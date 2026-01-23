@@ -900,14 +900,7 @@
             <div id="guideContent" style="margin-top:15px;"></div>
             <button onclick="resetGuideInstruction(); goToMenu();">🔙 Back to menu</button>
         </div>
-
         <script>
-            // ===== DATA USER =====
-            const users = {
-                "JeffanIndo": "jeffan123",
-                "Administrator": "061007",
-            };
-
             // ===== FUNGSI LOGIN =====
             function login() {
                 const user = document.getElementById('loginUser').value.trim();
@@ -22462,15 +22455,14 @@
                 showCurrentItem();
                 updateNavButtons();
             };
-
-
-            // ======= SCRIPT INPUT DATA INSPECTION =======
+            const users = {
+                "JeffanIndo": "jeffan123",
+                "Administrator": "061007",
+            };
             const STORAGE_KEY = "inspectionData";
             let inspectionPhotos = [];
             let stream = null;
             let editId = null; // null = mode tambah, ada isi = mode edit
-
-            // ======= ELEMENTS =======
             const poSelect = document.getElementById("poSelect");
             const itemSelect = document.getElementById("itemSelect");
             const vendor = document.getElementById("vendor");
