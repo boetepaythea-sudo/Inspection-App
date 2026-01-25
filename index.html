@@ -22237,20 +22237,10 @@
                 });
             }
 
-
             // Inisialisasi selector kode saat halaman dimuat
             document.addEventListener("DOMContentLoaded", () => {
                 populateKodeSelector(); // Memuat kode ke dalam dropdown
             });
-            function shareLinkWhatsApp() {
-                const pdf = localStorage.getItem("inspection_pdf");
-                const excel = localStorage.getItem("inspection_excel");
-
-                if (!pdf && !excel) return alert("Belum ada file tersedia.");
-
-                const msg = encodeURIComponent("Hasil inspeksi siap di-download dari aplikasi.");
-                window.open(`https://wa.me/?text=${msg}`, "_blank");
-            }
 
             document.addEventListener("DOMContentLoaded", () => { goToMenu(); });
             function goToMenu() {
@@ -22258,8 +22248,6 @@
                 document.getElementById("menu").style.display = "flex"; // kembalikan tampilan menu utama
                 document.getElementById("Dashboard").style.display = ""; // kembalikan tampilan menu utama
             }
-
-
             // Fungsi untuk navigasi ke gambar berikutnya
             function showNext() {
                 if (currentItemIndex < Object.keys(itemStaticDatabase).length - 1) {
@@ -22269,7 +22257,6 @@
                     showItemDetail();  // Memperbarui tampilan dengan item baru
                 }
             }
-
             // Fungsi untuk navigasi ke gambar sebelumnya
             function showPrevious() {
                 if (currentItemIndex > 0) {
