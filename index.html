@@ -903,29 +903,44 @@
         <script>
             // ===== FUNGSI LOGIN =====
             function login() {
-                const user = document.getElementById('loginUser').value.trim();
-                const pass = document.getElementById('loginPass').value.trim();
-                const errorDiv = document.getElementById('errorLogin');
+        const user = document.getElementById("loginUser").value.trim();
+        const pass = document.getElementById("loginPass").value.trim();
+        const error = document.getElementById("errorLogin");
 
-                if (users[user] && users[user] === pass) {
-                    errorDiv.style.display = 'none';
-                    alert(`Login berhasil! Selamat datang, ${user}`);
-                    document.getElementById('loginOverlay').style.display = 'none';
-                    document.getElementById('menu').style.display = 'flex'; // contoh tampilkan menu utama
-                } else {
-                    errorDiv.style.display = 'block';
-                    errorDiv.textContent = "Username atau password salah!";
-                }
-            }
-            function showForgotPasswordNote() {
-                alert("Silahkan hubungi admin untuk reset password.");
-            }
+        // DEBUG (boleh hapus nanti)
+        console.log("login klik", user, pass);
 
-            // ===== FUNGSI LOGOUT (opsional) =====
-            function logout() {
-                sessionStorage.removeItem('username');
-                location.reload(); // reload page → kembali ke login
-            }
+        if (users[user] && users[user] === pass) {
+          sessionStorage.setItem("isLogin", "true");
+          sessionStorage.setItem("username", user);
+
+          document.getElementById("loginOverlay").style.display = "none";
+          document.getElementById("menu").style.display = "flex";
+        } else {
+          error.style.display = "block";
+          error.textContent = "Username atau password salah!";
+        }
+      }
+
+      function logout() {
+        sessionStorage.clear();
+        location.reload();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const overlay = document.getElementById("loginOverlay");
+        const isLogin = sessionStorage.getItem("isLogin");
+
+        console.log("page load, isLogin =", isLogin);
+
+        if (isLogin === "true") {
+          overlay.style.display = "none";
+          document.getElementById("menu").style.display = "flex";
+        } else {
+          overlay.style.display = "flex";
+          document.getElementById("menu").style.display = "none";
+        }
+      });
         </script>
 
         <!-- Library JS -->
