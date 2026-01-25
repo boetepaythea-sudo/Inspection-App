@@ -23266,7 +23266,8 @@
                 });
 
                 // ===== SIMPAN PDF =====
-                doc.save(`Purchase Order_${poNumber}.pdf`);
+                const safeVendor = poData.Vendor.replace(/\s+/g, "_"); // <-- simpan di sini
+                doc.save(`Purchase_Order_${safeVendor}_PO_${poNumber}.pdf`);
             });
 
 
@@ -23480,7 +23481,7 @@
 
                     // Fungsi save progres export PDf
                     const safeVendor = selectedVendor.replace(/[^a-zA-Z0-9]/g, "_");
-                    const fileName = `inspection_report_${safeVendor}_${selectedPO}.pdf`;
+                    const fileName = `Inspection_Report_${safeVendor}_${selectedPO}.pdf`;
                     doc.save(fileName);
 
                     progressBar.style.width = "100%";
