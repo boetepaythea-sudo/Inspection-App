@@ -23652,7 +23652,45 @@
                     console.error(err);
                 }
             }
+            // ======= AUTO-LOGOUT UNTUK USER LOGIN =======
+      (function () {
+        const IDLE_LIMIT = 1 * 60; // durasi idle dalam detik (1 jam)
+        let idleTime = 0;
 
+        // Fungsi logout otomatis
+        function autoLogout() {
+          sessionStorage.clear();      // hapus data login
+          location.reload();           // kembali ke login
+        }
+
+        // Reset timer saat ada aktivitas
+        function resetIdleTimer() {
+          idleTime = 0;
+        }
+
+        // Hitung waktu idle setiap detik
+        setInterval(() => {
+          const isLogin = sessionStorage.getItem("isLogin");
+          if (isLogin === "true") {   // hanya aktif jika user login
+            idleTime++;
+            if (idleTime >= IDLE_LIMIT) {
+              autoLogout();
+            }
+          }
+        }, 1000);
+
+        // Event listener untuk aktivitas user
+        ["mousemove", "keydown", "scroll", "click"].forEach(event => {
+          document.addEventListener(event, resetIdleTimer);
+        });
+
+        // Reset timer saat halaman dimuat dan user sudah login
+        document.addEventListener("DOMContentLoaded", () => {
+          if (sessionStorage.getItem("isLogin") === "true") {
+            resetIdleTimer();
+          }
+        });
+      })();
 
             // Event listener tombol export
             exportExcelBtn.addEventListener("click", exportToExcel);
