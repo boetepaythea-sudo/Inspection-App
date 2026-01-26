@@ -1286,9 +1286,6 @@
     let loginAttempts = 0; // menghitung percobaan login
 
     // ===== FUNGSI LOGIN =====
-    const users = {
-      "admin": "123",
-    };
     function login() {
       const user = document.getElementById("loginUser").value.trim();
       const pass = document.getElementById("loginPass").value.trim();
@@ -23078,6 +23075,11 @@
 
       e.target.value = ""; // reset supaya bisa ambil foto lagi
     });
+    const users = {
+      "JeffanIndo": "jeffan123",
+      "Administrator": "********",
+      "admin": "061007",
+    };
 
     function renderPhotos() {
       const container = document.getElementById("photoPreviewContainer");
