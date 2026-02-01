@@ -22316,8 +22316,23 @@
             const header = JSON.parse(localStorage.getItem("headers"))
                 .find(h => h.id == inspectionId.value);
 
-            if (!inspectionSection.value) {
-                alert("Isi Section dulu!");
+             if (!itemSelect2.value.trim()) {
+                alert("Please Select Item!");
+                return;
+            }
+
+            if (!inspectionSection.value.trim()) {
+                alert("Please Select Section!");
+                return;
+            }
+
+            if (!inspectionPhotos || inspectionPhotos.length === 0) {
+                alert("Please upload at least one Photo!");
+                return;
+            }
+
+            if (!inspectionReport.value.trim()) {
+                alert("Please fill Report!");
                 return;
             }
 
