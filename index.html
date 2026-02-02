@@ -22671,8 +22671,14 @@
                 doc.rect(x, finalY + 10, colWidth, 25);
             });
             /* ================= SAVE ================= */
-            doc.save(`Inspection_${activePO}.pdf`);
+           doc.save(`Repot Data Inspection_${activeVendor}_${activePO}.pdf`);
             updateExportProgress(100); // ✅ selesai
+
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000); 
         }
 
         /* ====== EXPORT EXCEL DENGAN PROGRESS ========== */
@@ -22763,12 +22769,17 @@
 
             // ================= EXPORT =================
             const buffer = await workbook.xlsx.writeBuffer();
-            saveAs(new Blob([buffer], { type: "application/octet-stream" }), `Inspection_${activePO}.xlsx`);
-
+            saveAs(new Blob([buffer], { type: "application/octet-stream" }), `Repot Data Inspection_${activeVendor}_${activePO}.xlsx`);
             updateExportProgress(100); // progress selesai
+
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);  
         }
 
-/* ======= RESET MENU ======= */
+       /* ======= RESET MENU ======= */
         function resetInventory() {
             document.getElementById("reportVendor").value = "";
             document.getElementById("reportPO").value = "";
