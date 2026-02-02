@@ -21902,19 +21902,6 @@
             if (typeof currentIndex !== "undefined") currentIndex = 0;
             if (typeof filteredResults !== "undefined") filteredResults = [];
         }
-        function resetInventory() {
-            // Kosongkan input manual PO
-            const reportMenu = document.getElementById("reportMenu");
-            if (reportMenu) reportMenu.value = "";
-
-            const reportVendor = document.getElementById("reportVendor");
-            if (reportVendor) reportVendor.value = "";
-
-            const reportPO = document.getElementById("reportPO");
-            if (reportPO) reportPO.value = "";
-
-            console.log("resetInventory() BERHASIL");
-        }
         function resetGaleryItem() {
             // Reset preview gambar utama
             const photoPreview = document.getElementById("photoPreview");
@@ -22779,6 +22766,86 @@
             updateExportProgress(100); // progress selesai
         }
 
+/* ======= RESET MENU ======= */
+        function resetInventory() {
+            document.getElementById("reportVendor").value = "";
+            document.getElementById("reportPO").value = "";
+            document.getElementById("reportTable").style.display = "none";
+            document.querySelector("#reportTable tbody").innerHTML = "";
+            console.log("resetInventory() BERHASIL");
+        }
+
+        /* ======= LOAD VENDOR ======= */
+        function loadVendorOptions() {
+            const finalData = JSON.parse(localStorage.getItem("finalData") || "[]");
+            const vendors = [...new Set(finalData.map(d => d.vendor))];
+
+            const reportVendor = document.getElementById("reportVendor");
+            reportVendor.innerHTML = `<option value="">-- Select Vendor --</option>`;
+            vendors.forEach(v => {
+                reportVendor.innerHTML += `<option value="${v}">${v}</option>`;
+            });
+
+            // Set event listener onchange
+            reportVendor.addEventListener("change", () => {
+                loadPOOptions();
+                toggleReportTable(); // cek apakah tabel harus muncul
+            });
+        }
+
+        /* ======= LOAD PO BERDASARKAN VENDOR ======= */
+        function loadPOOptions() {
+            const vendor = document.getElementById("reportVendor").value;
+            const finalData = JSON.parse(localStorage.getItem("finalData") || "[]");
+            const filteredData = finalData.filter(d => d.vendor === vendor);
+            const pos = [...new Set(filteredData.map(d => d.po))];
+
+            const reportPO = document.getElementById("reportPO");
+            reportPO.innerHTML = `<option value="">-- Select PO --</option>`;
+            pos.forEach(po => {
+                reportPO.innerHTML += `<option value="${po}">${po}</option>`;
+            });
+
+            // Event listener onchange PO
+            reportPO.addEventListener("change", toggleReportTable);
+        }
+
+        /* ======= TOGGLE TABLE ======= */
+        function toggleReportTable() {
+            const vendor = document.getElementById("reportVendor").value;
+            const po = document.getElementById("reportPO").value;
+            const table = document.getElementById("reportTable");
+
+            if (vendor && po) {
+                table.style.display = "table"; // tampilkan tabel
+                loadReportTable();
+            } else {
+                table.style.display = "none"; // sembunyikan tabel
+                document.querySelector("#reportTable tbody").innerHTML = "";
+            }
+        }
+
+        /* ======= LOAD DATA KE TABEL ======= */
+        function loadReportTable() {
+            const vendor = document.getElementById("reportVendor").value;
+            const po = document.getElementById("reportPO").value;
+            const finalData = JSON.parse(localStorage.getItem("finalData") || "[]");
+            const data = finalData.filter(d => d.vendor === vendor && d.po === po);
+
+            const tbody = document.querySelector("#reportTable tbody");
+            tbody.innerHTML = "";
+
+            data.forEach(d => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+            <td>${d.item}</td>
+            <td>${d.section}</td>
+            <td>${d.report}</td>
+            ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => `<td>${d.images[i] ? `<img src="${d.images[i]}" style="width:40px;height:40px;object-fit:cover;">` : ''}</td>`).join('')}
+        `;
+                tbody.appendChild(tr);
+            });
+        }
         /* ====== EXPORT DARI MENU LAPORAN INSPEKSI ====== */
         async function exportReportPDF() {
             const vendor = document.getElementById("reportVendor").value;
@@ -22837,43 +22904,13 @@
             alert("Export Excel selesai!");
         }
 
-        /* ====== LOAD VENDOR + PO MENU REPORT INVENTORY ======== */
-
-        function loadVendorOptions() {
-            const vendors = [...new Set(JSON.parse(localStorage.getItem("finalData") || []).map(d => d.vendor))];
-            const reportVendor = document.getElementById("reportVendor");
-            reportVendor.innerHTML = `<option value="">-- Select Vendor --</option>`;
-            vendors.forEach(v => reportVendor.innerHTML += `<option>${v}</option>`);
+        /* ======= INIT MENU ======= */
+        function initReportMenu() {
+            loadVendorOptions();
+            document.getElementById("reportTable").style.display = "none";
         }
 
-        function loadPOOptions() {
-            const vendor = document.getElementById("reportVendor").value;
-            const reportPO = document.getElementById("reportPO");
-            const data = JSON.parse(localStorage.getItem("finalData") || []).filter(d => d.vendor === vendor);
-            const pos = [...new Set(data.map(d => d.po))];
-            reportPO.innerHTML = `<option value="">-- Select PO --</option>`;
-            pos.forEach(po => reportPO.innerHTML += `<option>${po}</option>`);
-            loadReportTable();
-        }
-
-        function loadReportTable() {
-            const vendor = document.getElementById("reportVendor").value;
-            const po = document.getElementById("reportPO").value;
-            const tbody = document.querySelector("#reportTable tbody");
-            const data = JSON.parse(localStorage.getItem("finalData") || [])
-                .filter(d => (!vendor || d.vendor === vendor) && (!po || d.po === po));
-            tbody.innerHTML = "";
-            data.forEach(d => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-            <td>${d.item}</td>
-            <td>${d.section}</td>
-            <td>${d.report}</td>
-            ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => `<td>${d.images[i] ? `<img src="${d.images[i]}" style="width:40px;height:40px;object-fit:cover;">` : ''}</td>`).join('')}
-        `;
-                tbody.appendChild(tr);
-            });
-        }
+        initReportMenu();
 
         // ===== EXPORT PDF PURCHASE ORDER =====
         document.getElementById("exportPdfBtn").addEventListener("click", async function () {
