@@ -22158,6 +22158,9 @@
         const poSelectStep1 = document.getElementById("poSelectStep1");
         const qtyPO = document.getElementById("qtyPO");
         const headerTableBody = document.querySelector("#headerTable tbody");
+        const qtyInspect = document.getElementById("qtyInspect");
+        const inspector = document.getElementById("inspector");
+        const inspectDate = document.getElementById("inspectDate");
 
         [...new Set(Object.values(dataByKode).map(v => v.Vendor))]
             .forEach(v => vendorSelectStep1.innerHTML += `<option>${v}</option>`);
@@ -22181,7 +22184,7 @@
 
         /* ================= HEADER ================= */
         function saveHeader() {
-            if (!vendorSelectStep1.value || !poSelectStep1.value) { alert("Lengkapi header"); return; }
+           if (!vendorSelectStep1.value || !poSelectStep1.value || !qtyInspect.value || !inspector.value || !inspectDate.value) { alert("Lengkapi header"); return; }
             let h = JSON.parse(localStorage.getItem("headers") || "[]");
             if (h.some(x => x.po === poSelectStep1.value)) { alert("PO sudah ada"); return; }
             h.push({
@@ -22391,11 +22394,10 @@
             localStorage.setItem("finalData", JSON.stringify(d));
             loadFinalTable();
         }
-        step2.style.display = "none";
 
         /* ================= RESET FORM ================= */
         function resetStep1Form() {
-            vendorSelect.value = "";
+            vendorSelectStep1.value = "";
             poSelectStep1.innerHTML = '<option value="">-- Select PO --</option>';
             qtyPO.value = "";
             qtyInspect.value = "";
