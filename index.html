@@ -22545,7 +22545,7 @@
         };
 
         /* ======== EXPORT PDF ========= */
-        async function exportPDF() { // ⚠️ harus async
+        async function exportPDF() {
             updateExportProgress(0);
 
             const { jsPDF } = window.jspdf;
@@ -22567,23 +22567,26 @@
             }
 
             const inspector = data[0].inspector;
+            const inspectionDate = new Date(data[0].date).toLocaleDateString("id-ID");
             const printDate = new Date().toLocaleDateString("id-ID");
 
-            // Simulasi progress (opsional, bisa diganti progress real)
+            // Simulasi progress
             for (let i = 0; i <= 100; i += 5) {
                 updateExportProgress(i);
-                await new Promise(r => setTimeout(r, 20));
+                await new Promise(r => setTimeout(r, 10));
             }
 
             // ================= HEADER =================
+            let startY = 60; // posisi awal tabel setelah header
             doc.setFontSize(16);
             doc.text("Inspection Report Data", 14, 20);
 
-            doc.setFontSize(11);
+            doc.setFontSize(12);
             doc.text(`Vendor Name : ${activeVendor}`, 14, 30);
             doc.text(`PO : ${activePO}`, 14, 36);
             doc.text(`Inspector Name : ${inspector}`, 14, 42);
-            doc.text(`Print Date : ${printDate}`, 14, 48);
+            doc.text(`Inspection Date : ${inspectionDate}`, 14, 48);
+            doc.text(`Print Date : ${printDate}`, 14, 54);
 
             // ================= TABLE =================
             const tableHead = [[
@@ -22612,7 +22615,7 @@
             const IMG_SIZE = 18;
 
             doc.autoTable({
-                startY: 55,
+                startY: startY,
                 head: tableHead,
                 body: tableBody,
                 styles: {
@@ -22621,16 +22624,18 @@
                     valign: "top",
                     overflow: "linebreak"
                 },
+                bodyStyles: { textColor: [0, 0, 0] },
                 columnStyles: {
                     0: { cellWidth: 30 },
                     1: { cellWidth: 15 },
                     2: { cellWidth: 15 },
                     3: { cellWidth: 30 },
-                    4: { cellWidth: 45 }
+                    4: { cellWidth: 100 }
                 },
                 headStyles: { fillColor: [0, 102, 204], textColor: 255, fontStyle: "bold" },
                 alternateRowStyles: { fillColor: [240, 240, 240] },
-                rowPageBreak: "avoid",
+                rowPageBreak: "auto",
+                margin: { top: 5 }, // kunci biar halaman berikutnya rapat
                 didParseCell: function (dataCell) {
                     if (dataCell.section === "body" && dataCell.column.index >= 5) {
                         dataCell.cell.styles.minCellHeight = IMG_SIZE + 4;
@@ -22643,9 +22648,7 @@
                         const img = images[imgIndex];
                         if (img) {
                             try {
-                                doc.addImage(
-                                    img,
-                                    "JPEG",
+                                doc.addImage(img, "JPEG",
                                     dataCell.cell.x + 2,
                                     dataCell.cell.y + 2,
                                     IMG_SIZE,
@@ -22654,8 +22657,7 @@
                             } catch (e) { console.warn("Image error:", e); }
                         }
                     }
-                },
-                margin: { top: 55, bottom: 40 }
+                }
             });
 
             // ================= SIGNATURE =================
@@ -22668,7 +22670,7 @@
                 finalY = 20;
             }
 
-            const colWidth = 60;
+            const colWidth = 45;
             const startX = pageWidth - colWidth * 3 - 20;
             const signatures = [{ title: "Inspector" }, { title: "QC Vendor" }, { title: "Approved" }];
 
@@ -22679,7 +22681,6 @@
                 doc.text(sig.title, x + colWidth / 2, finalY + 7, { align: "center" });
                 doc.rect(x, finalY + 10, colWidth, 25);
             });
-
             /* ================= SAVE ================= */
             doc.save(`Inspection_${activePO}.pdf`);
             updateExportProgress(100); // ✅ selesai
