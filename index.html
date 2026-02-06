@@ -1460,7 +1460,12 @@
             setInterval(updateClock, 1000);
             updateClock();
         });
-
+/* ===== CLEAN OLD STORAGE (RUN ON LOAD) ===== */
+(function cleanOldStorage() {
+    if (localStorage.getItem("headers")) {
+        localStorage.removeItem("headers");
+    }
+})();
         function login() {
             const user = document.getElementById("loginUser").value.trim();
             const pass = document.getElementById("loginPass").value.trim();
