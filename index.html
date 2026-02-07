@@ -1002,10 +1002,8 @@
                 text-align: center;
                 border: 1px solid #ddd;
             }
-
-            /* ===== WARNA PER KOLOM (HANYA DATA) ===== */
-
-            /* Qty Inspect (kolom 1) */
+           /* ===== WARNA PER KOLOM (HANYA DATA) ===== */
+                        /* Qty Inspect (kolom 1) */
             .aql-table tbody td:nth-child(1) {
                 background-color: #c62828;
                 /* merah elegan */
@@ -1015,7 +1013,7 @@
 
             /* Qty AQL (kolom 2) */
             .aql-table tbody td:nth-child(2) {
-                background-color: #616161;
+                background-color: #a09797;
                 /* abu gelap */
                 color: #fff;
                 font-weight: 600;
@@ -1023,10 +1021,18 @@
 
             /* Max Rejected (kolom 3) */
             .aql-table tbody td:nth-child(3) {
-                background-color: #e0e0e0;
-                /* abu terang */
+                background-color: #7a7979;
                 color: #000;
                 font-weight: 600;
+                border-color: #f0f6f7;
+            }
+
+            /* Max Rejected (kolom 4) */
+            .aql-table tbody td:nth-child(4) {
+                background-color: #b7b4b4;
+                color: #000;
+                font-weight: 600;
+                border-color: #f0f6f7;
             }
 
             /* Hover tetap enak dilihat */
@@ -1034,15 +1040,7 @@
                 opacity: 0.9;
                 transition: 0.2s;
             }
-
-            /* Perkuat garis di kolom Max Rejected */
-            .aql-table tbody td:nth-child(3) {
-                background-color: #b7b4b4;
-                color: #000;
-                font-weight: 600;
-                border-color: #f0f6f7;
-                /* GARIS LEBIH JELAS */
-            }
+         
         </style>
 
     <body>
@@ -1232,7 +1230,7 @@
 
                     <div>
                         <label for="upload-img">Upload Image (max 10 per Section):</label>
-                        <input type="file" id="upload-img" accept="image/*" capture="environment">
+                        <input type="file" id="upload-img" multiple accept="image/*">
                     </div>
 
                     <div>
@@ -1249,7 +1247,7 @@
                         </select>
                         <button type="button" id="translateReport">🌐 Translate</button>
                     </div>
-                    <button id="s2-save" disabled>Save Step 2</button>
+                    <button id="s2-save">Save Step 2</button>
                     <button id="s2-back">BACK TO STEP 1</button>
 
                     <h3>Summary Step 2</h3>
@@ -1506,7 +1504,7 @@
 
         // ===== WELCOME MESSAGE =====
         function showWelcome(username) {
-            const appName = "Inspection App Ver.01.III.2026";
+            const appName = "Inspection App Ver.02.V.2026";
             const welcomeOverlay = document.getElementById("welcomeOverlay");
             const welcomeText = document.getElementById("welcomeText");
 
@@ -22897,73 +22895,76 @@
         }
 
         // ====== AQL TABLE DISPLAY =========
-        function showGuideInspectDetail() {
-            const select = document.getElementById("guideinspectSelect").value;
-            const content = document.getElementById("guideinspectContent");
+function showGuideInspectDetail() {
+    const select = document.getElementById("guideinspectSelect").value;
+    const content = document.getElementById("guideinspectContent");
 
-            content.innerHTML = "";
-            if (select === "aqlTable") {
-                renderAQLTable();
-            }
-        }
+    content.innerHTML = "";
+    if (select === "aqlTable") {
+        renderAQLTable();
+    }
+}
 
-        function renderAQLTable() {
-            const content = document.getElementById("guideinspectContent");
+function renderAQLTable() {
+    const content = document.getElementById("guideinspectContent");
 
-            const aqlData = [
-                { inspect: "2 – 8", aql: 2, maxReject: 0 },
-                { inspect: "9 – 15", aql: 3, maxReject: 0 },
-                { inspect: "16 – 25", aql: 5, maxReject: 0 },
-                { inspect: "26 – 50", aql: 8, maxReject: 0 },
-                { inspect: "51 – 90", aql: 13, maxReject: 0 },
-                { inspect: "91 – 150", aql: 20, maxReject: 1 },
-                { inspect: "151 – 280", aql: 32, maxReject: 2 },
-                { inspect: "281 – 500", aql: 50, maxReject: 3 },
-                { inspect: "501 – 1200", aql: 80, maxReject: 5 },
-                { inspect: "1201 – 3200", aql: 125, maxReject: 7 },
-                { inspect: "3201 – 10000", aql: 200, maxReject: 10 },
-                { inspect: "10001 – 35000", aql: 315, maxReject: 14 },
-                { inspect: "35001 – 150000", aql: 500, maxReject: 21 },
-                { inspect: "150001 – 500000", aql: 800, maxReject: 21 },
-                { inspect: "500001 and over", aql: 1250, maxReject: 21 }
-            ];
+    // Tambahkan kolom sizeCode di setiap baris
+    const aqlData = [
+        { inspect: "2 – 8", sizeCode: "A", aql: 2, maxReject: 0 },
+        { inspect: "9 – 15", sizeCode: "B", aql: 3, maxReject: 0 },
+        { inspect: "16 – 25", sizeCode: "C", aql: 5, maxReject: 0 },
+        { inspect: "26 – 50", sizeCode: "D", aql: 8, maxReject: 0 },
+        { inspect: "51 – 90", sizeCode: "E", aql: 13, maxReject: 0 },
+        { inspect: "91 – 150", sizeCode: "F", aql: 20, maxReject: 1 },
+        { inspect: "151 – 280", sizeCode: "G", aql: 32, maxReject: 2 },
+        { inspect: "281 – 500", sizeCode: "H", aql: 50, maxReject: 3 },
+        { inspect: "501 – 1200", sizeCode: "J", aql: 80, maxReject: 5 },
+        { inspect: "1201 – 3200", sizeCode: "K", aql: 125, maxReject: 7 },
+        { inspect: "3201 – 10000", sizeCode: "L", aql: 200, maxReject: 10 },
+        { inspect: "10001 – 35000", sizeCode: "M", aql: 315, maxReject: 14 },
+        { inspect: "35001 – 150000", sizeCode: "N", aql: 500, maxReject: 21 },
+        { inspect: "150001 – 500000", sizeCode: "P", aql: 800, maxReject: 21 },
+        { inspect: "500001 and over", sizeCode: "Q", aql: 1250, maxReject: 21 }
+    ];
 
-            let html = `
-        <div class="aql-title">📊 AQL (Acceptable Quality Level)</div>
-        <table class="aql-table">
-            <thead>
-                <tr>
-                    <th>Qty Lot or batch size</th>
-                    <th>Qty Sample Inspection</th>
-                    <th>Qty Max Rejected</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-
-            aqlData.forEach(row => {
-                html += `
+    let html = `
+    <div class="aql-title">📊 AQL (Acceptable Quality Level)</div>
+    <table class="aql-table">
+        <thead>
             <tr>
-                <td>${row.inspect}</td>
-                <td>${row.aql}</td>
-                <td>${row.maxReject}</td>
+                <th>Qty Lot or Batch Size</th>
+                <th>Size Code</th>
+                <th>Qty Sample Inspection</th>
+                <th>Qty Max Rejected</th>
             </tr>
-        `;
-            });
-
-            html += `
-            </tbody>
-        </table>
+        </thead>
+        <tbody>
     `;
 
-            content.innerHTML = html;
-        }
+    aqlData.forEach(row => {
+        html += `
+        <tr>
+            <td>${row.inspect}</td>
+            <td>${row.sizeCode}</td>
+            <td>${row.aql}</td>
+            <td>${row.maxReject}</td>
+        </tr>
+        `;
+    });
 
-        // Reset saat keluar menu
-        function resetGuideInspection() {
-            document.getElementById("guideinspectSelect").value = "";
-            document.getElementById("guideinspectContent").innerHTML = "";
-        }
+    html += `
+        </tbody>
+    </table>
+    `;
+
+    content.innerHTML = html;
+}
+
+// Reset saat keluar menu
+function resetGuideInspection() {
+    document.getElementById("guideinspectSelect").value = "";
+    document.getElementById("guideinspectContent").innerHTML = "";
+}
 
         // ====== INISIALISASI SCRIPT PURCHASE ORDER ==========
         function hitungMaxRejected(aql) {
@@ -23746,13 +23747,6 @@
                 });
             });
         }
-
-        // ===== ENABLE SAVE =====
-        function checkSaveEnabled() {
-            const unsavedSections = Object.keys(step2Data).filter(sec => !savedSections.has(sec));
-            s2Save.disabled = unsavedSections.length === 0;
-        }
-
         // ===== SAVE STEP 2 =====
         s2Save.onclick = () => {
             if (Object.keys(step2Data).length === 0) { alert("Belum ada Section & Gambar!"); return; }
@@ -23793,7 +23787,6 @@
             selectSection.value = '';
             uploadImg.value = '';
             reportEl.value = '';
-            s2Save.disabled = true;
 
             renderStep2ResultByPO(activePO);
             loadPOFilter();
