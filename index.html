@@ -1112,6 +1112,7 @@
                     <button onclick="showSection('input')">📝 Input Data Inspection</button>
                     <button onclick="showSection('reportMenu')">💾 Inventory Data Inspection</button>
                     <button onclick="showSection('poDisplay')">🗂️ Purchase Order Data</button>
+                    <button onclick="showPOSectionAndOpenLink()">🗂️ PO Print Piew Image</button>
                     <button onclick="showSection('itemDisplay')">🖼️ Gallery Item Product</button>
                     <button onclick="showSection('guideinspect')">🕵️‍♂️ AQL Tabel</button>
                     <button onclick="showSection('guide')">💡 User Guide</button>
@@ -1472,8 +1473,8 @@
                 // Reset counter jika login berhasil
                 loginAttempts = 0;
 
-                sessionStorage.setItem("isLogin", "true");
-                sessionStorage.setItem("username", user);
+                localStorage.setItem("isLogin", "true");
+                localStorage.setItem("username", user);
 
                 error.style.display = "none";
                 document.getElementById("loginOverlay").style.display = "none";
@@ -1497,7 +1498,8 @@
 
         // ===== LOGOUT =====
         function logout() {
-            sessionStorage.clear();
+            localStorage.removeItem("isLogin");
+            localStorage.removeItem("username");
             location.reload();
         }
 
@@ -1524,7 +1526,7 @@
 
         // ===== CEK LOGIN SAAT LOAD =====
         document.addEventListener("DOMContentLoaded", function () {
-            const isLogin = sessionStorage.getItem("isLogin");
+            const isLogin = localStorage.getItem("isLogin");
             const loginOverlay = document.getElementById("loginOverlay");
             const welcomeOverlay = document.getElementById("welcomeOverlay");
 
@@ -1538,7 +1540,7 @@
                 document.getElementById("menu").style.display = "none";
             }
         });
-
+        
     </script>
     <!-- Library JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -1580,6 +1582,13 @@
                 };
                 r.readAsDataURL(file);
             });
+        }
+        function showPOSectionAndOpenLink() {
+            // Tampilkan section PO seperti biasa
+            showSection('poDisplay');
+
+            // Buka link toko online di tab baru
+            window.open('https://boetepaythea-sudo.github.io/Purchase-Order', '_blank');
         }
         const dataByKode = {
             "CG2510-01": {
