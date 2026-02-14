@@ -1110,10 +1110,10 @@
                 <!-- MENU UTAMA -->
                 <div class="menu-buttons" id="menu" style="display:none;">
                     <button onclick="showSection('input')">📝 Input Data Inspection</button>
-                    <button onclick="showSection('reportMenu')">💾 Inventory Data Inspection</button>
-                    <button onclick="showSection('poDisplay')">🗂️ Purchase Order Data</button>
+                    <button onclick="showSection('reportMenu')">🗃️ Inventory Data Inspection</button>
+                    <button onclick="showSection('poDisplay')">📦 Purchase Order Data</button>
                     <button onclick="showSection('itemDisplay')">🖼️ Gallery Item Product</button>
-                    <button onclick="showSection('guideinspect')">🕵️‍♂️ AQL Tabel</button>
+                    <button onclick="showSection('guideinspect')">📊 AQL Tabel</button>
                     <button onclick="showSection('guide')">💡 User Guide</button>
                     <button class="logout-btn" onclick="logout()">🔓 Logout</button>
                 </div>
@@ -1158,7 +1158,7 @@
                         </select>
                         <label>Inspect Date</label>
                         <input type="date" id="inspectDate">
-                        <button onclick="saveData()">Save Header</button>
+                        <button onclick="saveData()">💾Save Header</button>
                         <button onclick="resetInputData(); goToMenu();">🔙 Back to menu</button>
                         <hr>
                         <h3>Inspection Item List</h3>
@@ -1228,7 +1228,7 @@
                     </div>
 
                     <div>
-                        <label for="upload-img">Upload Image (max 10 per Section):</label>
+                        <label for="upload-img">📷 Upload Image (max 10 per Section):</label>
                         <input type="file" id="upload-img" multiple accept="image/*">
                     </div>
 
@@ -1246,18 +1246,18 @@
                         </select>
                         <button type="button" id="translateReport">🌐 Translate</button>
                     </div>
-                    <button id="s2-save">Save Step 2</button>
-                    <button id="s2-back">BACK TO STEP 1</button>
+                    <button id="s2-save">💾Save Step 2</button>
+                    <button id="s2-back">🔙 BACK TO STEP 1</button>
 
                     <h3>Summary Step 2</h3>
                     <div style="margin-bottom:10px">
                         <label>Select PO :</label>
                         <select id="filter-po">
-                            <option value="">-- select PO --</option>
+                            <option value="">-- Select PO --</option>
                         </select>
 
-                        <button id="export-pdf" disabled>Export PDF</button>
-                        <button id="export-excel" disabled>Export Excel</button>
+                        <button id="export-pdf" disabled>📑Export PDF</button>
+                        <button id="export-excel" disabled>📊Export Excel</button>
                     </div>
 
                     <div class="table-wrapper">
@@ -1305,8 +1305,8 @@
                         </select>
                     </div>
                     <div style="margin-bottom:15px;">
-                        <button id="btnExportPDFReport">Export PDF</button>
-                        <button id="btnExportExcelReport">Export Excel</button>
+                        <button id="btnExportPDFReport">📑Export PDF</button>
+                        <button id="btnExportExcelReport">📊Export Excel</button>
                         <div id="exportProgressContainerReport"
                             style="display:none; margin: 10px 0; width: 100%; background-color: #ddd; border-radius: 6px;">
                             <div id="exportProgressBarReport"
