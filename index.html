@@ -1112,7 +1112,6 @@
                     <button onclick="showSection('input')">📝 Input Data Inspection</button>
                     <button onclick="showSection('reportMenu')">💾 Inventory Data Inspection</button>
                     <button onclick="showSection('poDisplay')">🗂️ Purchase Order Data</button>
-                    <button onclick="showPOSectionAndOpenLink()">🖨️ PO Image Print View</button>
                     <button onclick="showSection('itemDisplay')">🖼️ Gallery Item Product</button>
                     <button onclick="showSection('guideinspect')">🕵️‍♂️ AQL Tabel</button>
                     <button onclick="showSection('guide')">💡 User Guide</button>
@@ -1384,7 +1383,8 @@
                     <div class="center">
                         <button onclick="previousPO()" id="prevBtn">&#8592; Previous</button>
                         <button onclick="nextPO()" id="nextBtn">Next &#8594;</button>
-                        <button id="exportPdfBtn" class="btn-export-pdf">Export to PDF</button>
+                        <button id="exportPdfBtn" class="btn-export-pdf">📑Export to PDF</button>
+                        <button onclick="showPOSectionAndOpenLink()">🖨️ PO Image Print View</button>
                         <button onclick="resetPOMenu(); goToMenu();">🔙 Back to menu</button>
 
                         <!-- Modal zoom image -->
