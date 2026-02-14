@@ -24799,12 +24799,12 @@ function resetGuideInspection() {
         });
         // ======= AUTO-LOGOUT UNTUK USER LOGIN =======
         (function () {
-            const IDLE_LIMIT = 30 * 60; // durasi idle dalam detik (1 jam)
+            const IDLE_LIMIT = 1 * 60; // durasi idle dalam detik (1 jam)
             let idleTime = 0;
 
             // Fungsi logout otomatis
             function autoLogout() {
-                sessionStorage.clear();      // hapus data login
+                localstorage.clear();      // hapus data login
                 location.reload();           // kembali ke login
             }
 
@@ -24815,7 +24815,7 @@ function resetGuideInspection() {
 
             // Hitung waktu idle setiap detik
             setInterval(() => {
-                const isLogin = sessionStorage.getItem("isLogin");
+                const isLogin = localstorage.getItem("isLogin");
                 if (isLogin === "true") {   // hanya aktif jika user login
                     idleTime++;
                     if (idleTime >= IDLE_LIMIT) {
@@ -24831,7 +24831,7 @@ function resetGuideInspection() {
 
             // Reset timer saat halaman dimuat dan user sudah login
             document.addEventListener("DOMContentLoaded", () => {
-                if (sessionStorage.getItem("isLogin") === "true") {
+                if (localstorage.getItem("isLogin") === "true") {
                     resetIdleTimer();
                 }
             });
