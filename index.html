@@ -1464,7 +1464,7 @@
         localStorage.removeItem("headers");
     }
 })();
-        function login() {
+                function login() {
             const user = document.getElementById("loginUser").value.trim();
             const pass = document.getElementById("loginPass").value.trim();
             const error = document.getElementById("errorLogin");
@@ -1473,8 +1473,8 @@
                 // Reset counter jika login berhasil
                 loginAttempts = 0;
 
-                localStorage.setItem("isLogin", "true");
-                localStorage.setItem("username", user);
+                sessionStorage.setItem("isLogin", "true");
+                sessionStorage.setItem("username", user);
 
                 error.style.display = "none";
                 document.getElementById("loginOverlay").style.display = "none";
@@ -1498,8 +1498,7 @@
 
         // ===== LOGOUT =====
         function logout() {
-            localStorage.removeItem("isLogin");
-            localStorage.removeItem("username");
+            sessionStorage.clear();
             location.reload();
         }
 
@@ -1526,7 +1525,7 @@
 
         // ===== CEK LOGIN SAAT LOAD =====
         document.addEventListener("DOMContentLoaded", function () {
-            const isLogin = localStorage.getItem("isLogin");
+            const isLogin = sessionStorage.getItem("isLogin");
             const loginOverlay = document.getElementById("loginOverlay");
             const welcomeOverlay = document.getElementById("welcomeOverlay");
 
@@ -1588,7 +1587,7 @@
             showSection('poDisplay');
 
             // Buka link toko online di tab baru
-            window.open('https://boetepaythea-sudo.github.io/Purchase-Order', '_blank');
+           window.location.href = 'https://boetepaythea-sudo.github.io/Purchase-Order';
         }
         const dataByKode = {
             "CG2510-01": {
@@ -24797,17 +24796,15 @@ function resetGuideInspection() {
             const safeVendor = poData.Vendor.replace(/\s+/g, "_");
             doc.save(`Purchase_Order_${safeVendor}_PO_${poNumber}.pdf`);
         });
-        // ======= AUTO-LOGOUT UNTUK USER LOGIN =======
+         // ======= AUTO-LOGOUT UNTUK USER LOGIN =======
         (function () {
-            const IDLE_LIMIT = 1 * 60; // durasi idle dalam detik (1 jam)
+            const IDLE_LIMIT = 30 * 60; // durasi idle dalam detik (1 jam)
             let idleTime = 0;
 
             // Fungsi logout otomatis
             function autoLogout() {
-                localStorage.removeItem("isLogin");
-                localStorage.removeItem("username");
-                alert("Session habis. Silakan login kembali.");
-                location.reload();
+                sessionStorage.clear();      // hapus data login
+                location.reload();           // kembali ke login
             }
 
             // Reset timer saat ada aktivitas
@@ -24817,7 +24814,7 @@ function resetGuideInspection() {
 
             // Hitung waktu idle setiap detik
             setInterval(() => {
-                const isLogin = localStorage.getItem("isLogin");
+                const isLogin = sessionStorage.getItem("isLogin");
                 if (isLogin === "true") {   // hanya aktif jika user login
                     idleTime++;
                     if (idleTime >= IDLE_LIMIT) {
@@ -24833,12 +24830,12 @@ function resetGuideInspection() {
 
             // Reset timer saat halaman dimuat dan user sudah login
             document.addEventListener("DOMContentLoaded", () => {
-                if (localStorage.getItem("isLogin") === "true") {
+                if (sessionStorage.getItem("isLogin") === "true") {
                     resetIdleTimer();
                 }
             });
         })();
-        
+
         document.addEventListener("DOMContentLoaded", () => {
 
             const reportVendor = document.getElementById("reportVendor");
