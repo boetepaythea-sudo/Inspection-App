@@ -24804,8 +24804,10 @@ function resetGuideInspection() {
 
             // Fungsi logout otomatis
             function autoLogout() {
-                localstorage.clear();      // hapus data login
-                location.reload();           // kembali ke login
+                localStorage.removeItem("isLogin");
+                localStorage.removeItem("username");
+                alert("Session habis. Silakan login kembali.");
+                location.reload();
             }
 
             // Reset timer saat ada aktivitas
@@ -24815,7 +24817,7 @@ function resetGuideInspection() {
 
             // Hitung waktu idle setiap detik
             setInterval(() => {
-                const isLogin = localstorage.getItem("isLogin");
+                const isLogin = localStorage.getItem("isLogin");
                 if (isLogin === "true") {   // hanya aktif jika user login
                     idleTime++;
                     if (idleTime >= IDLE_LIMIT) {
@@ -24831,12 +24833,12 @@ function resetGuideInspection() {
 
             // Reset timer saat halaman dimuat dan user sudah login
             document.addEventListener("DOMContentLoaded", () => {
-                if (localstorage.getItem("isLogin") === "true") {
+                if (localStorage.getItem("isLogin") === "true") {
                     resetIdleTimer();
                 }
             });
         })();
-
+        
         document.addEventListener("DOMContentLoaded", () => {
 
             const reportVendor = document.getElementById("reportVendor");
