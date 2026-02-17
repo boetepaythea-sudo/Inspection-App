@@ -1112,7 +1112,7 @@
                     <button onclick="showSection('input')">📝 Input Data Inspection</button>
                     <button onclick="showSection('reportMenu')">🗃️ Inventory Data Inspection</button>
                     <button onclick="showSection('poDisplay')">📦 Purchase Order Data</button>
-                    <button onclick="showSection('itemDisplay')">🖼️ Gallery Item Product</button>
+                    <button onclick="showPOSectionAndOpenGallery()">🖼️ Gallery Item Product</button>
                     <button onclick="showSection('guideinspect')">📊 AQL Tabel</button>
                     <button onclick="showSection('guide')">💡 User Guide</button>
                     <button class="logout-btn" onclick="logout()">🔓 Logout</button>
@@ -1583,11 +1583,12 @@
             });
         }
         function showPOSectionAndOpenLink() {
-            // Tampilkan section PO seperti biasa
-            showSection('poDisplay');
+            
+            window.location.href = 'https://boetepaythea-sudo.github.io/Purchase-Order';
+        }
+        function showPOSectionAndOpenGallery() {
 
-            // Buka link toko online di tab baru
-           window.location.href = 'https://boetepaythea-sudo.github.io/Purchase-Order';
+            window.location.href = 'https://boetepaythea-sudo.github.io/Gallery-Item';
         }
         const dataByKode = {
             "CG2510-01": {
