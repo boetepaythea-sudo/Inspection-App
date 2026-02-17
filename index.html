@@ -23081,7 +23081,6 @@ function resetGuideInspection() {
             <th class="item-col">Item</th>
             <th class="qty-col">Qty PO</th>
             <th class="qty-col">Qty AQL</th>
-            <th class="qty-col">Max Rejected</th>
             <th class="desc-col">Description</th>
             <th>Image</th>
           </tr>
@@ -23097,7 +23096,6 @@ function resetGuideInspection() {
           <td class="item-col">${row.item}</td>
           <td class="qty-col">${row.qty}</td>
           <td class="qty-col">${qtyAQL}</td>
-          <td class="qty-col">${maxRejected}</td>
           <td class="desc-col">${row.desc}</td>
           <td>${row.image ? `<img src="${row.image}" alt="${row.item}" class="thumbnail" onclick="zoomGambar('${row.image}')">` : ''}</td>
         </tr>`;
@@ -24722,6 +24720,7 @@ function resetGuideInspection() {
 
         }
         initReportMenu();
+        
         // ===== EXPORT PDF PURCHASE ORDER (FULL & FIXED) =====
         document.getElementById("exportPdfBtn").addEventListener("click", async function () {
             const poSelect = document.getElementById("kodeSelector1");
