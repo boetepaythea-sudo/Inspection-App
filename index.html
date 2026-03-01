@@ -7126,9 +7126,16 @@
                 }
             };
 
-            // ===============================
-            // CHART DASHBOARD
-            // ===============================
+// =========================
+            //CHART DASHBOARD
+            //===========================
+            // Formatter USD global
+            const usdFormatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0 // tanpa .00, ubah jadi 2 jika mau
+            });
+
             let salesPieChart, salesLineChart, poBarChart;
 
             function renderDashboardCharts() {
@@ -7144,11 +7151,23 @@
                         datasets: [{
                             label: 'Sales',
                             data: [2790519, 2185354, 0, 0, 0, 0],
-                            backgroundColor: ['#2563eb', '#10b981', '#facc15', '#f97316', '#8b5cf6', '#ec4899']
+                            backgroundColor: [
+                                '#2563eb', '#10b981', '#facc15',
+                                '#f97316', '#8b5cf6', '#ec4899'
+                            ]
                         }]
                     },
                     options: {
-                        responsive: true
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + usdFormatter.format(context.raw);
+                                    }
+                                }
+                            }
+                        }
                     }
                 });
 
@@ -7156,7 +7175,7 @@
                 salesLineChart = new Chart(lineCtx, {
                     type: 'line',
                     data: {
-                        labels: ['Last Month', 'Current month'],
+                        labels: ['Last Month', 'Current Month'],
                         datasets: [{
                             label: 'Sales',
                             data: [2790519, 2185354],
@@ -7166,7 +7185,27 @@
                             tension: 0.3
                         }]
                     },
-                    options: { responsive: true }
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return 'Sales: ' + usdFormatter.format(context.raw);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: function (value) {
+                                        return usdFormatter.format(value);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 });
 
                 // 3️⃣ PO Bar Chart
@@ -7180,7 +7219,27 @@
                             backgroundColor: '#10b981'
                         }]
                     },
-                    options: { responsive: true }
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return 'PO: ' + usdFormatter.format(context.raw);
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: function (value) {
+                                        return usdFormatter.format(value);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 });
             }
             // ===============================
