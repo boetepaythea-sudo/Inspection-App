@@ -658,8 +658,8 @@
             }
 
             /* ===============================
-WELCOME OVERLAY
-=================================*/
+            WELCOME OVERLAY
+            =================================*/
             .welcome-overlay {
                 position: fixed;
                 inset: 0;
@@ -707,6 +707,17 @@ WELCOME OVERLAY
                     opacity: 1;
                     transform: scale(1);
                 }
+            }
+
+            /* ===============
+            Disabled Menu
+             ===============*/
+            .menu-disabled {
+                background: #9ca3af !important;
+                cursor: not-allowed !important;
+                opacity: 0.6;
+                pointer-events: none;
+                /* tidak bisa diklik */
             }
         </style>
     </head>
@@ -766,7 +777,7 @@ WELCOME OVERLAY
                     </div>
                     <ul>
                         <li onclick="showSection('dashboard')">📊Dashboard</li>
-                        <li onclick="showSection('step1')">📝Input Data</li>
+                        <li id="menuInputData" onclick="showSection('step1')">📝Input Data</li>
                         <li onclick="showSection('inventory')">🗃️Inventory Data</li>
                         <li onclick="showSection('purchase')">📦Purchase Order</li>
                         <li id="galleryMenu">🖼️ Gallery Item</li>
@@ -7193,6 +7204,16 @@ WELCOME OVERLAY
                 }, 3000);
             }
             // ===============================
+            // HAK AKSES INPUT DATA
+            // ===============================
+            const allowedInputUsers = [
+                "admin",
+                "ita",
+                "nono",
+                "edi",
+                "eko"
+            ];
+            // ===============================
             // LOGIN & LOGUT DATA
             // ===============================
             const IDLE_LIMIT = 30 * 60; // 30 menit dalam detik
@@ -7237,7 +7258,9 @@ WELCOME OVERLAY
             };
 
             window.logout = () => signOut(auth).then(() => location.reload());
-
+            // ===============================
+            // SHOW USER ID IN DASHBOARD
+            // ===============================
             onAuthStateChanged(auth, user => {
                 if (user) {
 
@@ -7245,6 +7268,15 @@ WELCOME OVERLAY
                     const username = user.email.split("@")[0];
                     document.getElementById("user-id-display").innerText =
                         "User ID : " + username;
+
+                    // kontrol akses menu
+                    const menuInput = document.getElementById("menuInputData");
+
+                    if (!allowedInputUsers.includes(username)) {
+                        menuInput.classList.add("menu-disabled");
+                    } else {
+                        menuInput.classList.remove("menu-disabled");
+                    }
 
                     document.getElementById("loginPage").style.display = "none";
                     document.getElementById("dashboardPage").style.display = "flex";
