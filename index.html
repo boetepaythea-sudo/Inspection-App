@@ -656,6 +656,58 @@
                 text-align: center;
                 margin-bottom: 10px;
             }
+
+            /* ===============================
+WELCOME OVERLAY
+=================================*/
+            .welcome-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.65);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 99999;
+                backdrop-filter: blur(6px);
+            }
+
+            .welcome-card {
+                background: white;
+                padding: 40px 50px;
+                border-radius: 18px;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+                animation: fadeZoom 0.4s ease;
+            }
+
+            .welcome-card h2 {
+                margin: 15px 0 10px;
+                font-size: 26px;
+                color: #1e3a8a;
+            }
+
+            .welcome-text {
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 15px;
+            }
+
+            .welcome-footer {
+                font-size: 12px;
+                opacity: 0.7;
+            }
+
+            @keyframes fadeZoom {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
         </style>
     </head>
 
@@ -673,6 +725,20 @@
                     If you forgot your username and password, please contact us.
                     <a href="https://s.id/atrisna">admin</a>
                 </p>
+            </div>
+        </div>
+
+        <!-- ================= WELCOME OVERLAY ================= -->
+        <div id="welcomeOverlay" class="welcome-overlay">
+            <div class="welcome-card">
+                <div class="welcome-logo">
+                    <img src="https://www.jeffan.com/secure/extensions/Intente/Jeffan_21_1_0/21.1.0/img/jeffan-logo.png"
+                        alt="Logo Perusahaan" class="logo">
+                </div>
+
+                <h2>Welcome</h2>
+                <p id="welcomeText" class="welcome-text"></p>
+                <div class="welcome-footer">Secure Inspection System</div>
             </div>
         </div>
 
@@ -694,27 +760,29 @@
                     <div id="clock-container">
                         <div id="clock-time">00:00:00</div>
                         <div id="clock-date">-</div>
+                        <div id="user-id-display" style="font-size:12px; font-weight:600; margin-top:4px;">
+                            User ID : -
+                        </div>
                     </div>
-                </div>
-                <ul>
-                    <li onclick="showSection('dashboard')">📊Dashboard</li>
-                    <li onclick="showSection('step1')">📝Input Data</li>
-                    <li onclick="showSection('inventory')">🗃️Inventory Data</li>
-                    <li onclick="showSection('purchase')">📦Purchase Order</li>
-                    <li id="galleryMenu">🖼️ Gallery Item</li>
-                    <li onclick="showSection('aqlSection')">📋 AQL Tabel</li>
-                    <li onclick="showSection('guide')">💡 User Guide</li>
-                    <li class="logout" onclick="logout()">🔓Logout System</li>
-                </ul>
+                    <ul>
+                        <li onclick="showSection('dashboard')">📊Dashboard</li>
+                        <li onclick="showSection('step1')">📝Input Data</li>
+                        <li onclick="showSection('inventory')">🗃️Inventory Data</li>
+                        <li onclick="showSection('purchase')">📦Purchase Order</li>
+                        <li id="galleryMenu">🖼️ Gallery Item</li>
+                        <li onclick="showSection('aqlSection')">📋 AQL Tabel</li>
+                        <li onclick="showSection('guide')">💡 User Guide</li>
+                        <li class="logout" onclick="logout()">🔓Logout System</li>
+                    </ul>
 
-                <!-- LINK TOKO -->
-                <div class="toko-online" id="dashboardLinks">
-                    <h4>Visit Our Online Store</h4>
-                    <div class="link-toko">
-                        <a href="https://www.jeffan.com/" target="_blank">🌐 Jeffan Store</a>
-                        <a href="https://www.wayfair.com" target="_blank">🌐 Wayfair</a>
-                        <a href="https://s.id/atrisna" target="_blank">https://s.id/atrisna</a>
-                    </div>
+                    <!-- LINK TOKO -->
+                    <div class="toko-online" id="dashboardLinks">
+                        <h4>Visit Our Online Store</h4>
+                        <div class="link-toko">
+                            <a href="https://www.jeffan.com/" target="_blank">🌐 Jeffan Store</a>
+                            <a href="https://www.wayfair.com" target="_blank">🌐 Wayfair</a>
+                            <a href="https://s.id/atrisna" target="_blank">https://s.id/atrisna</a>
+                        </div>
             </aside>
 
             <main class="main">
@@ -7105,6 +7173,26 @@
                 });
             }
             // ===============================
+            // LOGIN VERLAY 
+            // ===============================
+            function showWelcomeOverlay(user) {
+
+                const overlay = document.getElementById("welcomeOverlay");
+                const welcomeText = document.getElementById("welcomeText");
+
+                const username = user.displayName
+                    || user.email.split("@")[0];
+
+                welcomeText.innerText = "Hello, " + username + " 👋";
+
+                overlay.style.display = "flex";
+
+                // Hilang otomatis setelah 3 detik
+                setTimeout(() => {
+                    overlay.style.display = "none";
+                }, 3000);
+            }
+            // ===============================
             // LOGIN & LOGUT DATA
             // ===============================
             const IDLE_LIMIT = 30 * 60; // 30 menit dalam detik
@@ -7152,12 +7240,25 @@
 
             onAuthStateChanged(auth, user => {
                 if (user) {
+
+                    // Ambil UID Firebase
+                    const username = user.email.split("@")[0];
+                    document.getElementById("user-id-display").innerText =
+                        "User ID : " + username;
+
                     document.getElementById("loginPage").style.display = "none";
                     document.getElementById("dashboardPage").style.display = "flex";
                     showSection("dashboard");
+
+                    // 🔥 Panggil Welcome Overlay
+                    showWelcomeOverlay(user);
+
                 } else {
                     document.getElementById("loginPage").style.display = "flex";
                     document.getElementById("dashboardPage").style.display = "none";
+
+                    // Reset tampilan user ID
+                    document.getElementById("user-id-display").innerText = "User ID : -";
                 }
             });
 
