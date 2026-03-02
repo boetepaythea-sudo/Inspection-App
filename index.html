@@ -7152,13 +7152,28 @@
             });
 
             let salesPieChart, salesLineChart, poBarChart;
-
             function renderDashboardCharts() {
+            if (salesPieChart) {
+                    salesPieChart.destroy();
+                    salesPieChart = null;
+                }
+
+                if (salesLineChart) {
+                    salesLineChart.destroy();
+                    salesLineChart = null;
+                }
+
+                if (poBarChart) {
+                    poBarChart.destroy();
+                    poBarChart = null;
+                }
                 const pieCtx = document.getElementById('salesPieChart').getContext('2d');
                 const lineCtx = document.getElementById('salesLineChart').getContext('2d');
                 const barCtx = document.getElementById('poBarChart').getContext('2d');
 
-                // 1️⃣ Sales Pie Chart
+                // =========================
+                // 1️⃣ SALES PIE CHART
+                // =========================
                 salesPieChart = new Chart(pieCtx, {
                     type: 'pie',
                     data: {
@@ -7186,7 +7201,9 @@
                     }
                 });
 
-                // 2️⃣ Sales Line Chart
+                // =========================
+                // 2️⃣ SALES LINE CHART
+                // =========================
                 salesLineChart = new Chart(lineCtx, {
                     type: 'line',
                     data: {
@@ -7223,7 +7240,9 @@
                     }
                 });
 
-                // 3️⃣ PO Bar Chart
+                // =========================
+                // 3️⃣ PO BAR CHART
+                // =========================
                 poBarChart = new Chart(barCtx, {
                     type: 'bar',
                     data: {
