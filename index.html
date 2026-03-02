@@ -30,7 +30,8 @@
             LOGIN PAGE
             =================================*/
             #loginPage {
-                display: flex;
+                display: none;
+                /* default hidden */
                 height: 100vh;
                 justify-content: center;
                 align-items: center;
@@ -7126,7 +7127,7 @@
                 }
             };
 
-// =========================
+            // =========================
             //CHART DASHBOARD
             //===========================
             // Formatter USD global
@@ -7317,42 +7318,37 @@
             };
 
             window.logout = () => signOut(auth).then(() => location.reload());
+
             // ===============================
             // SHOW USER ID IN DASHBOARD
             // ===============================
             onAuthStateChanged(auth, user => {
                 if (user) {
-
-                    // Ambil UID Firebase
+                    // Update User ID
                     const username = user.email.split("@")[0];
-                    document.getElementById("user-id-display").innerText =
-                        "User ID : " + username;
-
-                    // kontrol akses menu
-                    const menuInput = document.getElementById("menuInputData");
-
-                    if (!allowedInputUsers.includes(username)) {
-                        menuInput.classList.add("menu-disabled");
-                    } else {
-                        menuInput.classList.remove("menu-disabled");
-                    }
+                    document.getElementById("user-id-display").innerText = "User ID : " + username;
 
                     document.getElementById("loginPage").style.display = "none";
                     document.getElementById("dashboardPage").style.display = "flex";
                     showSection("dashboard");
 
-                    // 🔥 Panggil Welcome Overlay
-                    showWelcomeOverlay(user);
+                    // ✅ Tampilkan welcome overlay HANYA saat login baru
+                    if (!sessionStorage.getItem("welcomeShown")) {
+                        showWelcomeOverlay(user);
+                        sessionStorage.setItem("welcomeShown", "true");
+                    }
 
                 } else {
                     document.getElementById("loginPage").style.display = "flex";
                     document.getElementById("dashboardPage").style.display = "none";
 
-                    // Reset tampilan user ID
+                    // Reset User ID
                     document.getElementById("user-id-display").innerText = "User ID : -";
+
+                    // Reset overlay flag
+                    sessionStorage.removeItem("welcomeShown");
                 }
             });
-
         </script>
 
     </body>
