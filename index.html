@@ -1138,9 +1138,23 @@
             window.toggleMenu = () => document.getElementById("sidebar").classList.toggle("show");
 
             window.showSection = (id) => {
-                document.querySelectorAll("main section, .step1-container").forEach(sec => sec.style.display = "none");
-                const el = document.getElementById(id);
-                if (el) el.style.display = "block";
+            // ===============================
+            // 🔐 VALIDASI AKSES STEP1
+            // ===============================
+            if (id === "step1") {
+                const user = auth.currentUser;
+                if (user) {
+                    const username = user.email.split("@")[0].toLowerCase().trim();
+        
+                    if (!allowedInputUsers.includes(username)) {
+                        alert("You do not have access to the Data Input menu!");
+                        return; // STOP here, don't continue
+                    }
+                }
+            }
+            document.querySelectorAll("main section, .step1-container").forEach(sec => sec.style.display = "none");
+            const el = document.getElementById(id);
+            if (el) el.style.display = "block";
 
                 // Render chart ketika dashboard ditampilkan
                 if (id === 'dashboard') renderDashboardCharts();
