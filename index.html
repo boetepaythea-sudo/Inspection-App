@@ -72,13 +72,37 @@
 
             .login-image {
                 width: 130px;
+                margin-bottom: 5px;
+                /* jarak logo ke International */
+            }
+
+            .login-box h1 {
+                font-size: 20px;
+                color: white;
+                margin: 0;
+                /* hilangkan jarak default */
+                line-height: 1.1;
                 margin-bottom: 2px;
             }
-            .login-h5 {
-                font-size: 14px;
-                color: rgb(54, 198, 10);
-                margin-top: 0px;
-                margin-bottom: 2px;
+
+            .login-box h2 {
+                font-size: 24px;
+                margin: 2px 0 15px 0;
+                /* rapat ke atas, agak ke bawah */
+                line-height: 1.2;
+            }
+
+            .login-box h3 {
+                font-size: 10px;
+                margin: 2px 0 15px 0;
+                /* rapat ke atas, agak ke bawah */
+                line-height: 1.2;
+            }
+
+            .login-help {
+                font-size: 12px;
+                margin-top: 10px;
+                opacity: 0.9;
             }
 
             /* ===============================
@@ -735,12 +759,13 @@
             <div class="login-box">
                 <img src="https://www.jeffan.com/secure/extensions/Intente/Jeffan_21_1_0/21.1.0/img/jeffan-logo.png"
                     class="login-image">
-                <h5>International</h5>
-                <h1>ERP Application System</h1>
+                <h1>International</h1>
+                <h2>ERP Application System</h2>
                 <input type="email" id="email" placeholder="Email" required>
                 <input type="password" id="password" placeholder="Password" required>
                 <button onclick="login()">Login</button>
                 <p class="login-help">
+                    <h3>Update.Ver.03.VI.2026</h3>
                     If you forgot your username and password, please contact us.
                     <a href="https://s.id/atrisna">admin</a>
                 </p>
