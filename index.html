@@ -1057,9 +1057,12 @@
                         <table id="poTable">
                             <thead>
                                 <tr>
+                                    <th>Vendor</th>
+                                    <th>PO</th>
                                     <th>Item</th>
                                     <th>Qty PO</th>
                                     <th>Description</th>
+                                    <th>ECRD</th>
                                     <th>Image</th>
                                 </tr>
                             </thead>
@@ -8421,9 +8424,12 @@
                     const tr = document.createElement("tr");
 
                     tr.innerHTML = `
+        <td>${poData.Vendor || ""}</td>
+        <td>${kode}</td>
         <td>${item.item || ""}</td>
         <td>${item.qty || ""}</td>
         <td>${item.desc || ""}</td>
+        <td>${poData.ecrd || ""}</td>
         <td>
             <img src="${item.image || ""}" 
             style="width:50px;cursor:pointer;">
