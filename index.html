@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ERP Dashboard</title>
+        <title>ERP Application System</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
@@ -750,6 +750,42 @@
                 pointer-events: none;
                 /* tidak bisa diklik */
             }
+
+            /* ===============================
+            RUNNING TEXT DASHBOARD
+            =================================*/
+            .running-text-container {
+                width: 100%;
+                height: 35px;
+                margin-top: 15px;
+                overflow: hidden;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #2563eb, #1e40af);
+                position: relative;
+            }
+
+            .running-text {
+                position: absolute;
+                white-space: nowrap;
+                color: white;
+                font-weight: 500;
+                line-height: 35px;
+                animation: marquee 30s linear infinite;
+            }
+
+            @keyframes marquee {
+                from {
+                    transform: translateX(100%);
+                }
+
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+
+            .running-text-container:hover .running-text {
+                animation-play-state: paused;
+            }
         </style>
     </head>
 
@@ -765,9 +801,9 @@
                 <input type="password" id="password" placeholder="Password" required>
                 <button onclick="login()">Login</button>
                 <p class="login-help">
-                    <h3>Update.Ver.03.VI.2026</h3>
-                    If you forgot your username and password, please contact us.
-                    <a href="https://s.id/atrisna">admin</a>
+                <h3>Update.Ver.03.VI.2026</h3>
+                If you forgot your username and password, please contact us.
+                <a href="https://s.id/atrisna">admin</a>
                 </p>
             </div>
         </div>
@@ -782,7 +818,7 @@
 
                 <h2>Welcome</h2>
                 <p id="welcomeText" class="welcome-text"></p>
-                <div class="welcome-footer">Secure Inspection System</div>
+                <div class="welcome-footer">ERP Application System</div>
             </div>
         </div>
 
@@ -850,6 +886,29 @@
                             <h4>Purchase Orders per Month</h4>
                             <canvas id="poBarChart"></canvas>
                         </div>
+
+                        <!-- RUNNING TEXT -->
+                        <div id="runningText" class="running-text-container">
+                            <div class="running-text">
+                                📢 Welcome to Jeffan International ERP Application System Ver.03.VI.2026
+                            </div>
+                        </div>
+                        <div id="runningText" class="running-text-container">
+                            <div class="running-text">
+
+                                📢 Please ensure inspection data is submitted before 17:00
+                                Purchase Order approval deadline is every Friday
+                                ERP System Maintenance scheduled every Sunday 02:00 AM
+                            </div>
+                        </div>
+                        <div id="runningText" class="running-text-container">
+                            <div class="running-text">
+
+                                📢 Don't forget to save all the data entered today, and make sure it is saved correctly.
+                                Please contact admin if you need assistance.
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- Step 1 Input Data Inspection -->
@@ -1031,6 +1090,7 @@
                             <option value="">-- Select PO --</option>
                         </select>
                         <button id="exportPdfBtn" class="btn btn-danger">Export PDF</button>
+                        <button id="backToMenuBtnInventory" type="button">← Back to Menu</button>
                     </div>
                     <!-- Table Inventory -->
                     <div class="table-wrapper">
@@ -1082,6 +1142,7 @@
                         <button onclick="previousPO()" id="prevBtn">⬅️ Previous</button>
                         <button onclick="nextPO()" id="nextBtn">Next ➡️</button>
                         <button id="poPrintBtn">🖨️ PO Image Print View</button>
+                        <button id="backToMenuBtnPurchaseOrder" type="button">← Back to Menu</button>
                     </div>
 
                     <!-- TABLE DISPLAY PO -->
@@ -1189,6 +1250,17 @@
                 document.querySelectorAll("main section, .step1-container").forEach(sec => sec.style.display = "none");
                 const el = document.getElementById(id);
                 if (el) el.style.display = "block";
+
+                // ===============================
+                // RUNNING TEXT CONTROL
+                // ===============================
+                const runningText = document.getElementById("runningText");
+                if (runningText) {
+                    runningText.style.display = (id === "dashboard") ? "block" : "none";
+                }
+                if (runningText) {
+                    runningText.style.display = (id === "dashboard") ? "flex" : "none";
+                }
 
                 // Render chart ketika dashboard ditampilkan
                 if (id === 'dashboard') renderDashboardCharts();
@@ -8157,6 +8229,7 @@
             const inventoryVendor = document.getElementById("inventoryVendor");
             const inventoryPO = document.getElementById("inventoryPO");
             const inventoryTbody = document.querySelector("#inventoryTable tbody");
+            const backToMenuBtnInventory = document.getElementById("backToMenuBtnInventory");
 
             // render Inventory table dari data Step 2
             function renderInventory(data = step2Data) {
@@ -8230,6 +8303,7 @@
             }
 
             loadStep2Data();
+            backToMenuBtnInventory.addEventListener("click", () => showSection("dashboard"));
 
             // ============= EXPORT PDF INVENTORY ==============
             document.getElementById("exportPdfBtn").addEventListener("click", async () => {
@@ -8409,6 +8483,7 @@
             const kodeSelector1 = document.getElementById("kodeSelector1");
             const searchInput = document.getElementById("searchInput");
             const poTableBody = document.getElementById("poTableBody");
+            const backToMenuBtnPurchaseOrder = document.getElementById("backToMenuBtnPurchaseOrder");
 
             // ===============================
             // GENERATE SELECT PO
@@ -8577,6 +8652,7 @@
             document.addEventListener("DOMContentLoaded", function () {
 
                 generatePOSelect();
+                backToMenuBtnPurchaseOrder.addEventListener("click", () => showSection("dashboard"));
 
             });
 
