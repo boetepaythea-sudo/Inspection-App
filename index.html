@@ -288,7 +288,8 @@
                 /* scroll vertikal di main */
                 overflow-x: hidden;
                 /* sembunyikan scroll horizontal */
-                padding: 25px;
+                padding: 10px 30px 30px 30px;
+                /* atas kanan bawah kiri */
                 position: relative;
                 background-image: url('https://www.jeffan.com/web-assets/images/landing/living-hero.jpg');
                 background-size: cover;
@@ -316,7 +317,8 @@
                 display: none;
                 max-width: 1200px;
                 margin: auto;
-                padding: 30px;
+                padding: 5px 15px 10px 15px;
+                /* atas-kanan-bawah-kiri */
                 border-radius: 16px;
                 background: rgba(255, 255, 255, 0.95);
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -668,24 +670,33 @@
 
             /* =========================
             CHART DASHBOARD
-            ===========================*/
+            =========================== */
             .charts-container {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 25px;
-                margin-top: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 10px;
+                margin-top: 5px;
             }
 
             .chart-box {
                 background: rgba(255, 255, 255, 0.95);
-                padding: 20px;
+                padding: 8px 8px 24px 8px;
+                /* padding internal chart */
                 border-radius: 12px;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 320px;
+                /* tinggi chart-box, bisa diubah */
             }
 
             .chart-box h4 {
                 text-align: center;
-                margin-bottom: 10px;
+                margin-bottom: 6px;
+                font-size: 14px;
+                font-weight: 600;
             }
 
             /* ===============================
@@ -757,7 +768,7 @@
             .running-text-container {
                 width: 100%;
                 height: 35px;
-                margin-top: 15px;
+                margin-top: 2px;
                 overflow: hidden;
                 border-radius: 8px;
                 background: linear-gradient(135deg, #2563eb, #1e40af);
@@ -785,6 +796,46 @@
 
             .running-text-container:hover .running-text {
                 animation-play-state: paused;
+            }
+
+            /* ===============================
+            ERP KPI CARDS
+            =================================*/
+            .kpi-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .kpi-card {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 20px;
+                border-radius: 14px;
+                text-align: center;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+                transition: 0.3s;
+            }
+
+            .kpi-card:hover {
+                transform: translateY(-4px);
+            }
+
+            .kpi-title {
+                font-size: 13px;
+                color: #555;
+                margin-bottom: 8px;
+            }
+
+            .kpi-value {
+                font-size: 26px;
+                font-weight: 700;
+                color: #1e3a8a;
+            }
+
+            .kpi-icon {
+                font-size: 20px;
+                margin-bottom: 6px;
             }
         </style>
     </head>
@@ -870,8 +921,35 @@
                 <section id="dashboard">
                     <h3>Dashboard</h3>
                     <p>Welcome to Jeffan International ERP Application System</p>
+                    <div class="kpi-container">
+                        <div class="kpi-card">
+                            <div class="kpi-icon">💰</div>
+                            <div class="kpi-title">Sales Update</div>
+                            <div class="kpi-value" id="kpiSales">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">📦</div>
+                            <div class="kpi-title">Total Purchase Order</div>
+                            <div class="kpi-value" id="kpiPO">0</div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon">📝</div>
+                            <div class="kpi-title">Inspection Today</div>
+                            <div class="kpi-value" id="kpiInspection">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">✅</div>
+                            <div class="kpi-title">Approved Items</div>
+                            <div class="kpi-value" id="kpiApproved">0</div>
+                        </div>
+                    </div>
 
                     <div class="charts-container">
+                        <div class="chart-box">
+                            <h4>Sales Per Year</h4>
+                            <canvas id="salesBarChart"></canvas>
+                        </div>
                         <div class="chart-box">
                             <h4>Sales per Month</h4>
                             <canvas id="salesPieChart"></canvas>
@@ -881,7 +959,6 @@
                             <h4>Last Month's Sales vs. This Month's Sales</h4>
                             <canvas id="salesLineChart"></canvas>
                         </div>
-
                         <div class="chart-box">
                             <h4>Purchase Orders per Month</h4>
                             <canvas id="poBarChart"></canvas>
@@ -896,16 +973,20 @@
                         <div id="runningText" class="running-text-container">
                             <div class="running-text">
 
-                                📢 Please ensure inspection data is submitted before 17:00
-                                Purchase Order approval deadline is every Friday
-                                ERP System Maintenance scheduled every Sunday 02:00 AM
+                                📢 jeffan International, Bring Style Home, Your style... Youre home.
                             </div>
                         </div>
                         <div id="runningText" class="running-text-container">
                             <div class="running-text">
-
                                 📢 Don't forget to save all the data entered today, and make sure it is saved correctly.
                                 Please contact admin if you need assistance.
+                            </div>
+                        </div>
+                        <div id="runningText" class="running-text-container">
+                            <div class="running-text">
+                                📢 Please ensure inspection data is submitted before 17:00
+                                Purchase Order approval deadline is every Friday
+                                ERP System Maintenance scheduled every Sunday 02:00 AM
                             </div>
                         </div>
                     </div>
@@ -1263,7 +1344,9 @@
                 }
 
                 // Render chart ketika dashboard ditampilkan
-                if (id === 'dashboard') renderDashboardCharts();
+                if (id === 'dashboard')
+                    renderDashboardCharts();
+                loadKPI();
             };
 
             function openExternal(link) {
@@ -8760,13 +8843,17 @@
                 minimumFractionDigits: 0 // tanpa .00, ubah jadi 2 jika mau
             });
 
-            let salesPieChart, salesLineChart, poBarChart;
+            let salesBarChart, salesPieChart, salesLineChart, poBarChart;
 
             function renderDashboardCharts() {
 
                 // =========================
                 // 🔥 DESTROY CHART LAMA (WAJIB)
                 // =========================
+                if (salesBarChart) {
+                    salesBarChart.destroy();
+                    salesBarChart = null;
+                }
                 if (salesPieChart) {
                     salesPieChart.destroy();
                     salesPieChart = null;
@@ -8788,6 +8875,73 @@
                 const pieCtx = document.getElementById('salesPieChart').getContext('2d');
                 const lineCtx = document.getElementById('salesLineChart').getContext('2d');
                 const barCtx = document.getElementById('poBarChart').getContext('2d');
+                const salesYearCtx = document.getElementById('salesBarChart').getContext('2d');
+
+                // =========================
+                // SALES PER YEAR MANUAL
+                // =========================
+                const salesPerYear = [
+                    { year: '2024', total: 16646254.49 },
+                    { year: '2025', total: 15257955.59 },
+                    { year: '2026', total: 2518799.24 }
+                ];
+
+                const usdFormatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0
+                });
+
+                // Hapus chart lama jika ada
+                if (window.salesBarChartInstance) window.salesBarChartInstance.destroy();
+
+                window.salesBarChartInstance = new Chart(salesYearCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: salesPerYear.map(d => d.year),
+                        datasets: [{
+                            label: 'Total Sales',
+                            data: salesPerYear.map(d => d.total),
+                            backgroundColor: [
+                                'rgba(37, 99, 235, 0.7)',
+                                'rgba(16, 185, 129, 0.7)',
+                                'rgba(250, 204, 21, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(37, 99, 235, 1)',
+                                'rgba(16, 185, 129, 1)',
+                                'rgba(250, 204, 21, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, // tetap responsive
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: 'Sales Per Year', padding: { top: 10, bottom: 10 } },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return usdFormatter.format(context.raw); // tampil USD
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value) { return usdFormatter.format(value); } // tampil USD
+                                }
+                            },
+                            x: {
+                                ticks: { autoSkip: false },
+                                grid: { offset: true } // batang di tengah label
+                            }
+                        }
+                    }
+                });
 
                 // =========================
                 // 1️⃣ SALES PIE CHART
@@ -8893,6 +9047,45 @@
                         }
                     }
                 });
+            }
+            // ===============================
+            // KPI DASHBOARD 
+            // ===============================
+            async function loadKPI() {
+                const snapshot = await getDocs(collection(db, "inspectionData"));
+
+                let total = 0;
+                let approved = 0;
+
+                snapshot.forEach(doc => {
+                    total++;
+                    const data = doc.data();
+                    if (data.status === "Approved") approved++;
+                });
+
+                // KPI Inspection & Approved
+                document.getElementById("kpiInspection").textContent = total;
+                document.getElementById("kpiApproved").textContent = approved;
+
+                // HITUNG TOTAL PO dari data chart
+                const poData = [6271, 1537, 1257, 0, 0, 0]; // sama seperti chart
+                const totalPO = poData.reduce((sum, val) => sum + val, 0);
+                document.getElementById("kpiPO").textContent = totalPO.toLocaleString();
+
+                // ===============================
+                // KPI Sales Tahun Ini dalam USD
+                // ===============================
+                // Ambil tahun berjalan secara otomatis
+                const currentYear = [1038057, 1231929, 178163, 0, 0, 0]; // sama seperti chart
+                const salesThisYear = currentYear.reduce((sum, val) => sum + val, 0);
+                // Format ke USD
+                const usdFormatter = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0
+                });
+
+                document.getElementById("kpiSales").textContent = usdFormatter.format(salesThisYear);
             }
             // ===============================
             // LOGIN VERLAY 
