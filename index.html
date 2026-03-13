@@ -7943,9 +7943,15 @@
             const headerTableBody = document.getElementById("headerTableBody");
 
             // Inisialisasi vendor di input form
-            const allVendors = [...new Set(Object.values(dataByKode).map(po => po.Vendor))];
-            allVendors.forEach(v => { let opt = document.createElement("option"); opt.value = v; opt.textContent = v; vendorSelect.appendChild(opt); });
+            const allVendors = [...new Set(Object.values(dataByKode).map(po => po.Vendor))]
+                .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
+            allVendors.forEach(v => {
+                let opt = document.createElement("option");
+                opt.value = v;
+                opt.textContent = v;
+                vendorSelect.appendChild(opt);
+            });
             function getPOsByVendor(vendor) { return Object.keys(dataByKode).filter(po => dataByKode[po].Vendor === vendor); }
             vendorSelect.addEventListener("change", () => {
                 poSelect.innerHTML = '<option value="">-- Select PO --</option>';
