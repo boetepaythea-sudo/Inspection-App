@@ -929,7 +929,7 @@
                         </div>
                         <div class="kpi-card">
                             <div class="kpi-icon">📦</div>
-                            <div class="kpi-title">Total Purchase Order</div>
+                            <div class="kpi-title">Total Sales Order Qty</div>
                             <div class="kpi-value" id="kpiPO">0</div>
                         </div>
 
@@ -960,7 +960,7 @@
                             <canvas id="salesLineChart"></canvas>
                         </div>
                         <div class="chart-box">
-                            <h4>Purchase Orders per Month</h4>
+                            <h4>Sales Orders Qty per Month</h4>
                             <canvas id="poBarChart"></canvas>
                         </div>
 
@@ -9085,8 +9085,8 @@
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                         datasets: [{
-                            label: 'Purchase Order',
-                            data: [6271, 1537, 1257, 0, 0, 0],
+                            label: 'Sales Order Qty',
+                            data: [9044, 6258, 2430, 0, 0, 0],
                             backgroundColor: '#10b981'
                         }]
                     },
@@ -9096,7 +9096,7 @@
                             tooltip: {
                                 callbacks: {
                                     label: function (context) {
-                                        return 'PO: ' + usdFormatter.format(context.raw);
+                                        return 'PO: ' + context.raw.toLocaleString();
                                     }
                                 }
                             }
@@ -9105,7 +9105,7 @@
                             y: {
                                 ticks: {
                                     callback: function (value) {
-                                        return usdFormatter.format(value);
+                                        return value.toLocaleString();
                                     }
                                 }
                             }
@@ -9133,7 +9133,7 @@
                 document.getElementById("kpiApproved").textContent = approved;
 
                 // HITUNG TOTAL PO dari data chart
-                const poData = [6271, 1537, 1257, 0, 0, 0]; // sama seperti chart
+                const poData = [9044, 6258, 2430, 0, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
                 document.getElementById("kpiPO").textContent = totalPO.toLocaleString();
 
