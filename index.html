@@ -9936,7 +9936,7 @@
             async function loadKPI() {
                 const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 124704167;
+                let total = 1247041;
                 let approved = 21322;
 
                 snapshot.forEach(doc => {
@@ -9949,7 +9949,8 @@
                 document.getElementById("kpiApproved").textContent = approved.toLocaleString();
                 document.getElementById("kpiInspection").textContent = total.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "USD"
+                    currency: "USD",
+                    minimumFractionDigits: 0
                 });
                 
                 // HITUNG TOTAL PO dari data chart
