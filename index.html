@@ -937,7 +937,7 @@
 
                         <div class="kpi-card">
                             <div class="kpi-icon">📝</div>
-                            <div class="kpi-title">Inspection Today</div>
+                            <div class="kpi-title">Totals Qty Orders</div>
                             <div class="kpi-value" id="kpiInspection">0</div>
                         </div>
                         <div class="kpi-card">
@@ -9936,7 +9936,7 @@
             async function loadKPI() {
                 const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 0;
+                let total = 18100;
                 let approved = 0;
 
                 snapshot.forEach(doc => {
