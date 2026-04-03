@@ -931,7 +931,7 @@
                         </div>
                         <div class="kpi-card">
                             <div class="kpi-icon">📦</div>
-                            <div class="kpi-title">Total Sales Order Qty</div>
+                            <div class="kpi-title">Sales Total Qty</div>
                             <div class="kpi-value" id="kpiPO">0</div>
                         </div>
 
@@ -9903,7 +9903,7 @@
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                         datasets: [{
                             label: 'Sales Order Qty',
-                            data: [9044, 6258, 3238, 0, 0, 0],
+                            data: [6564, 6976, 8195, 370, 0, 0],
                             backgroundColor: '#10b981'
                         }]
                     },
@@ -9950,7 +9950,7 @@
                 document.getElementById("kpiApproved").textContent = approved;
 
                 // HITUNG TOTAL PO dari data chart
-                const poData = [9044, 6258, 3238, 0, 0, 0]; // sama seperti chart
+                const poData = [6564, 6976, 8195, 370, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
                 document.getElementById("kpiPO").textContent = totalPO.toLocaleString();
 
