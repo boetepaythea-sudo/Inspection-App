@@ -936,13 +936,13 @@
                         </div>
 
                         <div class="kpi-card">
-                            <div class="kpi-icon">📝</div>
-                            <div class="kpi-title">Totals Qty Orders</div>
+                            <div class="kpi-icon">🛒</div>
+                            <div class="kpi-title">Totals Orders Value</div>
                             <div class="kpi-value" id="kpiInspection">0</div>
                         </div>
                         <div class="kpi-card">
-                            <div class="kpi-icon">✅</div>
-                            <div class="kpi-title">Approved Items</div>
+                            <div class="kpi-icon">📝</div>
+                            <div class="kpi-title">Totals Orders Qty</div>
                             <div class="kpi-value" id="kpiApproved">0</div>
                         </div>
                     </div>
@@ -9936,8 +9936,8 @@
             async function loadKPI() {
                 const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 18100;
-                let approved = 0;
+                let total = 124704167;
+                let approved = 21322;
 
                 snapshot.forEach(doc => {
                     total++;
@@ -9946,9 +9946,12 @@
                 });
 
                 // KPI Inspection & Approved
-                document.getElementById("kpiInspection").textContent = total;
-                document.getElementById("kpiApproved").textContent = approved;
-
+                document.getElementById("kpiApproved").textContent = approved.toLocaleString();
+                document.getElementById("kpiInspection").textContent = total.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD"
+                });
+                
                 // HITUNG TOTAL PO dari data chart
                 const poData = [6564, 6976, 8195, 370, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
