@@ -9765,7 +9765,7 @@
                 const salesPerYear = [
                     { year: '2024', total: 16646254.49 },
                     { year: '2025', total: 15257955.59 },
-                    { year: '2026', total: 3210336.58 }
+                    { year: '2026', total: 3653327.96 }
                 ];
 
                 const usdFormatter = new Intl.NumberFormat('en-US', {
@@ -9834,7 +9834,7 @@
                         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1038057, 1232159, 940119, 0, 0, 0],
+                            data: [1068467, 1201750, 1319960, 63150, 0, 0],
                             backgroundColor: [
                                 '#2563eb', '#10b981', '#facc15',
                                 '#f97316', '#8b5cf6', '#ec4899'
@@ -9864,7 +9864,7 @@
                         labels: ['Last Month', 'Current Month'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1232159, 940119,],
+                            data: [1201750, 1319960,],
                             borderColor: '#2563eb',
                             backgroundColor: 'rgba(37,99,235,0.2)',
                             fill: true,
@@ -9958,7 +9958,7 @@
                 // KPI Sales Tahun Ini dalam USD
                 // ===============================
                 // Ambil tahun berjalan secara otomatis
-                const currentYear = [1068467, 1201750, 940119, 0, 0, 0]; // sama seperti chart
+                const currentYear = [1068467, 1201750, 1319960, 63150, 0, 0]; // sama seperti chart
                 const salesThisYear = currentYear.reduce((sum, val) => sum + val, 0);
                 // Format ke USD
                 const usdFormatter = new Intl.NumberFormat('en-US', {
