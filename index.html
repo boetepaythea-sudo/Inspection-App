@@ -691,9 +691,11 @@
                 height: 320px;
                 /* tinggi chart-box, bisa diubah */
             }
+
             .chart-box:hover {
                 transform: translateY(-4px);
             }
+
             .chart-box h4 {
                 text-align: center;
                 margin-bottom: 6px;
@@ -932,7 +934,7 @@
                         <div class="kpi-card">
                             <div class="kpi-icon">📦</div>
                             <div class="kpi-title">Totals Sales Qty</div>
-                            <div class="kpi-value" id="kpiPO">0</div>
+                            <div class="kpi-value" id="kpiQtySales">0</div>
                         </div>
 
                         <div class="kpi-card">
@@ -1408,68 +1410,68 @@
             /* ================= MASTER DATA PO ================= */
 
             const dataByKode = {
-                "PO1226 Sample":  {
-                 Vendor: "V70 CV. JATI VISIONS RAYA",
-                   items: [
-                    {
-                      item: "LM-70757-NTB",
-                      qty:  3,
-                      desc: "J8153-73PJW // Isadora Rattan Wide Bottle Pendant Light, Natural (18.25W Inch  x 18.25D Inch  x 36.5H Inch ) // //Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.278091 // Number of Shipping Boxes: 1 // *(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70757-NTB_001.jpg"
-                    },
-                   {
-                      item: "LM-70464-NTB",
-                      qty:  3,
-                      desc: "J8152-73PJW // Augustina Rattan Long Bottle Pendant Light, Natural (14W Inch  x 14D Inch  x 56.75H Inch ) // //Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.272536360096 // Number of Shipping Boxes: 1 /(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70464-NTB_001.jpg"
-                    },
-                    {
-                      item: "LM-70323-NTB",
-                      qty:  3,
-                      desc: "J8145-73PJW // Rosie Large Rattan Scallop Pendant Light, Natural (25W Inch  x 25D Inch  x 20.5H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.28 // Number of Shipping Boxes: 1 // ***DROPSH(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70323-NTB_001.jpg"
-                    },
-                    {
-                      item: "LM-70191-NTB",
-                      qty:  3,
-                      desc: "J8144-73PJW // Rosie Small Rattan Scallop Pendant Light, Natural (14W Inch  x 14D Inch  x 15H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.075 // Number of Shipping Boxes: 1 // ***DROPSHI(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70191-NTB_001.jpg"
-                   },
-                   {
-                      item: "AM-70876-NTB",
-                      qty:  1,
-                      desc: "J12232-2PJW // Halo Round Rattan Frame Mirror, Natural (35W Inch  x 35D Inch  x 2.5H Inch ) // // Materials: Natural Rattan, Plywood, Glass // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.12 // Number of Shipping Boxes: 1 // ***DROPSHI(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70876-NTB_001.jpg"
-                    },
-                    {
-                      item: "AM-70345-NT",
-                      qty:  1,
-                      desc: "J12111-1PJW // Neroli Round Water Hyacinth Fringe Mirror, Natural (48W Inch  x 3.5D Inch  x 48H Inch ) // // Materials: Wood, Plywood, Waterhyacinth // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.281 // Number of Shipping Boxes: 1 // ***DROP(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70345-NT_001.jpg"
-                    },
-                    {
-                      item: "LM-70946-NTB",
-                      qty:  1,
-                      desc: "J8146-1PJW // Briar Woven Rattan 3 Tier Pendant Light, Natural (32.25W Inch  x 32.25D Inch  x 24.5H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.534 // Number of Shipping Boxes: 1 // ***D(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70946-NTB_001.jpg"
-                    },
-                    {
-                      item: "AM-70238-NTB",
-                      qty:  2,
-                      desc: "J12235-1PJW // Marco Large Rattan Keyhole Mirror, Natural (28W Inch  x 2.25D Inch  x 52H Inch ) // //Materials: Plywood, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.13 // Number of Shipping Boxes: 1 // ***DROPSHIP PAC(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70238-NTB_001.jpg"
-                    },
-                    {
-                      item: "BN-70890-BD",
-                      qty:  2,
-                      desc: "J693-142PJW // Nico Banana Leaf Rush Seat Fully Woven Stool, Blonde (22W Inch  x 16.5D Inch  x 18.5H Inch ) // //Materials: Acacia Wood, Banana // Finish Code: 142, Finish Name: Natural Blonde // Set Up // CBM: 0.171 // Number of Shipping Boxes: 1 // ***D(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-70890-BD_001.jpg"
-                   },
-                   {
-                      item: "BN-70121-BD",
-                      qty:  2,
-                      desc: "J758-142PJW // Hollis Banana Leaf Ottoman With X-Pattern Overlay, Blonde (18W Inch  x 18D Inch  x 18H Inch ) // // Materials: Acacia Wood, Banana // Finish Code: 142, Finish Name: Natural Blonde // Set Up // CBM: 0.141 // Number of Shipping Boxes: 1 // *(more...)",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-70121-BD_001.jpg"
+                "PO1226 Sample": {
+                    Vendor: "V70 CV. JATI VISIONS RAYA",
+                    items: [
+                        {
+                            item: "LM-70757-NTB",
+                            qty: 3,
+                            desc: "J8153-73PJW // Isadora Rattan Wide Bottle Pendant Light, Natural (18.25W Inch  x 18.25D Inch  x 36.5H Inch ) // //Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.278091 // Number of Shipping Boxes: 1 // *(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70757-NTB_001.jpg"
+                        },
+                        {
+                            item: "LM-70464-NTB",
+                            qty: 3,
+                            desc: "J8152-73PJW // Augustina Rattan Long Bottle Pendant Light, Natural (14W Inch  x 14D Inch  x 56.75H Inch ) // //Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.272536360096 // Number of Shipping Boxes: 1 /(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70464-NTB_001.jpg"
+                        },
+                        {
+                            item: "LM-70323-NTB",
+                            qty: 3,
+                            desc: "J8145-73PJW // Rosie Large Rattan Scallop Pendant Light, Natural (25W Inch  x 25D Inch  x 20.5H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.28 // Number of Shipping Boxes: 1 // ***DROPSH(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70323-NTB_001.jpg"
+                        },
+                        {
+                            item: "LM-70191-NTB",
+                            qty: 3,
+                            desc: "J8144-73PJW // Rosie Small Rattan Scallop Pendant Light, Natural (14W Inch  x 14D Inch  x 15H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.075 // Number of Shipping Boxes: 1 // ***DROPSHI(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70191-NTB_001.jpg"
+                        },
+                        {
+                            item: "AM-70876-NTB",
+                            qty: 1,
+                            desc: "J12232-2PJW // Halo Round Rattan Frame Mirror, Natural (35W Inch  x 35D Inch  x 2.5H Inch ) // // Materials: Natural Rattan, Plywood, Glass // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.12 // Number of Shipping Boxes: 1 // ***DROPSHI(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70876-NTB_001.jpg"
+                        },
+                        {
+                            item: "AM-70345-NT",
+                            qty: 1,
+                            desc: "J12111-1PJW // Neroli Round Water Hyacinth Fringe Mirror, Natural (48W Inch  x 3.5D Inch  x 48H Inch ) // // Materials: Wood, Plywood, Waterhyacinth // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.281 // Number of Shipping Boxes: 1 // ***DROP(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70345-NT_001.jpg"
+                        },
+                        {
+                            item: "LM-70946-NTB",
+                            qty: 1,
+                            desc: "J8146-1PJW // Briar Woven Rattan 3 Tier Pendant Light, Natural (32.25W Inch  x 32.25D Inch  x 24.5H Inch ) // // Materials: Iron, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.534 // Number of Shipping Boxes: 1 // ***D(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-70946-NTB_001.jpg"
+                        },
+                        {
+                            item: "AM-70238-NTB",
+                            qty: 2,
+                            desc: "J12235-1PJW // Marco Large Rattan Keyhole Mirror, Natural (28W Inch  x 2.25D Inch  x 52H Inch ) // //Materials: Plywood, Natural Rattan // Finish Code: 73, Finish Name: Natural Honey // Set Up // CBM: 0.13 // Number of Shipping Boxes: 1 // ***DROPSHIP PAC(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70238-NTB_001.jpg"
+                        },
+                        {
+                            item: "BN-70890-BD",
+                            qty: 2,
+                            desc: "J693-142PJW // Nico Banana Leaf Rush Seat Fully Woven Stool, Blonde (22W Inch  x 16.5D Inch  x 18.5H Inch ) // //Materials: Acacia Wood, Banana // Finish Code: 142, Finish Name: Natural Blonde // Set Up // CBM: 0.171 // Number of Shipping Boxes: 1 // ***D(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-70890-BD_001.jpg"
+                        },
+                        {
+                            item: "BN-70121-BD",
+                            qty: 2,
+                            desc: "J758-142PJW // Hollis Banana Leaf Ottoman With X-Pattern Overlay, Blonde (18W Inch  x 18D Inch  x 18H Inch ) // // Materials: Acacia Wood, Banana // Finish Code: 142, Finish Name: Natural Blonde // Set Up // CBM: 0.141 // Number of Shipping Boxes: 1 // *(more...)",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-70121-BD_001.jpg"
                         }
                     ]
                 },
@@ -3202,239 +3204,239 @@
                         }
                     ]
                 },
-                "CG2603-01":  {
-                 Vendor: "V68 PT. FURNILAC PRIMAGUNA",
-                 ecrd: "2026-5-25",
-                   items: [
-                    {
-                      item: "NS-68406-BKV",
-                      qty:  15,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
-                    },
-                   {
-                      item: "NS-68406-BRV",
-                      qty:  15,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
-                    },
-                    {
-                      item: "ST-68DR16-WN",
-                      qty:  20,
-                      desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-AD301-BK",
-                      qty:  25,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Black (17x15x23) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BK_001.jpg"
-                   },
-                   {
-                      item: "TT-VC-AD301-BR",
-                      qty:  20,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-AD301-WH",
-                      qty:  15,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-White (17x15x23) Material/Color:Bayur Wood and Mdf E2 / White CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-WH_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-BK",
-                      qty:  20,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-WH",
-                      qty:  15,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-YK339-BR",
-                      qty:  25,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Brown (19x15x23) Material/Color:Bayur Wood and Mdf E2/Brown..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-BR_001.jpg"
-                   },
-                   {
-                      item: "TT-VC-YK339-NV",
-                      qty:  43,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Navy Blue (19x15x23) Material/Color:Bayur Wood and Mdf E2/Navy Blue..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-NV_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-YK339-WH",
-                      qty:  40,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-White (19x15x23) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-WH_001.jpg"
-                    },
-                    {
-                      item: "VC-HP325-NV",
-                      qty:  20,
-                      desc: "Hooper Two Drawer Wooden Accent Side Table, Navy, (18 Inch W x 15 Inch D x 22 Inch H) // CBM: 0.1686 // Packaging: Brown carton, 5 ply outer craft 200, Styrofoam 3 cm (1pc/case) // Materials: Bayur Wood and Mdf E2 // Finish Color: Navy // ***ISTA 3A Dropship Packaging Required***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-HP325-NV_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-BK",
-                      qty:  25,
-                      desc: "York Three Drawer Accent Side Table, Black, (18.5 Inch W x 15 Inch D x 23 Inch H) // Materials: Bayur Wood and Mdf E2 // Finish Code: , Finish Name: Black // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BK_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-BL",
-                      qty:  25,
-                      desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-GW",
-                      qty:  30,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table- Gray Wash  (19x15x23) Material/Color:Bayur Wood and Mdf E2/Wheat..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-GW_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-WB",
-                      qty:  20,
-                      desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Warm Brown, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Soli d Bayur Wood + Mdf E2 + Veneer Meranti // Finish Code: WNB/01, Finish Name: Warm Brown // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-WB_001.jpg"
+                "CG2603-01": {
+                    Vendor: "V68 PT. FURNILAC PRIMAGUNA",
+                    ecrd: "2026-5-25",
+                    items: [
+                        {
+                            item: "NS-68406-BKV",
+                            qty: 15,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
+                        },
+                        {
+                            item: "NS-68406-BRV",
+                            qty: 15,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
+                        },
+                        {
+                            item: "ST-68DR16-WN",
+                            qty: 20,
+                            desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-BK",
+                            qty: 25,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Black (17x15x23) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BK_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-BR",
+                            qty: 20,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-WH",
+                            qty: 15,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-White (17x15x23) Material/Color:Bayur Wood and Mdf E2 / White CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-WH_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-BK",
+                            qty: 20,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-WH",
+                            qty: 15,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-BR",
+                            qty: 25,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Brown (19x15x23) Material/Color:Bayur Wood and Mdf E2/Brown..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-BR_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-NV",
+                            qty: 43,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Navy Blue (19x15x23) Material/Color:Bayur Wood and Mdf E2/Navy Blue..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-NV_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-WH",
+                            qty: 40,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-White (19x15x23) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-WH_001.jpg"
+                        },
+                        {
+                            item: "VC-HP325-NV",
+                            qty: 20,
+                            desc: "Hooper Two Drawer Wooden Accent Side Table, Navy, (18 Inch W x 15 Inch D x 22 Inch H) // CBM: 0.1686 // Packaging: Brown carton, 5 ply outer craft 200, Styrofoam 3 cm (1pc/case) // Materials: Bayur Wood and Mdf E2 // Finish Color: Navy // ***ISTA 3A Dropship Packaging Required***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-HP325-NV_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-BK",
+                            qty: 25,
+                            desc: "York Three Drawer Accent Side Table, Black, (18.5 Inch W x 15 Inch D x 23 Inch H) // Materials: Bayur Wood and Mdf E2 // Finish Code: , Finish Name: Black // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BK_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-BL",
+                            qty: 25,
+                            desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-GW",
+                            qty: 30,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table- Gray Wash  (19x15x23) Material/Color:Bayur Wood and Mdf E2/Wheat..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-GW_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-WB",
+                            qty: 20,
+                            desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Warm Brown, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Soli d Bayur Wood + Mdf E2 + Veneer Meranti // Finish Code: WNB/01, Finish Name: Warm Brown // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-WB_001.jpg"
                         }
                     ]
                 },
-                "CG2603-02":  {
-                 Vendor: "V68 PT. FURNILAC PRIMAGUNA",
-                  ecrd: "2026-6-25",
-                   items: [
-                    {
-                      item: "NS-68406-BKV",
-                      qty:  15,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
-                    },
-                   {
-                      item: "NS-68406-BRV",
-                      qty:  15,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
-                    },
-                    {
-                      item: "ST-68DR16-WN",
-                      qty:  20,
-                      desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-AD301-BK",
-                      qty:  25,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Black (17x15x23) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BK_001.jpg"
-                   },
-                   {
-                      item: "TT-VC-AD301-BR",
-                      qty:  20,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-AD301-WH",
-                      qty:  15,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-White (17x15x23) Material/Color:Bayur Wood and Mdf E2 / White CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-WH_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-BK",
-                      qty:  20,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-WH",
-                      qty:  15,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-YK339-BR",
-                      qty:  25,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Brown (19x15x23) Material/Color:Bayur Wood and Mdf E2/Brown..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-BR_001.jpg"
-                   },
-                   {
-                      item: "TT-VC-YK339-NV",
-                      qty:  43,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Navy Blue (19x15x23) Material/Color:Bayur Wood and Mdf E2/Navy Blue..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-NV_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-YK339-WH",
-                      qty:  40,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-White (19x15x23) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-WH_001.jpg"
-                    },
-                    {
-                      item: "VC-HP325-NV",
-                      qty:  20,
-                      desc: "Hooper Two Drawer Wooden Accent Side Table, Navy, (18 Inch W x 15 Inch D x 22 Inch H) // CBM: 0.1686 // Packaging: Brown carton, 5 ply outer craft 200, Styrofoam 3 cm (1pc/case) // Materials: Bayur Wood and Mdf E2 // Finish Color: Navy // ***ISTA 3A Dropship Packaging Required***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-HP325-NV_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-BK",
-                      qty:  25,
-                      desc: "York Three Drawer Accent Side Table, Black, (18.5 Inch W x 15 Inch D x 23 Inch H) // Materials: Bayur Wood and Mdf E2 // Finish Code: , Finish Name: Black // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BK_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-BL",
-                      qty:  25,
-                      desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-GW",
-                      qty:  30,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table- Gray Wash  (19x15x23) Material/Color:Bayur Wood and Mdf E2/Wheat..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-GW_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-WB",
-                      qty:  20,
-                      desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Warm Brown, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Soli d Bayur Wood + Mdf E2 + Veneer Meranti // Finish Code: WNB/01, Finish Name: Warm Brown // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-WB_001.jpg"
+                "CG2603-02": {
+                    Vendor: "V68 PT. FURNILAC PRIMAGUNA",
+                    ecrd: "2026-6-25",
+                    items: [
+                        {
+                            item: "NS-68406-BKV",
+                            qty: 15,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
+                        },
+                        {
+                            item: "NS-68406-BRV",
+                            qty: 15,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
+                        },
+                        {
+                            item: "ST-68DR16-WN",
+                            qty: 20,
+                            desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-BK",
+                            qty: 25,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Black (17x15x23) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BK_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-BR",
+                            qty: 20,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-WH",
+                            qty: 15,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-White (17x15x23) Material/Color:Bayur Wood and Mdf E2 / White CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-WH_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-BK",
+                            qty: 20,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-WH",
+                            qty: 15,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-BR",
+                            qty: 25,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Brown (19x15x23) Material/Color:Bayur Wood and Mdf E2/Brown..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-BR_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-NV",
+                            qty: 43,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Navy Blue (19x15x23) Material/Color:Bayur Wood and Mdf E2/Navy Blue..CBM:0.18 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-NV_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-WH",
+                            qty: 40,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-White (19x15x23) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-WH_001.jpg"
+                        },
+                        {
+                            item: "VC-HP325-NV",
+                            qty: 20,
+                            desc: "Hooper Two Drawer Wooden Accent Side Table, Navy, (18 Inch W x 15 Inch D x 22 Inch H) // CBM: 0.1686 // Packaging: Brown carton, 5 ply outer craft 200, Styrofoam 3 cm (1pc/case) // Materials: Bayur Wood and Mdf E2 // Finish Color: Navy // ***ISTA 3A Dropship Packaging Required***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-HP325-NV_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-BK",
+                            qty: 25,
+                            desc: "York Three Drawer Accent Side Table, Black, (18.5 Inch W x 15 Inch D x 23 Inch H) // Materials: Bayur Wood and Mdf E2 // Finish Code: , Finish Name: Black // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BK_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-BL",
+                            qty: 25,
+                            desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-GW",
+                            qty: 30,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF, Acacia Wood  //  CBM: 0.1787  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table- Gray Wash  (19x15x23) Material/Color:Bayur Wood and Mdf E2/Wheat..CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-GW_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-WB",
+                            qty: 20,
+                            desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Warm Brown, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Soli d Bayur Wood + Mdf E2 + Veneer Meranti // Finish Code: WNB/01, Finish Name: Warm Brown // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-WB_001.jpg"
                         }
                     ]
                 },
-                "CG2603-04":  {
-                 Vendor: "V70 CV. JATI VISIONS RAYA",
-                 ecrd: "2026-6-23",
-                   items: [
-                    {
-                      item: "JV-ABL401",
-                      qty:  100,
-                      desc: "Abella Round Coffee Table (34.25x34.25x16.53) // Material: Rotan Frame; Banana Small Astor + Banana (Styrofoam 1) + Single Face Master Carton: Y , 1***DROPSHIP PACKAGING REQUIRED*** KD // CBM: 0.397 // Packaging: Box Kraft #150 + Protect Styrofoam (Styrofoam 1) + Single Face // Master Carton: Y , 1 // ***DROPSHIP PACKAGING REQUIRED*** ******",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-ABL401_001.jpg"
-                    },
-                   {
-                      item: "JV-CR401",
-                      qty:  30,
-                      desc: "Cypress Cocktail Table (35.43x35.43x17.71) // Material: Wood Frame; Banana Twisted Astor Lamination Natural Color // CBM: 0.358 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Single Face // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-CR401_001.jpg"
-                    },
-                    {
-                      item: "SY-EL305",
-                      qty:  30,
-                      desc: "Ellantra Side Table (12.59x12.59x17.71)   //  Material: Wood    //  CBM: 0.097  //  Packaging: Box Corner Protect Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L )  //     Inch Drop Ship packaging Inch  required",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-EL305_001.jpg"
-                    },
-                    {
-                      item: "TT-NTR-OP302-NT",
-                      qty:  165,
-                      desc: "Open Slat Wooden End Table (11.81x11.81x17.71)   //  Material: Wood    //  CBM: 0.071  //  Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L )  //  Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-NTR-OP302-NT_001.jpg"
+                "CG2603-04": {
+                    Vendor: "V70 CV. JATI VISIONS RAYA",
+                    ecrd: "2026-6-23",
+                    items: [
+                        {
+                            item: "JV-ABL401",
+                            qty: 100,
+                            desc: "Abella Round Coffee Table (34.25x34.25x16.53) // Material: Rotan Frame; Banana Small Astor + Banana (Styrofoam 1) + Single Face Master Carton: Y , 1***DROPSHIP PACKAGING REQUIRED*** KD // CBM: 0.397 // Packaging: Box Kraft #150 + Protect Styrofoam (Styrofoam 1) + Single Face // Master Carton: Y , 1 // ***DROPSHIP PACKAGING REQUIRED*** ******",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-ABL401_001.jpg"
+                        },
+                        {
+                            item: "JV-CR401",
+                            qty: 30,
+                            desc: "Cypress Cocktail Table (35.43x35.43x17.71) // Material: Wood Frame; Banana Twisted Astor Lamination Natural Color // CBM: 0.358 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Single Face // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-CR401_001.jpg"
+                        },
+                        {
+                            item: "SY-EL305",
+                            qty: 30,
+                            desc: "Ellantra Side Table (12.59x12.59x17.71)   //  Material: Wood    //  CBM: 0.097  //  Packaging: Box Corner Protect Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L )  //     Inch Drop Ship packaging Inch  required",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-EL305_001.jpg"
+                        },
+                        {
+                            item: "TT-NTR-OP302-NT",
+                            qty: 165,
+                            desc: "Open Slat Wooden End Table (11.81x11.81x17.71)   //  Material: Wood    //  CBM: 0.071  //  Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L )  //  Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-NTR-OP302-NT_001.jpg"
 
-                      }
+                        }
                     ]
                 },
                 "JW 2507-07N": {
@@ -8028,579 +8030,579 @@
                         }
                     ]
                 },
-                "JW 2603-01N":  {
-                 Vendor: "V65 CV. Living Creation Furniture (PT. Indigo Mandiri Sejahtera)",
-                  ecrd: "2026-05-30",
-                   items: [
-                    {
-                      item: "BK-65434-AN",
-                      qty:  10,
-                      desc: "Palma Rattan Wrapped Bookshelf, Antique Natural (33.75W Inch  x 17D Inch  x 75H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.74 // ***Single Wall Only Without Shipping Cartons***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/BK-65434-AN_001.jpg"
-                    },
-                   {
-                      item: "BN-65444-AN",
-                      qty:  12,
-                      desc: "Palma Rattan Wrapped Bench With Curved Legs And Shelf, Antique Natural (54.75W Inch  x 17D Inch  x 18.5H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.26 // ***Single Wall Only Without Shipping Cartons***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-65444-AN_001.jpg"
-                    },
-                    {
-                      item: "CS-65307-NT",
-                      qty:  25,
-                      desc: "Amaya Woven Water Hyacinth Counterstool, Natural (22.5 Inch W x 21.5 Inch D x 38 Inch H) // Fabric Type: Polyester, Fabric Code from Vendor: SR 10 Snow White, Fabric Content %: 100% Polyester, Fill Material on Upholstered Items only: 2 Inch  foam inoac // Materials: Rattan Pole, Rattan natural hyacinth and Fitrit // Finish Code: NAT-WHC, Finish Name: Natural // Set Up // CBM: 0.29 //***Single Wall Only Without Shipping Cartons*** // ***SOFFA COMPLIANCE REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CS-65307-NT_001.jpg"
-                    },
-                    {
-                      item: "CT-65404-AN",
-                      qty:  20,
-                      desc: "Palma Rectangular Rattan Wrapped Coffee Table With Curved Legs And Shelf, Antique Natural (44.5W Inch  x 27.5D Inch  x 17.75H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.36 // ***Single Wall Only Without Shipping Cartons***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-65404-AN_001.jpg"
-                   },
-                   {
-                      item: "DT-65706-NT",
-                      qty:  11,
-                      desc: "Alina Rattan Hourglass Pedestal Dining Table Base (Glass Top Not Included), Natural (28W Inch  x 28D Inch  x 30.5H Inch ) // // Materials: Rattan Pole, Rattan core // Finish Code: NAT-CORE, Finish Name: Natural // Set Up // CBM: 0.4 // ***Single Wall Only Without Shipping Cartons***//",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-65706-NT_001.jpg"
-                    },
-                    {
-                      item: "OC-65202-NT-V2",
-                      qty:  12,
-                      desc: "Atherton 2.0 Wide Weave Water Hyacinth Occasional Chair With Raised Front Chair Apron, Natural (32.5x30.5x32.5) // Material: Rattan, Water Hyacinth, Fabric // Finish: Lacquer; NATURAL // CBM: 0.501 // Packaging: CORRUGATED PAPER // MOQ: 20",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/OC-65202-NT-V2_001.jpg"
-                    },
-                    {
-                      item: "OT-65414-AN",
-                      qty:  22,
-                      desc: "Palma Rattan Wrapped Console Table With Shelves, Antique Natural (55W Inch  x 16D Inch  x 30H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.44 // ***Single Wall Only Without Shipping Cartons*** ",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/OT-65414-AN_001.jpg"
-                    },
-                    {
-                      item: "ST-65104-L-NT",
-                      qty:  20,
-                      desc: "Ellison Round Rattan Side Table With Shelf, Natural (22W Inch  x 22D Inch  x 22H Inch ) // Materials: MAHOGANY WOOD, RATTAN PEEL // Finish Code: NAT-PEEL, Finish Name: NATURAL // Set Up // CBM: 0.281 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65104-L-NT_001.jpg"
-                    },
-                    {
-                      item: "ST-65104-NT",
-                      qty:  15,
-                      desc: "Ellison Round Rattan Side Table With Shelf, Natural (18x18x19.25) // Material: MAHOGANY WOOD, Natural Peel Rattan, // Finish: Lacquer; NATURAL // CBM: 0.145 // Packaging: CORRUGATED PAPER // MOQ: 20 // ISTA 3A Dropship packaging",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65104-NT_001.JPG"
-                   },
-                   {
-                      item: "ST-65350-AN",
-                      qty:  75,
-                      desc: "Palma Square Rattan Wrapped Side Table, Antique Natural (22W Inch  x 22D Inch  x 22.25H Inch ) // //Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: TIGER NATURAL // Set Up // CBM: 0.228 // Number of Shipping Boxes: 1 // Container Packed Via: Stacked Single Wall Wrapped with Cartons Included. ***Must Include Cartons In Container*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65350-AN_001.jpg"
-                       }
-                    ]
-                },
-                "JW 2603-02N":  {
-                 Vendor: "V68 PT. FURNILAC PRIMAGUNA",
-                  ecrd: "2026-06-25",
-                   items: [
-                    {
-                      item: "NS-6802-LOV",
-                      qty:  52,
-                      desc: "Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-LOV_001.jpg"
-                    },
-                    {
-                      item: "NS-68406-BKV",
-                      qty:  30,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
-                    },
-                    {
-                      item: "NS-68406-BRV",
-                      qty:  30,
-                      desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
-                    },
-                    {
-                      item: "ST-68DR16-BK",
-                      qty:  20,
-                      desc: "16 Inch Cinched Wood Drum Table, Black, (16 Inch W x 16 Inch D x 23.5 Inch H) // Materials: Bayur, Mdf + Veneer // Finish Code: BK-32, Finish Name: Black // Set Up // CBM: 0.173 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-BK_001.jpg"
-                    },
-                    {
-                      item: "ST-68DR16-WW",
-                      qty:  20,
-                      desc: "16 Inch Cinched Wood Drum Table, White Oak (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop Ship packaging required Inch polysheet wrapped Brown carton, 5 ply outer craft 200 Styrofoam 3 cm //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WW_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-AD301-BR",
-                      qty:  25,
-                      desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-BK",
-                      qty:  25,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-YK339-OR",
-                      qty:  25,
-                      desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Orange..(19x15x23) Material/Color : Bayur Wood and Mdf E2 / Orange, CBM: 0.17 Packing : Box K#200 + Protection***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-OR_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-BL",
-                      qty:  65,
-                      desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
-                    },
-                    {
-                      item: "VC-YK339-PK",
-                      qty:  25,
-                      desc: "York Three Drawer Accent Side Table, 18.5 Inch W, Pink, (18.5 Inch W x 15 Inch D x 23 Inch H) //  // Materials: Bayur Wood + MDF // Finish Code: SW 6296, Finish Name: Fading Rose // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-PK_001.jpg"
+                "JW 2603-01N": {
+                    Vendor: "V65 CV. Living Creation Furniture (PT. Indigo Mandiri Sejahtera)",
+                    ecrd: "2026-05-30",
+                    items: [
+                        {
+                            item: "BK-65434-AN",
+                            qty: 10,
+                            desc: "Palma Rattan Wrapped Bookshelf, Antique Natural (33.75W Inch  x 17D Inch  x 75H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.74 // ***Single Wall Only Without Shipping Cartons***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/BK-65434-AN_001.jpg"
+                        },
+                        {
+                            item: "BN-65444-AN",
+                            qty: 12,
+                            desc: "Palma Rattan Wrapped Bench With Curved Legs And Shelf, Antique Natural (54.75W Inch  x 17D Inch  x 18.5H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.26 // ***Single Wall Only Without Shipping Cartons***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/BN-65444-AN_001.jpg"
+                        },
+                        {
+                            item: "CS-65307-NT",
+                            qty: 25,
+                            desc: "Amaya Woven Water Hyacinth Counterstool, Natural (22.5 Inch W x 21.5 Inch D x 38 Inch H) // Fabric Type: Polyester, Fabric Code from Vendor: SR 10 Snow White, Fabric Content %: 100% Polyester, Fill Material on Upholstered Items only: 2 Inch  foam inoac // Materials: Rattan Pole, Rattan natural hyacinth and Fitrit // Finish Code: NAT-WHC, Finish Name: Natural // Set Up // CBM: 0.29 //***Single Wall Only Without Shipping Cartons*** // ***SOFFA COMPLIANCE REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CS-65307-NT_001.jpg"
+                        },
+                        {
+                            item: "CT-65404-AN",
+                            qty: 20,
+                            desc: "Palma Rectangular Rattan Wrapped Coffee Table With Curved Legs And Shelf, Antique Natural (44.5W Inch  x 27.5D Inch  x 17.75H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.36 // ***Single Wall Only Without Shipping Cartons***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-65404-AN_001.jpg"
+                        },
+                        {
+                            item: "DT-65706-NT",
+                            qty: 11,
+                            desc: "Alina Rattan Hourglass Pedestal Dining Table Base (Glass Top Not Included), Natural (28W Inch  x 28D Inch  x 30.5H Inch ) // // Materials: Rattan Pole, Rattan core // Finish Code: NAT-CORE, Finish Name: Natural // Set Up // CBM: 0.4 // ***Single Wall Only Without Shipping Cartons***//",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-65706-NT_001.jpg"
+                        },
+                        {
+                            item: "OC-65202-NT-V2",
+                            qty: 12,
+                            desc: "Atherton 2.0 Wide Weave Water Hyacinth Occasional Chair With Raised Front Chair Apron, Natural (32.5x30.5x32.5) // Material: Rattan, Water Hyacinth, Fabric // Finish: Lacquer; NATURAL // CBM: 0.501 // Packaging: CORRUGATED PAPER // MOQ: 20",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/OC-65202-NT-V2_001.jpg"
+                        },
+                        {
+                            item: "OT-65414-AN",
+                            qty: 22,
+                            desc: "Palma Rattan Wrapped Console Table With Shelves, Antique Natural (55W Inch  x 16D Inch  x 30H Inch ) // Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: Tiger natural // Set Up // CBM: 0.44 // ***Single Wall Only Without Shipping Cartons*** ",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/OT-65414-AN_001.jpg"
+                        },
+                        {
+                            item: "ST-65104-L-NT",
+                            qty: 20,
+                            desc: "Ellison Round Rattan Side Table With Shelf, Natural (22W Inch  x 22D Inch  x 22H Inch ) // Materials: MAHOGANY WOOD, RATTAN PEEL // Finish Code: NAT-PEEL, Finish Name: NATURAL // Set Up // CBM: 0.281 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65104-L-NT_001.jpg"
+                        },
+                        {
+                            item: "ST-65104-NT",
+                            qty: 15,
+                            desc: "Ellison Round Rattan Side Table With Shelf, Natural (18x18x19.25) // Material: MAHOGANY WOOD, Natural Peel Rattan, // Finish: Lacquer; NATURAL // CBM: 0.145 // Packaging: CORRUGATED PAPER // MOQ: 20 // ISTA 3A Dropship packaging",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65104-NT_001.JPG"
+                        },
+                        {
+                            item: "ST-65350-AN",
+                            qty: 75,
+                            desc: "Palma Square Rattan Wrapped Side Table, Antique Natural (22W Inch  x 22D Inch  x 22.25H Inch ) // //Materials: Mahogany wood, Rattan peel, Plywood // Finish Code: NAT-TIGER, Finish Name: TIGER NATURAL // Set Up // CBM: 0.228 // Number of Shipping Boxes: 1 // Container Packed Via: Stacked Single Wall Wrapped with Cartons Included. ***Must Include Cartons In Container*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-65350-AN_001.jpg"
                         }
                     ]
                 },
-                "JW 2603-03N":  {
-                 Vendor: "V68 PT. FURNILAC PRIMAGUNA",
-                  ecrd: "2026-06-25",
-                   items: [
-                    {
-                      item: "DR-68834-NT",
-                      qty:  20,
-                      desc: "Paloma 3 Drawer Raffia Wrapped Dresser, Natural, (34 Inch W x 18 Inch D x 32.5 Inch H) // // Materials: Wood, Mdf + Anyaman Raffia // Finish Code: NA, Finish Name: Natural // Set Up // CBM: 0.49 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ANTI TIP KIT REQUIRED***// ***STURDY Act Testing Required***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-68834-NT_001.jpg"
-                    },
-                    {
-                      item: "DR-68848-MBV",
-                      qty:  20,
-                      desc: "Maribelle Scallop 3 Drawer Dresser, Medium Brown (34W Inch  x 18D Inch  x 32.5H Inch ) // // Materials: wood,Mdf // Finish Code: BMV/02, Finish Name: Medium Brown // Set Up // CBM: 0.494 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-68848-MBV_001.jpg"
-                    },
-                    {
-                      item: "NS-6801-RFBK",
-                      qty:  20,
-                      desc: "Gia Raffia Single Drawer Nightstand, 26 Inch H, Black (24 x 19 x 26) // Material: Bayur Wood, MDF, Raffia, Metal Hardware // Finish: Black // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6801-RFBK_001.jpg"
-                    },
-                    {
-                      item: "NS-6801-RFNT",
-                      qty:  40,
-                      desc: "Gia Raffia Single Drawer Nightstand, 26 Inch H, Natural (24 x 19 x 26) // Material: Bayur Wood, MDF, Raffia, Metal Hardware // Finish: Natural // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6801-RFNT_001.jpg"
-                    },
-                    {
-                      item: "NS-6802-MBV",
-                      qty:  20,
-                      desc: "Gemma 2 Drawer Nightsand With Open Storage, 34 Inch W, Medium Brown (34W Inch  x 15D Inch  x 29.5H Inch ) // // Materials: Wood,Mdf+V.Meranti // Finish Code: BMV/02, Finish Name: Medium Brown // KD // CBM: 0.344 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***ANTI TIP KIT REQUIRED***//",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-MBV_001.jpg"
-                    },
-                    {
-                      item: "NS-6802-MRBK",
-                      qty:  60,
-                      desc: "Gemma 2 Drawer Nightsand With Open Storage, KD, 34 Inch W, Black (34 x 15 x 29.5) // Material: Bayur Wood, Meranti Veneer, MDF, Metal Hardware // Finish: Black Solid // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-MRBK_001.jpg"
-                    },
-                    {
-                      item: "ST-68DR16-WN",
-                      qty:  20,
-                      desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
-                    },
-                    {
-                      item: "TT-VC-HP325-WH",
-                      qty:  38,
-                      desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
-                      }
-                    ]
-                },
-                "JW 2603-04":  {
-                 Vendor: "V69 Dollar Furniture",
-                ecrd: "2026-07-06",
-                   items: [
-                    {
-                      item: "DF-PR107",
-                      qty:  236,
-                      desc: "Promenade Antique Counter Stool (13.78x13.78x24.02)   //  Material: Mindi Wood  //  CBM: 0.1126  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm     //  Master Carton: N - 1 pcs/box",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DF-PR107_001.jpg"
-                    },
-                   {
-                      item: "DF-PR511",
-                      qty:  50,
-                      desc: "Promenade Side Table with Drawer and Shelf (17.72x12.99x25.59)   //  Material: Mindi Wood  //  Color: Old Look  //  CBM: 0.1412  //  Packaging:  Inch Drop ship packaging Inch  required  Carton box K#200+Protection / Protection Styrofoam 2cm      //  Master Carton: N - 1 pcs/box",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DF-PR511_001.jpg"
-                    },
-                    {
-                      item: "SB-69566",
-                      qty:  30,
-                      desc: "Myra Bench (47.24x9.84x15.75)   //  Material: Teak Wood  //  CBM: 0.1797  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm      //  Master Carton: N - 1 pcs/box",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-69566_001.jpg"
-                    },
-                    {
-                      item: "TT-DF-PR515",
-                      qty:  150,
-                      desc: "Promenade Round Side Table (19.69x19.69x24.8)   //  Material:   //  CBM: 0.1841  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm    + Protection with inner carton box   //  Master Carton: Y - 1 pcs/box ***DROPSHIP PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-DF-PR515_001.jpg"
+                "JW 2603-02N": {
+                    Vendor: "V68 PT. FURNILAC PRIMAGUNA",
+                    ecrd: "2026-06-25",
+                    items: [
+                        {
+                            item: "NS-6802-LOV",
+                            qty: 52,
+                            desc: "Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-LOV_001.jpg"
+                        },
+                        {
+                            item: "NS-68406-BKV",
+                            qty: 30,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Matte Black Wood Veneer (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BKV_001.jpg"
+                        },
+                        {
+                            item: "NS-68406-BRV",
+                            qty: 30,
+                            desc: "2 Drawer + 1 Shelf Nightstand, Walnut Color Code DSC 6403 (22x15x24)   Material: Bayur Wood and MDF  Thin Medium Density Fiberboard - Phase 2   Antique Gold Oval Handle: OV-185/E   CBM: 0.21775   Packaging: Brown Carton",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-68406-BRV_001.jpg"
+                        },
+                        {
+                            item: "ST-68DR16-BK",
+                            qty: 20,
+                            desc: "16 Inch Cinched Wood Drum Table, Black, (16 Inch W x 16 Inch D x 23.5 Inch H) // Materials: Bayur, Mdf + Veneer // Finish Code: BK-32, Finish Name: Black // Set Up // CBM: 0.173 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-BK_001.jpg"
+                        },
+                        {
+                            item: "ST-68DR16-WW",
+                            qty: 20,
+                            desc: "16 Inch Cinched Wood Drum Table, White Oak (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop Ship packaging required Inch polysheet wrapped Brown carton, 5 ply outer craft 200 Styrofoam 3 cm //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WW_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-AD301-BR",
+                            qty: 25,
+                            desc: "Auburn Traditional One Drawer Wooden Accent Side Table (17.0x14.9x23.4)   //  Material: MDF, Bayur Wood  //  CBM: 0.1687  //  Packaging: Brown carton  5 ply outer craft 200  Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Auburn Traditional One Drawer Wooden Accent Side Table-Brown (17x15x23) Material/Color:Bayur Wood and Mdf E2 / Brown CBM:0.17 Packing:Box K#200+Styrofoam 2cm Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-AD301-BR_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-BK",
+                            qty: 25,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-Black..(18x15x22) Material/Color:Bayur Wood and Mdf E2/Black..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-BK_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-YK339-OR",
+                            qty: 25,
+                            desc: "York Three Drawer Wooden Accent Side Table (18.5x14.9x22.9)   //  Material: MDF  //  CBM: 0.1787  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s York 3 Drawer Wooden Accent Side Table-Orange..(19x15x23) Material/Color : Bayur Wood and Mdf E2 / Orange, CBM: 0.17 Packing : Box K#200 + Protection***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-YK339-OR_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-BL",
+                            qty: 65,
+                            desc: "York Three Drawer Wooden Accent Side Table, 18.5 Inch W, Blue, (18.5 Inch W x 15 Inch D x 23 Inch H) // //Materials: Solid Bayur Wood + Mdf E2 + Solid Meranti (NO VENEER) // Finish Code: BNV/02, Finish Name: Northern Air // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-BL_001.jpg"
+                        },
+                        {
+                            item: "VC-YK339-PK",
+                            qty: 25,
+                            desc: "York Three Drawer Accent Side Table, 18.5 Inch W, Pink, (18.5 Inch W x 15 Inch D x 23 Inch H) //  // Materials: Bayur Wood + MDF // Finish Code: SW 6296, Finish Name: Fading Rose // Set Up  // CBM: 0.1787 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/VC-YK339-PK_001.jpg"
                         }
                     ]
                 },
-                "JW 2603-08N":  {
-                 Vendor: "V73 Infinite Rattan Creation, CV",
-                 ecrd: "2026-05-30",
-                   items: [
-                    {
-                      item: "HB-KD404-FQ-NV",
-                      qty:  15,
-                      desc: "Lattice Full/Queen Headboard, Navy, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN-NVY01, Finish Name: NAVY // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-NV_001.jpg"
-                    },
-                    {
-                      item: "SB-73106-BL",
-                      qty:  68,
-                      desc: "Hampton Chippendale Counterstool, 39.25 Inch H, Blue, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H) // Fabric Type: Polyester, Fabric Code from Vendor: Snow White, Fabric Content %: 100% Polyester, Fill Material on Upholstered Items only: Foam // Finish Code: JFN BLU 02, Finish Name: Blue // Set Up // CBM: 0.367 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-BL_001.jpg"
-                    },
-                    {
-                      item: "SB-73106-NV",
-                      qty:  40,
-                      desc: "HAMPTON-CS-NAVY // Hampton Chippendale Counterstool, 39.25 Inch H, Navy, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H) // Finish Code: JFN NVY 01, Finish Name: Navy Blue // Set Up  // CBM: 0.314 // Number of Shipping Boxes: 1 // Materpack Contains:  // ***DROPSHIP PACKAGING REQUIRED*** //  FALSE***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-NV_001.jpg"
-                    },
-                    {
-                      item: "SC-73101-GW",
-                      qty:  60,
-                      desc: "Hampton Chippendale Rattan Side Chair Set of 2 (19 x 24 x 39) // Material: 0 // CBM: 0.503 // Packaging: BOX // Master Carton: 2 PC //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SC-73101-GW_001.jpg"
+                "JW 2603-03N": {
+                    Vendor: "V68 PT. FURNILAC PRIMAGUNA",
+                    ecrd: "2026-06-25",
+                    items: [
+                        {
+                            item: "DR-68834-NT",
+                            qty: 20,
+                            desc: "Paloma 3 Drawer Raffia Wrapped Dresser, Natural, (34 Inch W x 18 Inch D x 32.5 Inch H) // // Materials: Wood, Mdf + Anyaman Raffia // Finish Code: NA, Finish Name: Natural // Set Up // CBM: 0.49 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ANTI TIP KIT REQUIRED***// ***STURDY Act Testing Required***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-68834-NT_001.jpg"
+                        },
+                        {
+                            item: "DR-68848-MBV",
+                            qty: 20,
+                            desc: "Maribelle Scallop 3 Drawer Dresser, Medium Brown (34W Inch  x 18D Inch  x 32.5H Inch ) // // Materials: wood,Mdf // Finish Code: BMV/02, Finish Name: Medium Brown // Set Up // CBM: 0.494 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-68848-MBV_001.jpg"
+                        },
+                        {
+                            item: "NS-6801-RFBK",
+                            qty: 20,
+                            desc: "Gia Raffia Single Drawer Nightstand, 26 Inch H, Black (24 x 19 x 26) // Material: Bayur Wood, MDF, Raffia, Metal Hardware // Finish: Black // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6801-RFBK_001.jpg"
+                        },
+                        {
+                            item: "NS-6801-RFNT",
+                            qty: 40,
+                            desc: "Gia Raffia Single Drawer Nightstand, 26 Inch H, Natural (24 x 19 x 26) // Material: Bayur Wood, MDF, Raffia, Metal Hardware // Finish: Natural // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6801-RFNT_001.jpg"
+                        },
+                        {
+                            item: "NS-6802-MBV",
+                            qty: 20,
+                            desc: "Gemma 2 Drawer Nightsand With Open Storage, 34 Inch W, Medium Brown (34W Inch  x 15D Inch  x 29.5H Inch ) // // Materials: Wood,Mdf+V.Meranti // Finish Code: BMV/02, Finish Name: Medium Brown // KD // CBM: 0.344 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** // ***ANTI TIP KIT REQUIRED***//",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-MBV_001.jpg"
+                        },
+                        {
+                            item: "NS-6802-MRBK",
+                            qty: 60,
+                            desc: "Gemma 2 Drawer Nightsand With Open Storage, KD, 34 Inch W, Black (34 x 15 x 29.5) // Material: Bayur Wood, Meranti Veneer, MDF, Metal Hardware // Finish: Black Solid // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/NS-6802-MRBK_001.jpg"
+                        },
+                        {
+                            item: "ST-68DR16-WN",
+                            qty: 20,
+                            desc: "16 Inch Cinched Wood Drum Table, Walnut (16x16x23.5) // Material: Wood, MDF // CBM: 0.1725 // Packaging: Inch Drop ship packaging Inch required 5 ply outer craft 200 Styrofoam 3 cm",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-68DR16-WN_001.jpg"
+                        },
+                        {
+                            item: "TT-VC-HP325-WH",
+                            qty: 38,
+                            desc: "Hooper 2 Drawer Wooden Accent Side Table (17.9x14.9x22.0)   //  Material: MDF, Acacia Wood  //  CBM: 0.173  //  Packaging: Brown carton 5 ply outer craft 200 Styrofoam 3 cm  //  Master Carton:   //  ***Crafted Home Inch s Hooper 2 Drawer Wooden Accent Side Table-White (18x15x22) Material/Color:Bayur Wood and Mdf E2/White..CBM:0.17 Packing:Box K#200+Styrofoam 3cm Protection (1pc/case)***  //    KD",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-VC-HP325-WH_001.jpg"
                         }
                     ]
                 },
-                "JW 2603-09N":  {
-                 Vendor: "V73 Infinite Rattan Creation, CV",
-                 ecrd: "2026-05-30",
-                   items: [
-                    {
-                      item: "AM-70917",
-                      qty:  30,
-                      desc: "Material: 0 // CBM: 0.063 // Packaging: BOX // Master Carton: 1 PC // Drop Ship packaging required",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70917_001.jpg"
-                   },
-                   {
-                      item: "AM-73369-NT",
-                      qty:  15,
-                      desc: "Bonnie Rattan Scallop Frame Floor Length Mirror, 78.75 Inch H, Natural, (40 Inch W x 2.5 Inch D x 79 Inch H) // Materials: Mahogany Wood, Plywood, Rattan Fitrit, Mirror // Finish Code: JFN SC NAT, Finish Name: Natural // // CBM: 0.344 // Number of Shipping Boxes: 1 // ***ANTI TIP KIT REQUIRED***//***DROPSHIP PACKAGING REQUIRED*** /",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-73369-NT_001.jpg"
-                    },
-                    {
-                      item: "AM-73928-NT",
-                      qty:  15,
-                      desc: "Maui Seagrass Round Mirror, Natural/Navy/White (30 Inch Inch W x 2 Inch Inch D x 30 Inch Inch H) // Materials: MDF, Particle Board, Plywood, seagrass, Glass // Finish Code: JFN NAT-MAUI, Finish Name: Natural/Navy/White // Set Up // CBM: 0.0867 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-73928-NT_001.jpg"
-                    },
-                    {
-                      item: "HB-KD101-T-BL",
-                      qty:  20,
-                      desc: "Lattice Twin Headboard, Blue, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN BLU 01, Finish Name: Blue // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-BL_001.jpg"
-                    },
-                    {
-                      item: "HB-KD101-T-GN",
-                      qty:  18,
-                      desc: "Lattice Twin Headboard, Green, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN GRN 01, Finish Name: Green // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-GN_001.jpg"
-                    },
-                    {
-                      item: "HB-KD101-T-NV",
-                      qty:  20,
-                      desc: "Lattice Twin Headboard, Navy, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN-NVY01, Finish Name: NAVY // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-NV_001.jpg"
-                    },
-                    {
-                      item: "HB-KD101-T-WH",
-                      qty:  30,
-                      desc: "Lattice Twin Headboard, White, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN WHT 01, Finish Name: White // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-WH_001.jpg"
-                    },
-                    {
-                      item: "HB-KD404-FQ-BL",
-                      qty:  35,
-                      desc: "Lattice Full/Queen Headboard, Blue, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN BLU 01, Finish Name: Blue // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-BL_001.jpg"
-                    },
-                    {
-                      item: "HB-KD404-FQ-GN",
-                      qty:  25,
-                      desc: "Lattice Full/Queen Headboard, Green, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN GRN 01, Finish Name: Green // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-GN_001.jpg"
-                    },
-                    {
-                      item: "SB-73106-GW",
-                      qty:  55,
-                      desc: "Hampton Chippendale Counterstool, 39.25 Inch H, Grey Wash, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H)   //  Material: 0  //  CBM: 0.314  //  Packaging: EMPTY BOX  //  Master Carton: 1 PC  //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-GW_001.jpg"
-                    },
-                    {
-                      item: "SB-73106-WH",
-                      qty:  35,
-                      desc: "Hampton Chippendale Counter Stool, 39.25 Inch H, White, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H)   //  Material: 0  //  CBM: 0.314  //  Packaging: EMPTY BOX  //  Master Carton: 1 PC  //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-WH_001.jpg"
-                         }
-                    ]
-                },
-                "JW 2603-10N":  {
-                 Vendor: "V70 CV. JATI VISIONS RAYA",
-                 ecrd: "2026-06-25",
-                   items: [
-                    {
-                      item: "AB-70889-NT",
-                      qty:  30,
-                      desc: "Organic Teak Wood Carved Bowl, 24 Inch W, Natural, (24 Inch W x 24 Inch D x 6 Inch H) // // Materials: Teak Wood // Finish Code: 39, Finish Name: HO Natural // // CBM: 0.054 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AB-70889-NT_001.jpg"
-                    },
-                   {
-                      item: "AM-70457-NT",
-                      qty:  30,
-                      desc: "35 Inch Knotted Natural Fiber Round Mirror (36.61x1.574x36.61) // Material: Abaca Natural Weaving knot // CBM: 0.114 // Packaging: Box Kraft #150 + Box SW (stack cover) + Protect Box Styrofoam 2cm for Headboard 6cm + Styrofoam 100x200x2 + wrap paper/kg wide 120 + Plastik Handywrap 150x10x0.02 // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70457-NT_001.jpg"
-                    },
-                    {
-                      item: "AM-70640-NT",
-                      qty:  30,
-                      desc: "Shine Woven Wave Frame Mirror, Natural, (35 Inch W x 3.5 Inch D x 35 Inch D) // Materials: Banana Small Natural // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.11 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70640-NT_001.jpg"
-                    },
-                    {
-                      item: "AM-70912-M",
-                      qty:  15,
-                      desc: "24 Inch Marina Round Rattan Mirror, White (23.62x3.543x23.62) // Material: Rattan; Sanded Peel // CBM: 0.093 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for Headboard (width in styrofoam and sw = 11cm) + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1 Inch Drop Ship PAckaging Inch required",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70912-M_001.jpg"
-                   },
-                   {
-                      item: "AM-LE701",
-                      qty:  30,
-                      desc: "Live Edge 3D Mirror Solid Suar Wood Frame (21.65x1.968x24.01) // Material: Munggur Wood // CBM: 0.05 // Packaging: Box Kraft #150 + Box SW (stack cover) + Protect Box Styrofoam 2cm for Headboard 6cm + Single Face + wrap paper/kg wide 120 + Styrofoam 100x200x2 // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-LE701_001.jpg"
-                    },
-                    {
-                      item: "CT-7005-NT",
-                      qty:  20,
-                      desc: "Live Edge Teak Wood Coffee Table, 31.5 Inch , Natural 31.49x26.18x15.66 // Fabric Type: N/A // Finish Name: Tabletop: Natural /Legs: Black // KD // CBM: 0.0833 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-7005-NT_001.jpg"
-                    },
-                    {
-                      item: "CT-70435",
-                      qty:  26,
-                      desc: "Fulton Storage Coffee Table (30.70x30.70x15.74) // Material: // CBM: 0.339 // Packaging: Box Kraft #200 + Box SW + Protect Box Styrofoam PE 2cm (elbow shape) + Protect Box Styrofoam PE 2cm (L shape) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70435_001.jpg"
-                    },
-                    {
-                      item: "CT-70542",
-                      qty:  30,
-                      desc: "Bayside Coffee Table with Storage (47.24x18.30x17.71) // Material: Full Kubu+Wood Base // CBM: 0.343 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70542_001.jpg"
-                    },
-                    {
-                      item: "JV-AS504O-L",
-                      qty:  30,
-                      desc: "Aspen Round Mirror, Natural (31.10x2.244x31.10) // Material: Big Rope Woven // CBM: 0.101 // Packaging: Box Kraft #150 + Box SW (Pizza models) + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm (elbow shape) + wrap paper/kg wide 120 + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-AS504O-L_001.jpg"
-                   },
-                   {
-                      item: "JV-NHT402-4-WH",
-                      qty:  30,
-                      desc: "New Hampton Round End Table (15.74x15.74x18.50) // Material: // CBM: 0.119 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-NHT402-4-WH_001.jpg"
-                    },
-                    {
-                      item: "LM-2497-NT",
-                      qty:  10,
-                      desc: "Sultan Woven Manila Rope Chandelier, 32 Inch Dia X 24 Inch H (32.28x32.28x24.40) // Material: Core + Agel - Hanger: Manilla Rope // CBM: 0.535 // Packaging: Box Kraft #150 + Protect hat model for Mekele Hanging Lamp(size 82x82x10) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-2497-NT_001.jpg"
-                    },
-                    {
-                      item: "SB-70363-NT",
-                      qty:  32,
-                      desc: "20 Inch H X-Style Ottoman with Raffia, Cream (21.65x16.53x19.68) // Material: Rope; Mango Wood // CBM: 0.164 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Single Face // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-70363-NT_001.jpg"
-                    },
-                    {
-                      item: "ST-70108-BK",
-                      qty:  25,
-                      desc: "Kayu Petrifed Wood Top Pedestal Accent Table, 20 Inch H, Black (12x12x20) // Material: Petrified Black Munggur // Finish: Black-Black // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70108-BK_001.jpg"
-                    },
-                    {
-                      item: "SY-SNB604-WH",
-                      qty:  30,
-                      desc: "Sanibel Counterstool (17.32x17.32x24.01)   //  Material: Waterhyacinth    //  CBM: 0.173  //  Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Single Face  //  Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-SNB604-WH_001.jpg"
-                    },
-                    {
-                      item: "TT-ST-70659-NT",
-                      qty:  60,
-                      desc: "Riley Twist Wooden Side Table (11.81x11.81x23.62)   //  Material: Munggur Wood    //  CBM: 0.098  //  Packaging: Box  Kraft #150 + Protect Box Styrofoam PE 2cm (elbow shape)  //  Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-ST-70659-NT_001.jpg"
-                    },
-                    {
-                      item: "TT-SY-PL303-NT",
-                      qty:  25,
-                      desc: "Prelude Round Stool (14.96x14.96x15.74)   //  Material: Teakwood    //  CBM: 0.091  //  Packaging: Box Kraft #150 + Box Single wall + Protect Box Styrofoam 2cm for a circle shape ( L )  //  Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-SY-PL303-NT_001.jpg"
+                "JW 2603-04": {
+                    Vendor: "V69 Dollar Furniture",
+                    ecrd: "2026-07-06",
+                    items: [
+                        {
+                            item: "DF-PR107",
+                            qty: 236,
+                            desc: "Promenade Antique Counter Stool (13.78x13.78x24.02)   //  Material: Mindi Wood  //  CBM: 0.1126  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm     //  Master Carton: N - 1 pcs/box",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DF-PR107_001.jpg"
+                        },
+                        {
+                            item: "DF-PR511",
+                            qty: 50,
+                            desc: "Promenade Side Table with Drawer and Shelf (17.72x12.99x25.59)   //  Material: Mindi Wood  //  Color: Old Look  //  CBM: 0.1412  //  Packaging:  Inch Drop ship packaging Inch  required  Carton box K#200+Protection / Protection Styrofoam 2cm      //  Master Carton: N - 1 pcs/box",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DF-PR511_001.jpg"
+                        },
+                        {
+                            item: "SB-69566",
+                            qty: 30,
+                            desc: "Myra Bench (47.24x9.84x15.75)   //  Material: Teak Wood  //  CBM: 0.1797  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm      //  Master Carton: N - 1 pcs/box",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-69566_001.jpg"
+                        },
+                        {
+                            item: "TT-DF-PR515",
+                            qty: 150,
+                            desc: "Promenade Round Side Table (19.69x19.69x24.8)   //  Material:   //  CBM: 0.1841  //  Packaging: Carton box K#200+Protcetion / Protection Styrofoam 2cm    + Protection with inner carton box   //  Master Carton: Y - 1 pcs/box ***DROPSHIP PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-DF-PR515_001.jpg"
                         }
                     ]
                 },
-                "JW 2603-10N":  {
-                 Vendor: "V70 CV. JATI VISIONS RAYA",
-                 ecrd: "2026-06-30",
-                   items: [
-                    {
-                      item: "AC-70817",
-                      qty:  40,
-                      desc: "Maples Rattan and Bamboo Antique Basket (21.25x14.96x16.14) // Material: Rattan Half Polish; Bamboo; Sendi Peel // CBM: 0.124 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AC-70817_001.jpg"
-                    },
-                    {
-                      item: "AD-70925-SET",
-                      qty:  12,
-                      desc: "Kera Round Wall Decor Set (35.43x2.952x35.43) // Material: Iron; Abaca // CBM: 0.139 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AD-70925-SET_001.jpg"
-                    },
-                    {
-                      item: "AM-70330-WH",
-                      qty:  30,
-                      desc: "Round Capiz Mirror, 30 Inch W, White 29.92x1.96x29.92 // Fabric Type: N/A // Finish Name: White // Set Up // CBM: 0.0805 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70330-WH_001.jpg"
-                    },
-                    {
-                      item: "AW-70635-BD",
-                      qty:  25,
-                      desc: "Shine Wall Art, Blonde, (18.25 Inch W x 5.5 Inch D x 18.25 Inch H) // // Materials: Banana, Metal // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.04 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AW-70635-BD_001.jpg"
-                    },
-                    {
-                      item: "AW-70746-BD",
-                      qty:  25,
-                      desc: "Shine Wall Art, Blonde, (14.25 Inch W x 4 Inch D x 14.25 Inch H) // // Materials: Banana, Metal // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.0328 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/AW-70746-BD_001.jpg"
-                    },
-                    {
-                      item: "CT-70611-NT",
-                      qty:  45,
-                      desc: "Abella Round Woven Banana Leaf Coffee Table, 28 Inch W, Natural 28.15 Inch W x 28.15 Inch D x 14.75”H // Fabric Type: N/A // Finish Name: Natural // Set Up // CBM: 0.267 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70611-NT_001.jpg"
-                    },
-                    {
-                      item: "JV-AC504-S",
-                      qty:  25,
-                      desc: "Chesapeake Mirror (26.77x1.456x39.37) // Material: Capiz // CBM: 0.108 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm for Headboard Small H = 8 + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) + wrap paper/kg wide 120 // Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-AC504-S_001.jpg"
-                    },
-                    {
-                      item: "JV-CR401-BD",
-                      qty:  30,
-                      desc: "Cypress Cocktail Table, 35.5 Inch W, Blonde, (35.5 Inch W x 35.5 Inch D x 17.75 Inch H) // Materials: Banana Small Natural Lamination, Mungur Wood // Finish Code: 1-143, Finish Name: Banana Natural & Peanut Brown W/O Brush // Partial KD // CBM: 0.51 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-CR401-BD_001.jpg"
-                    },
-                    {
-                      item: "ST-70328-NU",
-                      qty:  25,
-                      desc: "Savoy Turned Leg Side Table With Marble Tabletop, Natural, (11.75 Inch W x 11.75 Inch D x 23 Inch H) //  // Materials: Mungur, Marble // Finish Code: 39, Finish Name: Natural Ho // Set Up  // CBM: 0.186 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70328-NU_001.JPG"
-                    },
-                    {
-                      item: "ST-70768-BD",
-                      qty:  25,
-                      desc: "Cypress Accent Table, 14 Inch W, Blonde, (14 Inch W x 14 Inch D x 20 Inch H) // Materials: Banana Small Natural, Mungur Wood // Finish Code: 1-143, Finish Name: Banana Natural & Peanut Brown W/O Brush // Set Up // CBM: 0.1 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70768-BD_001.jpg"
-                    },
-                    {
-                      item: "ST-70768-NT",
-                      qty:  35,
-                      desc: "Cypress Accent Table, 14 Inch W, Natural, (14 Inch W x 14 Inch D x 20 Inch H) // Materials: Banana Twisted Astor Lamination, Mungur Wood // Finish Code: 1-129, Finish Name: Natural - Wenge // Set Up  // CBM: 0.1 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70768-NT_001.jpg"
-                    },
-                    {
-                      item: "SY-MR401-BD",
-                      qty:  25,
-                      desc: "Marina Abaca Double Bench with Storage, 40.2 Inch W, Blonde, (40.2 Inch W x 14.2 Inch D x 17.7 Inch H) // Materials: Banana Small Natural, Mungur Wood // Finish Code: 1-97, Finish Name: Banana Natural & White Patina // CBM: 0.23 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED***",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-MR401-BD_001.jpg"
-                    },
-                    {
-                      item: "TT-CT-211",
-                      qty:  22,
-                      desc: "Tropical Coffee Table Abaca Small Astor with Storage (48.03x30.31x18.11)   //  Material:     //  CBM: 0.446  //  Packaging: Box Kraft#150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Single Face  //  Master Carton: Y , 1",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-CT-211_001.jpg"
+                "JW 2603-08N": {
+                    Vendor: "V73 Infinite Rattan Creation, CV",
+                    ecrd: "2026-05-30",
+                    items: [
+                        {
+                            item: "HB-KD404-FQ-NV",
+                            qty: 15,
+                            desc: "Lattice Full/Queen Headboard, Navy, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN-NVY01, Finish Name: NAVY // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-NV_001.jpg"
+                        },
+                        {
+                            item: "SB-73106-BL",
+                            qty: 68,
+                            desc: "Hampton Chippendale Counterstool, 39.25 Inch H, Blue, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H) // Fabric Type: Polyester, Fabric Code from Vendor: Snow White, Fabric Content %: 100% Polyester, Fill Material on Upholstered Items only: Foam // Finish Code: JFN BLU 02, Finish Name: Blue // Set Up // CBM: 0.367 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-BL_001.jpg"
+                        },
+                        {
+                            item: "SB-73106-NV",
+                            qty: 40,
+                            desc: "HAMPTON-CS-NAVY // Hampton Chippendale Counterstool, 39.25 Inch H, Navy, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H) // Finish Code: JFN NVY 01, Finish Name: Navy Blue // Set Up  // CBM: 0.314 // Number of Shipping Boxes: 1 // Materpack Contains:  // ***DROPSHIP PACKAGING REQUIRED*** //  FALSE***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-NV_001.jpg"
+                        },
+                        {
+                            item: "SC-73101-GW",
+                            qty: 60,
+                            desc: "Hampton Chippendale Rattan Side Chair Set of 2 (19 x 24 x 39) // Material: 0 // CBM: 0.503 // Packaging: BOX // Master Carton: 2 PC //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SC-73101-GW_001.jpg"
                         }
                     ]
                 },
-                "JW 2603-12N":  {
-                 Vendor: "V34 ISQAA SOURCING PRIVATE LIMITED",
-                 ecrd: "2026-06-30",
-                   items: [
-                    {
-                      item: "DR-342187-LB",
-                      qty:  10,
-                      desc: "Arden 3 Drawer Dresser With Lace Pattern, Light Brown (30W Inch x 18D Inch x 30H Inch ) // // Materials: Mango Wood, MDF, Metal ETC // Finish Code: Nara, Finish Name: Nara // Metal Rails - One Knob placed in the center of each drawer //Set Up // CBM: 0.38 // Number of Shipping Boxes: 1 // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-342187-LB_001.jpg"
-                    },
-                   {
-                      item: "DT-342123-WD",
-                      qty:  16,
-                      desc: "Winslet Baluster Pedestal Bistro Dining Table, Whitewood (36W Inch x 36D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 6396 PCG, Finish Name: White // KD // CBM: 0.43 // Number of Shipping Boxes: 2 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342123-WD_001.jpg"
-                    },
-                    {
-                      item: "DT-342298-MB",
-                      qty:  20,
-                      desc: "Hawthorne Traditional Square Pedestal Bistro Dining Table, Medium Brown (36W Inch x 36D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 7012 PCG, Finish Name: Brown // KD // CBM: 0.33 // Number of Shipping Boxes: 2 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342298-MB_001.jpg"
-                    },
-                    {
-                      item: "DT-342399-WD",
-                      qty:  8,
-                      desc: "Clover Bistro Dining Table, Whitewood (37W Inch x 37D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 6396 PCG, Finish Name: White // KD // CBM: 0.48 // Number of Shipping Boxes: 2 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342399-WD_001.jpg"
-                   },
-                   {
-                      item: "DT-344212-WD",
-                      qty:  8,
-                      desc: "Round Abstract Sphere Pedestal Dining Table, Whitewash (48W Inch x 48D Inch x 30H Inch ) // // Materials: Mango Wood // Finish Code: PCG 6396, Finish Name: White // KD // CBM: 0.67 // Number of Shipping Boxes: 2 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-344212-WD_001.jpg"
-                    },
-                    {
-                      item: "DT-344302-LB",
-                      qty:  12,
-                      desc: "Linden Dining Table With Turned Legs, Light Brown (74W Inch x 39.5D Inch x 30.75H Inch ) // // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.43 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-344302-LB_001.jpg"
-                    },
-                    {
-                      item: "DT-64201-ES",
-                      qty:  18,
-                      desc: "Linden Dining Table With Turned Legs, Espresso (92W Inch x 39.5D Inch x 30.75H Inch ) // // Materials: Mango Wood // Finish Code: KK06, Finish Name: Grey Mango // KD // CBM: 0.6765 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-64201-ES_001.jpg"
-                    },
-                    {
-                      item: "OT-344111-LB",
-                      qty:  12,
-                      desc: "Linden Demilune Console With Turned Legs, Light Brown (55W Inch x 16D Inch x 30H Inch ) // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.2400 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/OT-344111-LB_001.jpg"
-                    },
-                    {
-                      item: "SB-342336-LB",
-                      qty:  6,
-                      desc: "Arden 4 Door Sideboard With Lace Pattern, Light Brown (78W Inch x 16D Inch x 34H Inch ) // // Materials: Mango Wood, MDF, Metal ETC // Finish Code: Nara, Finish Name: Nara // Set Up // CBM: 0.96 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-342336-LB_001.jpg"
-                   },
-                   {
-                      item: "SB-345543-WD",
-                      qty:  16,
-                      desc: "Rama 4 Door Sideboard With 2 Drawers, Whitewood (60W Inch x 16D Inch x 34H Inch ) // // Materials: MANGO WOOD, MDF, IRON // Finish Code: 6396 PCG, Finish Name: White // Set Up // CBM: 0.74 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-345543-WD_001.jpg"
-                    },
-                    {
-                      item: "ST-344333-LB",
-                      qty:  12,
-                      desc: "Linden Side Table With Turned Legs, Light Brown (18W Inch x 18D Inch x 22H Inch ) // // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.0826 // Number of Shipping Boxes: 1 //",
-                      image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-344333-LB_001.jpg"
+                "JW 2603-09N": {
+                    Vendor: "V73 Infinite Rattan Creation, CV",
+                    ecrd: "2026-05-30",
+                    items: [
+                        {
+                            item: "AM-70917",
+                            qty: 30,
+                            desc: "Material: 0 // CBM: 0.063 // Packaging: BOX // Master Carton: 1 PC // Drop Ship packaging required",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70917_001.jpg"
+                        },
+                        {
+                            item: "AM-73369-NT",
+                            qty: 15,
+                            desc: "Bonnie Rattan Scallop Frame Floor Length Mirror, 78.75 Inch H, Natural, (40 Inch W x 2.5 Inch D x 79 Inch H) // Materials: Mahogany Wood, Plywood, Rattan Fitrit, Mirror // Finish Code: JFN SC NAT, Finish Name: Natural // // CBM: 0.344 // Number of Shipping Boxes: 1 // ***ANTI TIP KIT REQUIRED***//***DROPSHIP PACKAGING REQUIRED*** /",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-73369-NT_001.jpg"
+                        },
+                        {
+                            item: "AM-73928-NT",
+                            qty: 15,
+                            desc: "Maui Seagrass Round Mirror, Natural/Navy/White (30 Inch Inch W x 2 Inch Inch D x 30 Inch Inch H) // Materials: MDF, Particle Board, Plywood, seagrass, Glass // Finish Code: JFN NAT-MAUI, Finish Name: Natural/Navy/White // Set Up // CBM: 0.0867 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-73928-NT_001.jpg"
+                        },
+                        {
+                            item: "HB-KD101-T-BL",
+                            qty: 20,
+                            desc: "Lattice Twin Headboard, Blue, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN BLU 01, Finish Name: Blue // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-BL_001.jpg"
+                        },
+                        {
+                            item: "HB-KD101-T-GN",
+                            qty: 18,
+                            desc: "Lattice Twin Headboard, Green, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN GRN 01, Finish Name: Green // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-GN_001.jpg"
+                        },
+                        {
+                            item: "HB-KD101-T-NV",
+                            qty: 20,
+                            desc: "Lattice Twin Headboard, Navy, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN-NVY01, Finish Name: NAVY // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-NV_001.jpg"
+                        },
+                        {
+                            item: "HB-KD101-T-WH",
+                            qty: 30,
+                            desc: "Lattice Twin Headboard, White, (41.5 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN WHT 01, Finish Name: White // KD // CBM: 0.169048 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD101-T-WH_001.jpg"
+                        },
+                        {
+                            item: "HB-KD404-FQ-BL",
+                            qty: 35,
+                            desc: "Lattice Full/Queen Headboard, Blue, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN BLU 01, Finish Name: Blue // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-BL_001.jpg"
+                        },
+                        {
+                            item: "HB-KD404-FQ-GN",
+                            qty: 25,
+                            desc: "Lattice Full/Queen Headboard, Green, (64.25 Inch W x 2 Inch D x 52 Inch H) // Materials: Mahogany Wood, Rattan // Finish Code: JFN GRN 01, Finish Name: Green // KD // CBM: 0.255816 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/HB-KD404-FQ-GN_001.jpg"
+                        },
+                        {
+                            item: "SB-73106-GW",
+                            qty: 55,
+                            desc: "Hampton Chippendale Counterstool, 39.25 Inch H, Grey Wash, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H)   //  Material: 0  //  CBM: 0.314  //  Packaging: EMPTY BOX  //  Master Carton: 1 PC  //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-GW_001.jpg"
+                        },
+                        {
+                            item: "SB-73106-WH",
+                            qty: 35,
+                            desc: "Hampton Chippendale Counter Stool, 39.25 Inch H, White, (19.75 Inch W x 20.5 Inch D x 39.25 Inch H)   //  Material: 0  //  CBM: 0.314  //  Packaging: EMPTY BOX  //  Master Carton: 1 PC  //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-73106-WH_001.jpg"
+                        }
+                    ]
+                },
+                "JW 2603-10N": {
+                    Vendor: "V70 CV. JATI VISIONS RAYA",
+                    ecrd: "2026-06-25",
+                    items: [
+                        {
+                            item: "AB-70889-NT",
+                            qty: 30,
+                            desc: "Organic Teak Wood Carved Bowl, 24 Inch W, Natural, (24 Inch W x 24 Inch D x 6 Inch H) // // Materials: Teak Wood // Finish Code: 39, Finish Name: HO Natural // // CBM: 0.054 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AB-70889-NT_001.jpg"
+                        },
+                        {
+                            item: "AM-70457-NT",
+                            qty: 30,
+                            desc: "35 Inch Knotted Natural Fiber Round Mirror (36.61x1.574x36.61) // Material: Abaca Natural Weaving knot // CBM: 0.114 // Packaging: Box Kraft #150 + Box SW (stack cover) + Protect Box Styrofoam 2cm for Headboard 6cm + Styrofoam 100x200x2 + wrap paper/kg wide 120 + Plastik Handywrap 150x10x0.02 // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70457-NT_001.jpg"
+                        },
+                        {
+                            item: "AM-70640-NT",
+                            qty: 30,
+                            desc: "Shine Woven Wave Frame Mirror, Natural, (35 Inch W x 3.5 Inch D x 35 Inch D) // Materials: Banana Small Natural // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.11 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70640-NT_001.jpg"
+                        },
+                        {
+                            item: "AM-70912-M",
+                            qty: 15,
+                            desc: "24 Inch Marina Round Rattan Mirror, White (23.62x3.543x23.62) // Material: Rattan; Sanded Peel // CBM: 0.093 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for Headboard (width in styrofoam and sw = 11cm) + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1 Inch Drop Ship PAckaging Inch required",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70912-M_001.jpg"
+                        },
+                        {
+                            item: "AM-LE701",
+                            qty: 30,
+                            desc: "Live Edge 3D Mirror Solid Suar Wood Frame (21.65x1.968x24.01) // Material: Munggur Wood // CBM: 0.05 // Packaging: Box Kraft #150 + Box SW (stack cover) + Protect Box Styrofoam 2cm for Headboard 6cm + Single Face + wrap paper/kg wide 120 + Styrofoam 100x200x2 // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-LE701_001.jpg"
+                        },
+                        {
+                            item: "CT-7005-NT",
+                            qty: 20,
+                            desc: "Live Edge Teak Wood Coffee Table, 31.5 Inch , Natural 31.49x26.18x15.66 // Fabric Type: N/A // Finish Name: Tabletop: Natural /Legs: Black // KD // CBM: 0.0833 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-7005-NT_001.jpg"
+                        },
+                        {
+                            item: "CT-70435",
+                            qty: 26,
+                            desc: "Fulton Storage Coffee Table (30.70x30.70x15.74) // Material: // CBM: 0.339 // Packaging: Box Kraft #200 + Box SW + Protect Box Styrofoam PE 2cm (elbow shape) + Protect Box Styrofoam PE 2cm (L shape) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70435_001.jpg"
+                        },
+                        {
+                            item: "CT-70542",
+                            qty: 30,
+                            desc: "Bayside Coffee Table with Storage (47.24x18.30x17.71) // Material: Full Kubu+Wood Base // CBM: 0.343 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70542_001.jpg"
+                        },
+                        {
+                            item: "JV-AS504O-L",
+                            qty: 30,
+                            desc: "Aspen Round Mirror, Natural (31.10x2.244x31.10) // Material: Big Rope Woven // CBM: 0.101 // Packaging: Box Kraft #150 + Box SW (Pizza models) + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm (elbow shape) + wrap paper/kg wide 120 + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-AS504O-L_001.jpg"
+                        },
+                        {
+                            item: "JV-NHT402-4-WH",
+                            qty: 30,
+                            desc: "New Hampton Round End Table (15.74x15.74x18.50) // Material: // CBM: 0.119 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-NHT402-4-WH_001.jpg"
+                        },
+                        {
+                            item: "LM-2497-NT",
+                            qty: 10,
+                            desc: "Sultan Woven Manila Rope Chandelier, 32 Inch Dia X 24 Inch H (32.28x32.28x24.40) // Material: Core + Agel - Hanger: Manilla Rope // CBM: 0.535 // Packaging: Box Kraft #150 + Protect hat model for Mekele Hanging Lamp(size 82x82x10) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/LM-2497-NT_001.jpg"
+                        },
+                        {
+                            item: "SB-70363-NT",
+                            qty: 32,
+                            desc: "20 Inch H X-Style Ottoman with Raffia, Cream (21.65x16.53x19.68) // Material: Rope; Mango Wood // CBM: 0.164 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Single Face // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-70363-NT_001.jpg"
+                        },
+                        {
+                            item: "ST-70108-BK",
+                            qty: 25,
+                            desc: "Kayu Petrifed Wood Top Pedestal Accent Table, 20 Inch H, Black (12x12x20) // Material: Petrified Black Munggur // Finish: Black-Black // ***ISTA 3A Packaging Required*** // ***INDIGO ROAD PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70108-BK_001.jpg"
+                        },
+                        {
+                            item: "SY-SNB604-WH",
+                            qty: 30,
+                            desc: "Sanibel Counterstool (17.32x17.32x24.01)   //  Material: Waterhyacinth    //  CBM: 0.173  //  Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Single Face  //  Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-SNB604-WH_001.jpg"
+                        },
+                        {
+                            item: "TT-ST-70659-NT",
+                            qty: 60,
+                            desc: "Riley Twist Wooden Side Table (11.81x11.81x23.62)   //  Material: Munggur Wood    //  CBM: 0.098  //  Packaging: Box  Kraft #150 + Protect Box Styrofoam PE 2cm (elbow shape)  //  Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-ST-70659-NT_001.jpg"
+                        },
+                        {
+                            item: "TT-SY-PL303-NT",
+                            qty: 25,
+                            desc: "Prelude Round Stool (14.96x14.96x15.74)   //  Material: Teakwood    //  CBM: 0.091  //  Packaging: Box Kraft #150 + Box Single wall + Protect Box Styrofoam 2cm for a circle shape ( L )  //  Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-SY-PL303-NT_001.jpg"
+                        }
+                    ]
+                },
+                "JW 2603-10N": {
+                    Vendor: "V70 CV. JATI VISIONS RAYA",
+                    ecrd: "2026-06-30",
+                    items: [
+                        {
+                            item: "AC-70817",
+                            qty: 40,
+                            desc: "Maples Rattan and Bamboo Antique Basket (21.25x14.96x16.14) // Material: Rattan Half Polish; Bamboo; Sendi Peel // CBM: 0.124 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Medium paper/kg (m2=0.2 kg) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AC-70817_001.jpg"
+                        },
+                        {
+                            item: "AD-70925-SET",
+                            qty: 12,
+                            desc: "Kera Round Wall Decor Set (35.43x2.952x35.43) // Material: Iron; Abaca // CBM: 0.139 // Packaging: Box Kraft #150 + Protect Box Styrofoam 2cm for a circle shape ( L ) // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AD-70925-SET_001.jpg"
+                        },
+                        {
+                            item: "AM-70330-WH",
+                            qty: 30,
+                            desc: "Round Capiz Mirror, 30 Inch W, White 29.92x1.96x29.92 // Fabric Type: N/A // Finish Name: White // Set Up // CBM: 0.0805 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AM-70330-WH_001.jpg"
+                        },
+                        {
+                            item: "AW-70635-BD",
+                            qty: 25,
+                            desc: "Shine Wall Art, Blonde, (18.25 Inch W x 5.5 Inch D x 18.25 Inch H) // // Materials: Banana, Metal // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.04 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AW-70635-BD_001.jpg"
+                        },
+                        {
+                            item: "AW-70746-BD",
+                            qty: 25,
+                            desc: "Shine Wall Art, Blonde, (14.25 Inch W x 4 Inch D x 14.25 Inch H) // // Materials: Banana, Metal // Finish Code: 1, Finish Name: Natural // Set Up // CBM: 0.0328 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/AW-70746-BD_001.jpg"
+                        },
+                        {
+                            item: "CT-70611-NT",
+                            qty: 45,
+                            desc: "Abella Round Woven Banana Leaf Coffee Table, 28 Inch W, Natural 28.15 Inch W x 28.15 Inch D x 14.75”H // Fabric Type: N/A // Finish Name: Natural // Set Up // CBM: 0.267 // Number of Shipping Boxes: 1 // // // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/CT-70611-NT_001.jpg"
+                        },
+                        {
+                            item: "JV-AC504-S",
+                            qty: 25,
+                            desc: "Chesapeake Mirror (26.77x1.456x39.37) // Material: Capiz // CBM: 0.108 // Packaging: Box Kraft #150 + Box SW + Protect Box Styrofoam 2cm for shape Mirror (U shape) + Protect Box Styrofoam 2cm for Headboard Small H = 8 + Styrofoam 100x200x2 + Medium paper/kg (m2=0.2 kg) + wrap paper/kg wide 120 // Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-AC504-S_001.jpg"
+                        },
+                        {
+                            item: "JV-CR401-BD",
+                            qty: 30,
+                            desc: "Cypress Cocktail Table, 35.5 Inch W, Blonde, (35.5 Inch W x 35.5 Inch D x 17.75 Inch H) // Materials: Banana Small Natural Lamination, Mungur Wood // Finish Code: 1-143, Finish Name: Banana Natural & Peanut Brown W/O Brush // Partial KD // CBM: 0.51 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/JV-CR401-BD_001.jpg"
+                        },
+                        {
+                            item: "ST-70328-NU",
+                            qty: 25,
+                            desc: "Savoy Turned Leg Side Table With Marble Tabletop, Natural, (11.75 Inch W x 11.75 Inch D x 23 Inch H) //  // Materials: Mungur, Marble // Finish Code: 39, Finish Name: Natural Ho // Set Up  // CBM: 0.186 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70328-NU_001.JPG"
+                        },
+                        {
+                            item: "ST-70768-BD",
+                            qty: 25,
+                            desc: "Cypress Accent Table, 14 Inch W, Blonde, (14 Inch W x 14 Inch D x 20 Inch H) // Materials: Banana Small Natural, Mungur Wood // Finish Code: 1-143, Finish Name: Banana Natural & Peanut Brown W/O Brush // Set Up // CBM: 0.1 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** // ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70768-BD_001.jpg"
+                        },
+                        {
+                            item: "ST-70768-NT",
+                            qty: 35,
+                            desc: "Cypress Accent Table, 14 Inch W, Natural, (14 Inch W x 14 Inch D x 20 Inch H) // Materials: Banana Twisted Astor Lamination, Mungur Wood // Finish Code: 1-129, Finish Name: Natural - Wenge // Set Up  // CBM: 0.1 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED*** //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-70768-NT_001.jpg"
+                        },
+                        {
+                            item: "SY-MR401-BD",
+                            qty: 25,
+                            desc: "Marina Abaca Double Bench with Storage, 40.2 Inch W, Blonde, (40.2 Inch W x 14.2 Inch D x 17.7 Inch H) // Materials: Banana Small Natural, Mungur Wood // Finish Code: 1-97, Finish Name: Banana Natural & White Patina // CBM: 0.23 // Number of Shipping Boxes: 1 // ***DROPSHIP PACKAGING REQUIRED*** //  ***ISTA 3A PACKAGING REQUIRED***",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SY-MR401-BD_001.jpg"
+                        },
+                        {
+                            item: "TT-CT-211",
+                            qty: 22,
+                            desc: "Tropical Coffee Table Abaca Small Astor with Storage (48.03x30.31x18.11)   //  Material:     //  CBM: 0.446  //  Packaging: Box Kraft#150 + Protect Box Styrofoam 2cm (elbow shape) + Protect Box Styrofoam 2cm for a circle shape ( L ) + Single Face  //  Master Carton: Y , 1",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/TT-CT-211_001.jpg"
+                        }
+                    ]
+                },
+                "JW 2603-12N": {
+                    Vendor: "V34 ISQAA SOURCING PRIVATE LIMITED",
+                    ecrd: "2026-06-30",
+                    items: [
+                        {
+                            item: "DR-342187-LB",
+                            qty: 10,
+                            desc: "Arden 3 Drawer Dresser With Lace Pattern, Light Brown (30W Inch x 18D Inch x 30H Inch ) // // Materials: Mango Wood, MDF, Metal ETC // Finish Code: Nara, Finish Name: Nara // Metal Rails - One Knob placed in the center of each drawer //Set Up // CBM: 0.38 // Number of Shipping Boxes: 1 // ***STURDY ACT TESTING REQUIRED***// ANTI TIP KIT REQUIRED***//",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DR-342187-LB_001.jpg"
+                        },
+                        {
+                            item: "DT-342123-WD",
+                            qty: 16,
+                            desc: "Winslet Baluster Pedestal Bistro Dining Table, Whitewood (36W Inch x 36D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 6396 PCG, Finish Name: White // KD // CBM: 0.43 // Number of Shipping Boxes: 2 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342123-WD_001.jpg"
+                        },
+                        {
+                            item: "DT-342298-MB",
+                            qty: 20,
+                            desc: "Hawthorne Traditional Square Pedestal Bistro Dining Table, Medium Brown (36W Inch x 36D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 7012 PCG, Finish Name: Brown // KD // CBM: 0.33 // Number of Shipping Boxes: 2 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342298-MB_001.jpg"
+                        },
+                        {
+                            item: "DT-342399-WD",
+                            qty: 8,
+                            desc: "Clover Bistro Dining Table, Whitewood (37W Inch x 37D Inch x 30H Inch ) // // Materials: Mango Wood, Metal ETC // Finish Code: 6396 PCG, Finish Name: White // KD // CBM: 0.48 // Number of Shipping Boxes: 2 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-342399-WD_001.jpg"
+                        },
+                        {
+                            item: "DT-344212-WD",
+                            qty: 8,
+                            desc: "Round Abstract Sphere Pedestal Dining Table, Whitewash (48W Inch x 48D Inch x 30H Inch ) // // Materials: Mango Wood // Finish Code: PCG 6396, Finish Name: White // KD // CBM: 0.67 // Number of Shipping Boxes: 2 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-344212-WD_001.jpg"
+                        },
+                        {
+                            item: "DT-344302-LB",
+                            qty: 12,
+                            desc: "Linden Dining Table With Turned Legs, Light Brown (74W Inch x 39.5D Inch x 30.75H Inch ) // // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.43 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-344302-LB_001.jpg"
+                        },
+                        {
+                            item: "DT-64201-ES",
+                            qty: 18,
+                            desc: "Linden Dining Table With Turned Legs, Espresso (92W Inch x 39.5D Inch x 30.75H Inch ) // // Materials: Mango Wood // Finish Code: KK06, Finish Name: Grey Mango // KD // CBM: 0.6765 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/DT-64201-ES_001.jpg"
+                        },
+                        {
+                            item: "OT-344111-LB",
+                            qty: 12,
+                            desc: "Linden Demilune Console With Turned Legs, Light Brown (55W Inch x 16D Inch x 30H Inch ) // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.2400 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/OT-344111-LB_001.jpg"
+                        },
+                        {
+                            item: "SB-342336-LB",
+                            qty: 6,
+                            desc: "Arden 4 Door Sideboard With Lace Pattern, Light Brown (78W Inch x 16D Inch x 34H Inch ) // // Materials: Mango Wood, MDF, Metal ETC // Finish Code: Nara, Finish Name: Nara // Set Up // CBM: 0.96 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-342336-LB_001.jpg"
+                        },
+                        {
+                            item: "SB-345543-WD",
+                            qty: 16,
+                            desc: "Rama 4 Door Sideboard With 2 Drawers, Whitewood (60W Inch x 16D Inch x 34H Inch ) // // Materials: MANGO WOOD, MDF, IRON // Finish Code: 6396 PCG, Finish Name: White // Set Up // CBM: 0.74 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/SB-345543-WD_001.jpg"
+                        },
+                        {
+                            item: "ST-344333-LB",
+                            qty: 12,
+                            desc: "Linden Side Table With Turned Legs, Light Brown (18W Inch x 18D Inch x 22H Inch ) // // Materials: Mango Wood // Finish Code: Nara, Finish Name: Nara // KD // CBM: 0.0826 // Number of Shipping Boxes: 1 //",
+                            image: "https://6694454.app.netsuite.com/c.6694454/item-images/ST-344333-LB_001.jpg"
                         }
                     ]
                 }
@@ -9952,14 +9954,14 @@
                     currency: "USD",
                     minimumFractionDigits: 0
                 });
-                
-                // HITUNG TOTAL PO dari data chart
-                const poData = [10545, 7169, 5486, 0, 0, 0]; // sama seperti chart
+
+                // HITUNG TOTAL Sales Qty dari data chart
+                const poData = [6564, 6976, 8195, 2425, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
-                document.getElementById("kpiPO").textContent = totalPO.toLocaleString();
+                document.getElementById("kpiQtySales").textContent = totalPO.toLocaleString();
 
                 // ===============================
-                // KPI Sales Tahun Ini dalam USD
+                // KPI Sales Value Tahun Ini dalam USD
                 // ===============================
                 // Ambil tahun berjalan secara otomatis
                 const currentYear = [1068467, 1201750, 1326146, 63150, 0, 0]; // sama seperti chart
