@@ -962,7 +962,7 @@
                             <canvas id="salesLineChart"></canvas>
                         </div>
                         <div class="chart-box">
-                            <h4>Sales Orders Qty per Month</h4>
+                            <h4>Purchase Orders Qty per Month</h4>
                             <canvas id="poBarChart"></canvas>
                         </div>
 
@@ -9903,7 +9903,7 @@
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                         datasets: [{
                             label: 'Sales Order Qty',
-                            data: [6564, 6976, 8195, 370, 0, 0],
+                            data: [6564, 6976, 8195, 2425, 0, 0],
                             backgroundColor: '#10b981'
                         }]
                     },
@@ -9936,8 +9936,8 @@
             async function loadKPI() {
                 const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 1247041;
-                let approved = 21322;
+                let total = 1293599.37;
+                let approved = 23200;
 
                 snapshot.forEach(doc => {
                     total++;
@@ -9954,7 +9954,7 @@
                 });
                 
                 // HITUNG TOTAL PO dari data chart
-                const poData = [6564, 6976, 8195, 370, 0, 0]; // sama seperti chart
+                const poData = [10545, 7169, 5486, 0, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
                 document.getElementById("kpiPO").textContent = totalPO.toLocaleString();
 
