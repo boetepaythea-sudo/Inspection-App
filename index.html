@@ -14057,7 +14057,7 @@
                 const salesPerYear = [
                     { year: '2024', total: 16646254.49 },
                     { year: '2025', total: 15257955.59 },
-                    { year: '2026', total: 3984251.50 }
+                    { year: '2026', total: 10936676.05 }
                 ];
 
                 const usdFormatter = new Intl.NumberFormat('en-US', {
@@ -14123,13 +14123,15 @@
                 salesPieChart = new Chart(pieCtx, {
                     type: 'pie',
                     data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1068467, 1201750, 1326146, 387887, 0, 0],
+                            data: [1068467, 1201750, 1327109, 1332204, 1422231, 1323572, 1434303, 1302281, 524756, 0, 0, 0],
                             backgroundColor: [
                                 '#2563eb', '#10b981', '#facc15',
-                                '#f97316', '#8b5cf6', '#ec4899'
+                                '#f97316', '#8b5cf6', '#ec4899',
+                                '#f97316', '#8b5cf6', '#ec4899',
+                                '#2563eb', '#10b981', '#facc15'
                             ]
                         }]
                     },
@@ -14156,7 +14158,7 @@
                         labels: ['Last Month', 'Current Month'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1326146, 387887,],
+                            data: [1302281, 524756,],
                             borderColor: '#2563eb',
                             backgroundColor: 'rgba(37,99,235,0.2)',
                             fill: true,
@@ -14192,10 +14194,10 @@
                 poBarChart = new Chart(barCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
                             label: 'PO Order Qty',
-                            data: [10545, 7169, 5486, 0, 0, 0],
+                            data: [2104, 2401, 2869, 5962, 6068, 11338, 15914, 6350, 3946, 0, 0, 0],
                             backgroundColor: '#10b981'
                         }]
                     },
@@ -14246,7 +14248,7 @@
                 });
 
                 // HITUNG TOTAL Sales Qty dari data chart
-                const poData = [6564, 6976, 8195, 2425, 0, 0]; // sama seperti chart
+                const poData = [6564, 6976, 8047, 8383, 9294, 7837, 7792, 7168, 3035, 0, 0 , 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
                 document.getElementById("kpiQtySales").textContent = totalPO.toLocaleString();
 
@@ -14254,7 +14256,7 @@
                 // KPI Sales Value Tahun Ini dalam USD
                 // ===============================
                 // Ambil tahun berjalan secara otomatis
-                const currentYear = [1068467.09, 1201750.33, 1326146.13, 387887.96, 0, 0]; // sama seperti chart
+                const currentYear = [1068467.09, 1201750.33, 1327109.62, 1332204.08, 1422231.21, 1323572.49, 1434303.46, 1302281.77, 524756.00, 0, 0, 0]; // sama seperti chart
                 const salesThisYear = currentYear.reduce((sum, val) => sum + val, 0);
                 // Format ke USD
                 const usdFormatter = new Intl.NumberFormat('en-US', {
