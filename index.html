@@ -7414,45 +7414,30 @@
             // NEXT PO
             // ===============================
             function nextPO() {
-
                 let index = kodeSelector1.selectedIndex;
-
                 if (index < kodeSelector1.options.length - 1) {
-
                     kodeSelector1.selectedIndex = index + 1;
-
                     searchInput.value = "";
-
                     tampilkanData();
-
                 }
-
             }
 
             // ===============================
             // PREVIOUS PO
             // ===============================
             function previousPO() {
-
                 let index = kodeSelector1.selectedIndex;
-
                 if (index > 1) {
-
                     kodeSelector1.selectedIndex = index - 1;
-
                     searchInput.value = "";
-
                     tampilkanData();
-
                 }
-
             }
 
             // ===============================
             // RESET PO MENU
             // ===============================
             function resetPOMenu() {
-
                 kodeSelector1.selectedIndex = 0;
                 searchInput.value = "";
                 poTableBody.innerHTML = "";
@@ -7463,7 +7448,6 @@
             // INIT
             // ===============================
             document.addEventListener("DOMContentLoaded", function () {
-
                 generatePOSelect();
                 backToMenuBtnPurchaseOrder.addEventListener("click", () => showSection("dashboard"));
 
@@ -7613,7 +7597,7 @@
                 const salesPerYear = [
                     {year: '2024', total: 16646254.49},
                     {year: '2025', total: 15257955.59},
-                    {year: '2026', total: 10936676.05}
+                    {year: '2026', total: 11308929.88}
                 ];
 
                 const usdFormatter = new Intl.NumberFormat('en-US', {
@@ -7682,7 +7666,7 @@
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1068467, 1201750, 1327109, 1332204, 1422231, 1323572, 1434303, 1302281, 524756, 0, 0, 0],
+                            data: [1068467, 1201750, 1327109, 1332204, 1422231, 1323572, 1434303, 1299798, 899492, 0, 0, 0],
                             backgroundColor: [
                                 '#2563eb', '#10b981', '#facc15',
                                 '#f97316', '#8b5cf6', '#ec4899',
@@ -7714,7 +7698,7 @@
                         labels: ['Last Month', 'Current Month'],
                         datasets: [{
                             label: 'Sales',
-                            data: [1302281, 524756,],
+                            data: [1299798, 899492,],
                             borderColor: '#2563eb',
                             backgroundColor: 'rgba(37,99,235,0.2)',
                             fill: true,
@@ -7753,7 +7737,7 @@
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
                             label: 'PO Order Qty',
-                            data: [2104, 2401, 2869, 5962, 6068, 11338, 15914, 6350, 3946, 0, 0, 0],
+                            data: [2104, 2401, 2869, 5962, 6068, 11338, 15914, 6350, 6349, 0, 0, 0],
                             backgroundColor: '#10b981'
                         }]
                     },
@@ -7786,8 +7770,8 @@
             async function loadKPI() {
                 const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 3371830.96;
-                let approved = 56952;
+                let total = 4448818.99;
+                let approved = 76796;
 
                 snapshot.forEach(doc => {
                     total++;
@@ -7804,7 +7788,7 @@
                 });
 
                 // HITUNG TOTAL Sales Qty dari data chart
-                const poData = [6564, 6976, 8047, 8383, 9294, 7837, 7792, 7168, 3035, 0, 0, 0]; // sama seperti chart
+                const poData = [6564, 6976, 8047, 8383, 9294, 7837, 7792, 7168, 5134, 0, 0, 0]; // sama seperti chart
                 const totalPO = poData.reduce((sum, val) => sum + val, 0);
                 document.getElementById("kpiQtySales").textContent = totalPO.toLocaleString();
 
@@ -7812,7 +7796,7 @@
                 // KPI Sales Value Tahun Ini dalam USD
                 // ===============================
                 // Ambil tahun berjalan secara otomatis
-                const currentYear = [1068467.09, 1201750.33, 1327109.62, 1332204.08, 1422231.21, 1323572.49, 1434303.46, 1302281.77, 524756.00, 0, 0, 0]; // sama seperti chart
+                const currentYear = [1068467.09, 1201750.33, 1327109.62, 1332204.08, 1422231.21, 1323572.49, 1434303.46, 1299798.67, 899492.93, 0, 0, 0]; // sama seperti chart
                 const salesThisYear = currentYear.reduce((sum, val) => sum + val, 0);
                 // Format ke USD
                 const usdFormatter = new Intl.NumberFormat('en-US', {
