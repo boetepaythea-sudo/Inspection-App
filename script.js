@@ -1152,6 +1152,49 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                     showSection("dashboard");
                 }
             );
+            // ===============================
+            // IMAGE ZOOM MODAL
+            // ===============================
+            const imageModal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            const modalClose = document.querySelector(".img-modal-close");
+
+            // Klik gambar pada tabel Purchase Order
+            document.getElementById("poTableBody").addEventListener("click", function (e) {
+                const img = e.target.closest("img");
+
+                if (!img) return;
+
+                modalImage.src = img.src;
+                imageModal.style.display = "block";
+            });
+
+            // Tutup modal dengan tombol X
+            modalClose.addEventListener("click", function () {
+                imageModal.style.display = "none";
+                modalImage.src = "";
+            });
+
+            // Tutup modal jika klik area gelap
+            imageModal.addEventListener("click", function (e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = "none";
+                    modalImage.src = "";
+                }
+            });
+
+            // Tutup dengan tombol Escape
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") {
+                    imageModal.style.display = "none";
+                    modalImage.src = "";
+                }
+            });
+            // Klik gambar yang diperbesar untuk menutup modal
+            modalImage.addEventListener("click", function () {
+                imageModal.style.display = "none";
+                modalImage.src = "";
+            });
             
             // ===============================
             // GLOBAL
