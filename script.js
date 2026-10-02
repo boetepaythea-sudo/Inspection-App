@@ -72,7 +72,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                 document.getElementById(sectionId).style.display = "block";
             }
 
-            document.getElementById("purchaseOrder").addEventListener("click", () => {
+            document.getElementById("poPrintBtn").addEventListener("click", () => {
                 window.location.href = "https://jeffanind.github.io/Purchase-Order";
             });
 
@@ -976,176 +976,190 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             setupImageZoom('.result-table'); // Header
             setupImageZoom('#step2-result'); // Step 2
             setupImageZoom('#inventoryTable'); // Inventory
-
+            
             // ===============================
-            // ELEMENT
+            // ELEMENT PURCHASE ORDER
             // ===============================
             const kodeSelector1 = document.getElementById("kodeSelector1");
             const searchInput = document.getElementById("searchInput");
             const poTableBody = document.getElementById("poTableBody");
-            const backToMenuBtnPurchaseOrder = document.getElementById("backToMenuBtnPurchaseOrder");
-
+            const backToMenuBtnPurchaseOrder =
+                document.getElementById("backToMenuBtnPurchaseOrder");
+            
             // ===============================
-            // GENERATE SELECT PO
+            // GENERATE SELECT PO DARI MASTER FIREBASE
             // ===============================
             function generatePOSelect() {
-
-                if (Object.keys(dataByKode).length === 0) {
-                    console.warn("Master PO Firebase belum tersedia atau kosong");
-                    return;
-                }
-
-                kodeSelector1.innerHTML = `<option value="">-- Select PO --</option>`;
-
-                Object.keys(dataByKode).forEach(kode => {
-
+                kodeSelector1.innerHTML =
+                    '<option value="">-- Select PO --</option>';
+            
+                const poList = Object.keys(dataByKode).sort(
+                    (a, b) => a.localeCompare(b, undefined, { numeric: true })
+                );
+            
+                poList.forEach(po => {
                     const option = document.createElement("option");
-                    option.value = kode;
-                    option.textContent = kode;
-
+                    option.value = po;
+                    option.textContent = po;
                     kodeSelector1.appendChild(option);
-
                 });
-
+            
+                console.log(
+                    `Select PO berhasil dimuat: ${poList.length} PO`
+                );
             }
-
+            
             // ===============================
             // DISPLAY DATA PO
             // ===============================
             function tampilkanData(kode = "") {
-
                 poTableBody.innerHTML = "";
-
-                if (!kode) {
-                    kode = kodeSelector1.value;
+            
+                const selectedPO = kode || kodeSelector1.value;
+                if (!selectedPO) return;
+            
+                const poData = dataByKode[selectedPO];
+                if (!poData) {
+                    console.warn("Detail PO tidak ditemukan:", selectedPO);
+                    return;
                 }
-
-                if (!kode || !dataByKode[kode]) return;
-
-                const poData = dataByKode[kode];
-
-                if (!poData.items) return;
-
-                poData.items.forEach(item => {
-
+            
+                const items = Array.isArray(poData.items)
+                    ? poData.items
+                    : [];
+            
+                items.forEach(item => {
                     const tr = document.createElement("tr");
-
-                    tr.innerHTML = `
-        <td>${poData.Vendor || ""}</td>
-        <td>${kode}</td>
-        <td>${item.item || ""}</td>
-        <td>${item.qty || ""}</td>
-        <td>${item.desc || ""}</td>
-        <td>${poData.ecrd || ""}</td>
-        <td>
-            <img src="${item.image || ""}" 
-            style="width:50px;cursor:pointer;">
-        </td>
-        `;
-
+            
+                    const values = [
+                        poData.Vendor || "",
+                        selectedPO,
+                        item.item || "",
+                        item.qty ?? "",
+                        item.desc || "",
+                        poData.ecrd || ""
+                    ];
+            
+                    values.forEach(value => {
+                        const td = document.createElement("td");
+                        td.textContent = value;
+                        tr.appendChild(td);
+                    });
+            
+                    const imageCell = document.createElement("td");
+                    if (item.image) {
+                        const img = document.createElement("img");
+                        img.src = item.image;
+                        img.style.width = "50px";
+                        img.style.cursor = "pointer";
+                        imageCell.appendChild(img);
+                    }
+                    tr.appendChild(imageCell);
+            
                     poTableBody.appendChild(tr);
-
                 });
-
-                // aktifkan zoom image
-                if (typeof setupImageZoom === "function") {
-                    setupImageZoom("#poTable");
-                }
-
             }
-
+            
             // ===============================
             // EVENT SELECT PO
             // ===============================
-            kodeSelector1.addEventListener("change", function () {
+            kodeSelector1.addEventListener("change", () => {
+                searchInput.value = "";
                 tampilkanData();
             });
-
+            
             // ===============================
-            // SEARCH MANUAL
+            // SEARCH MANUAL PO
             // ===============================
             function cariManual() {
-
                 const input = searchInput.value.trim().toLowerCase();
-
+            
                 if (!input) {
-                    kodeSelector1.selectedIndex = 0;
+                    kodeSelector1.value = "";
                     poTableBody.innerHTML = "";
                     return;
                 }
-
-                let found = false;
-
-                for (let i = 0; i < kodeSelector1.options.length; i++) {
-
-                    const kode = kodeSelector1.options[i].value.toLowerCase();
-
-                    if (kode.includes(input)) {
-
-                        kodeSelector1.selectedIndex = i;
-                        tampilkanData();
-
-                        found = true;
-                        break;
-                    }
-
+            
+                const poList = Object.keys(dataByKode);
+            
+                // Cari PO yang cocok secara tepat terlebih dahulu
+                let foundPO = poList.find(
+                    po => po.toLowerCase() === input
+                );
+            
+                // Jika tidak ada, cari PO yang mengandung teks input
+                if (!foundPO) {
+                    foundPO = poList.find(
+                        po => po.toLowerCase().includes(input)
+                    );
                 }
-
-                if (!found) {
+            
+                if (!foundPO) {
+                    kodeSelector1.value = "";
                     poTableBody.innerHTML = "";
+                    console.log("PO tidak ditemukan:", input);
+                    return;
                 }
-
+            
+                kodeSelector1.value = foundPO;
+                tampilkanData(foundPO);
             }
-
+            
             // ===============================
             // NEXT PO
             // ===============================
             function nextPO() {
-                let index = kodeSelector1.selectedIndex;
+                const index = kodeSelector1.selectedIndex;
+            
                 if (index < kodeSelector1.options.length - 1) {
                     kodeSelector1.selectedIndex = index + 1;
                     searchInput.value = "";
                     tampilkanData();
                 }
             }
-
+            
             // ===============================
             // PREVIOUS PO
             // ===============================
             function previousPO() {
-                let index = kodeSelector1.selectedIndex;
+                const index = kodeSelector1.selectedIndex;
+            
                 if (index > 1) {
                     kodeSelector1.selectedIndex = index - 1;
                     searchInput.value = "";
                     tampilkanData();
                 }
             }
-
+            
             // ===============================
             // RESET PO MENU
             // ===============================
             function resetPOMenu() {
-                kodeSelector1.selectedIndex = 0;
+                kodeSelector1.value = "";
                 searchInput.value = "";
                 poTableBody.innerHTML = "";
-
             }
-
+            
             // ===============================
             // INIT
             // ===============================
-            document.addEventListener("DOMContentLoaded", function () {
-                generatePOSelect();
-                backToMenuBtnPurchaseOrder.addEventListener("click", () => showSection("dashboard"));
-
-            });
-
+            generatePOSelect();
+            
+            backToMenuBtnPurchaseOrder.addEventListener(
+                "click",
+                () => {
+                    resetPOMenu();
+                    showSection("dashboard");
+                }
+            );
+            
             // ===============================
-            // GLOBAL (agar tombol HTML pasti bisa akses)
+            // GLOBAL
             // ===============================
             window.nextPO = nextPO;
             window.previousPO = previousPO;
             window.cariManual = cariManual;
+            window.resetPOMenu = resetPOMenu;
 
             // ===============================
             // AQL TABLE DATA
