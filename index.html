@@ -7,8 +7,8 @@
         <title>ERP Application System</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <link rel="stylesheet" href="style.css">
-        
     </head>
 
     <body>
@@ -57,7 +57,7 @@
                     <img src="https://www.jeffan.com/secure/extensions/Intente/Jeffan_21_1_0/21.1.0/img/jeffan-logo.png"
                         class="sidebar-logo" alt="Logo Sidebar">
                     <h2>ERP Application System</h2>
-                    <h3>Update.Ver.03.VI.2026</h3>
+                    <h3>Update.Ver.05.X.2026</h3>
 
                     <div id="clock-container">
                         <div id="clock-time">00:00:00</div>
@@ -70,10 +70,10 @@
                         <li onclick="showSection('dashboard')">📊Dashboard</li>
                         <li id="menuInputData" onclick="showSection('step1')">📝Input Data</li>
                         <li onclick="showSection('inventory')">🗃️Inventory Data</li>
-                       <li onclick="showSection('purchase')">📦Purchase Order</li>
+                        <li onclick="showSection('purchase')">📦Purchase Order</li>
                         <li id="galleryMenu">🖼️ Gallery Item</li>
-                        <li onclick="showSection('aqlSection')">📋 AQL Tabel</li>
-                        <li onclick="showSection('guide')">💡 User Guide</li>
+                        <li id="shipmentMenu">📋 Shipment PO</li>
+                        <li onclick="showSection('qualityGuide')">📚 Quality &amp; Guide</li>
                         <li class="logout" onclick="logout()">🔓Logout</li>
                     </ul>
 
@@ -87,12 +87,18 @@
                         </div>
             </aside>
 
+            <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleMenu()" aria-hidden="true"></div>
             <main class="main">
+                <button type="button" class="mobile-menu-toggle" onclick="toggleMenu()" aria-label="Buka menu navigasi" aria-controls="sidebar" aria-expanded="false">
+                    ☰ Menu
+                </button>
                 <!-- Dashboard -->
                 <section id="dashboard">
                     <h3>Dashboard</h3>
-                    <p>Welcome to Jeffan International ERP Application System ( Data Last Update : Thursday, 11:13
-                        AM_September 24,2026 )</p>
+                    <p>Welcome to Jeffan International ERP Application System ( Data Last Update : Wednesday, 14:55
+                        PM_October 14,2026 )</p>
+                    <p id="dashboardDataStatus" role="status" style="margin:6px 0 14px;color:#64748b;font-size:13px;">
+                        Memuat data Dashboard dari Firebase...</p>
                     <div class="kpi-container">
                         <div class="kpi-card">
                             <div class="kpi-icon">💰</div>
@@ -419,38 +425,67 @@
                     </div>
                 </section>
 
-                <!-- TABLE DISPLAY AQL -->
-                <section id="aqlSection" style="display:none;">
-                    <h3>📘 MATRICK TABEL AQL (ACCEPTABLE QUALITY LEVEL)</h3>
+                <!-- QUALITY & GUIDE: MENU INDUK -->
+                <section id="qualityGuide" style="display:none;">
+                    <h2>📚 Quality &amp; Guide</h2>
 
-                    <!-- Select untuk pilih bagian panduan -->
-                    <select id="aqlSelect" onchange="showAqlTableDetail()"
-                        style="margin-top:10px; padding:8px 10px; border-radius:6px; border:1px solid #ccc;">
-                        <option value="">-- Pilih AQL Tabel --</option>
-                        <option value="aqlTable">AQL Tabel (Acceptable Quality Level)</option>
-                    </select>
+                    <div class="quality-guide-tabs">
+                        <button type="button" onclick="showQualityGuideTab('aqlSection')">📋 AQL Tabel</button>
+                        <button type="button" onclick="showQualityGuideTab('guide')">💡 User Guide</button>
+                        <button type="button" id="dashboardUploadTabButton" style="display:none;"
+                            onclick="showQualityGuideTab('dashboardUploadPanel')">📤 Upload Data Dashboard</button>
+                    </div>
 
-                    <!-- Kontainer untuk menampilkan tabel -->
-                    <div id="AqlTabelContent" style="margin-top:15px;"></div>
-                </section>
+                    <!-- TABLE DISPLAY AQL -->
+                    <section id="aqlSection" class="quality-guide-panel" style="display:none;">
+                        <h3>📘 MATRICK TABEL AQL (ACCEPTABLE QUALITY LEVEL)</h3>
 
-                <!-- SECTION INSTRUCTION GUIDE -->
-                <section id="guide" style="display:none;">
-                    <h2>📘 Guide Instruction</h2>
-                    <!-- Select untuk pilih bagian panduan -->
-                    <label for="guideSelect">Select the guide you want to read:</label>
-                    <select id="guideSelect" onchange="showGuideDetail()" style="margin-top:10px;">
-                        <option value="">-- Select Guide --</option>
-                        <option value="guideInput">1. Input Data Inspection</option>
-                        <option value="guideInventory">2. Inventory Data Inspection</option>
-                        <option value="guideGallery">3. Gallery Item Product</option>
-                        <option value="guidePO">4. Purchase Order Data</option>
-                        <option value="guideInspek">5. Inspection Process Guide</option>
-                        <option value="guidelines">A. Standard Inspection Guidelines</option>
-                        <option value="guideinspectAbaca">a1. Abaca Table Inspection</option>
-                    </select>
-                    <!-- tempat konten panduan muncul -->
-                    <div id="guideContent" style="margin-top:15px;"></div>
+                        <!-- Select untuk pilih bagian panduan -->
+                        <select id="aqlSelect" onchange="showAqlTableDetail()"
+                            style="margin-top:10px; padding:8px 10px; border-radius:6px; border:1px solid #ccc;">
+                            <option value="">-- Pilih AQL Tabel --</option>
+                            <option value="aqlTable">AQL Tabel (Acceptable Quality Level)</option>
+                        </select>
+
+                        <!-- Kontainer untuk menampilkan tabel -->
+                        <div id="AqlTabelContent" style="margin-top:15px;"></div>
+                    </section>
+
+                    <!-- SECTION INSTRUCTION GUIDE -->
+                    <section id="guide" class="quality-guide-panel" style="display:none;">
+                        <h2>📘 Guide Instruction</h2>
+                        <!-- Select untuk pilih bagian panduan -->
+                        <label for="guideSelect">Select the guide you want to read:</label>
+                        <select id="guideSelect" onchange="showGuideDetail()" style="margin-top:10px;">
+                            <option value="">-- Select Guide --</option>
+                            <option value="guideInput">1. Input Data Inspection</option>
+                            <option value="guideInventory">2. Inventory Data Inspection</option>
+                            <option value="guideGallery">3. Gallery Item Product</option>
+                            <option value="guidePO">4. Purchase Order Data</option>
+                            <option value="guideInspek">5. Inspection Process Guide</option>
+                            <option value="guidelines">A. Standard Inspection Guidelines</option>
+                            <option value="guideinspectAbaca">a1. Abaca Table Inspection</option>
+                        </select>
+                        <!-- tempat konten panduan muncul -->
+                        <div id="guideContent" style="margin-top:15px;"></div>
+                    </section>
+
+                    <section id="dashboardUploadPanel" class="quality-guide-panel" style="display:none;">
+                        <h3>📤 Upload Data Dashboard dari Excel</h3>
+                        <p>Menu ini khusus admin. Upload akan mengganti seluruh data di koleksi
+                            <code>dashboardData</code>; data Purchase Order dan Inspection tidak diubah.
+                        </p>
+                        <p>Gunakan sheet <strong>DashboardData</strong> dari template Excel. Header wajib:
+                            <code>year, month, sales, qtySales, totalPO, inspectionValueUSD, approvedInspection</code>.
+                        </p>
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0;">
+                            <input type="file" id="dashboardExcelFile" accept=".xlsx,.xls" />
+                            <button type="button" id="uploadDashboardExcelBtn"
+                                onclick="document.getElementById('dashboardUploadStatus').textContent='Tombol aktif. Memeriksa file dan akses admin...';">Upload
+                                ke Firebase</button>
+                        </div>
+                        <p id="dashboardUploadStatus" role="status" style="font-size:13px;color:#475569;"></p>
+                    </section>
                 </section>
                 <!-- IFRAME GLOBAL -->
                 <iframe id="externalView" style="display:none; width:100%; height:80vh; border:none;"></iframe>
@@ -464,6 +499,7 @@
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
         <script type="module" src="script.js"></script>
     </body>
 
