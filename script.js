@@ -1,6 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
             import {getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-            import {getFirestore, collection, addDoc, getDocs, deleteDoc, doc} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+            import {getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, writeBatch} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
             const firebaseConfig = {
                 apiKey: "AIzaSyAdjD2FiCU-uP5eo8JuKyP_Gc_QNGpAPK8",
@@ -15,8 +15,46 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
             const db = getFirestore(app);
+            let isDashboardAdmin = false;
 
-            window.toggleMenu = () => document.getElementById("sidebar").classList.toggle("show");
+            async function refreshDashboardAdminAccess(user) {
+                isDashboardAdmin = false;
+                const uploadButton = document.getElementById("dashboardUploadTabButton");
+                if (uploadButton) uploadButton.style.display = "none";
+                if (!user) return false;
+                try {
+                    // Role ditetapkan melalui dokumen Firestore userRoles/{UID}, bukan sekadar karena akun bisa login.
+                    const roleSnapshot = await getDoc(doc(db, "userRoles", user.uid));
+                    isDashboardAdmin = roleSnapshot.exists() && String(roleSnapshot.data()?.role || "").toLowerCase() === "admin";
+                    if (uploadButton) uploadButton.style.display = isDashboardAdmin ? "inline-block" : "none";
+                } catch (error) {
+                    console.error("Gagal memeriksa role admin dashboard:", error);
+                    isDashboardAdmin = false;
+                }
+                return isDashboardAdmin;
+            }
+
+            window.toggleMenu = () => {
+                const sidebar = document.getElementById("sidebar");
+                const overlay = document.getElementById("sidebarOverlay");
+                const toggleButton = document.querySelector(".mobile-menu-toggle");
+                if (!sidebar) return;
+                const isOpen = sidebar.classList.toggle("show");
+                if (overlay) overlay.classList.toggle("show", isOpen);
+                if (toggleButton) toggleButton.setAttribute("aria-expanded", String(isOpen));
+                document.body.style.overflow = isOpen && window.matchMedia("(max-width: 768px)").matches ? "hidden" : "";
+            };
+
+            window.showQualityGuideTab = (tabId) => {
+                if (tabId === "dashboardUploadPanel" && !isDashboardAdmin) {
+                    alert("Menu Upload Data Dashboard hanya dapat diakses oleh admin.");
+                    return;
+                }
+                const panels = document.querySelectorAll("#qualityGuide .quality-guide-panel");
+                panels.forEach(panel => {
+                    panel.style.display = panel.id === tabId ? "block" : "none";
+                });
+            };
 
             window.showSection = (id) => {
                 // ===============================
@@ -37,6 +75,20 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                 const el = document.getElementById(id);
                 if (el) el.style.display = "block";
 
+                if (window.matchMedia("(max-width: 768px)").matches) {
+                    const sidebar = document.getElementById("sidebar");
+                    const overlay = document.getElementById("sidebarOverlay");
+                    const toggleButton = document.querySelector(".mobile-menu-toggle");
+                    if (sidebar) sidebar.classList.remove("show");
+                    if (overlay) overlay.classList.remove("show");
+                    if (toggleButton) toggleButton.setAttribute("aria-expanded", "false");
+                    document.body.style.overflow = "";
+                }
+
+                if (id === "qualityGuide") {
+                    showQualityGuideTab("aqlSection");
+                }
+
                 // ===============================
                 // RUNNING TEXT CONTROL
                 // ===============================
@@ -48,10 +100,11 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                     runningText.style.display = (id === "dashboard") ? "flex" : "none";
                 }
 
-                // Render chart ketika dashboard ditampilkan
-                if (id === 'dashboard')
-                    renderDashboardCharts();
-                loadKPI();
+                // Dashboard memakai koleksi khusus dashboardData.
+                // Data PO dan Inspection yang lain tidak dibaca atau diubah di sini.
+                if (id === 'dashboard') {
+                    loadDashboardData();
+                }
             };
 
             function openExternal(link) {
@@ -78,6 +131,9 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
 
             document.getElementById('galleryMenu').addEventListener('click', function () {
                 window.location.href = "https://jeffanind.github.io/Gallery-Item-Product";
+            });
+            document.getElementById('shipmentMenu').addEventListener('click', function () {
+                window.location.href = "https://jeffanind.github.io/Shipping-Dashboard";
             });
 
             //-- FUNCTION CLOCK UPDATE -->
@@ -976,7 +1032,8 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             setupImageZoom('.result-table'); // Header
             setupImageZoom('#step2-result'); // Step 2
             setupImageZoom('#inventoryTable'); // Inventory
-            
+
+
             // ===============================
             // ELEMENT PURCHASE ORDER
             // ===============================
@@ -985,52 +1042,52 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             const poTableBody = document.getElementById("poTableBody");
             const backToMenuBtnPurchaseOrder =
                 document.getElementById("backToMenuBtnPurchaseOrder");
-            
+
             // ===============================
             // GENERATE SELECT PO DARI MASTER FIREBASE
             // ===============================
             function generatePOSelect() {
                 kodeSelector1.innerHTML =
                     '<option value="">-- Select PO --</option>';
-            
+
                 const poList = Object.keys(dataByKode).sort(
-                    (a, b) => a.localeCompare(b, undefined, { numeric: true })
+                    (a, b) => a.localeCompare(b, undefined, {numeric: true})
                 );
-            
+
                 poList.forEach(po => {
                     const option = document.createElement("option");
                     option.value = po;
                     option.textContent = po;
                     kodeSelector1.appendChild(option);
                 });
-            
+
                 console.log(
                     `Select PO berhasil dimuat: ${poList.length} PO`
                 );
             }
-            
+
             // ===============================
             // DISPLAY DATA PO
             // ===============================
             function tampilkanData(kode = "") {
                 poTableBody.innerHTML = "";
-            
+
                 const selectedPO = kode || kodeSelector1.value;
                 if (!selectedPO) return;
-            
+
                 const poData = dataByKode[selectedPO];
                 if (!poData) {
                     console.warn("Detail PO tidak ditemukan:", selectedPO);
                     return;
                 }
-            
+
                 const items = Array.isArray(poData.items)
                     ? poData.items
                     : [];
-            
+
                 items.forEach(item => {
                     const tr = document.createElement("tr");
-            
+
                     const values = [
                         poData.Vendor || "",
                         selectedPO,
@@ -1039,13 +1096,13 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                         item.desc || "",
                         poData.ecrd || ""
                     ];
-            
+
                     values.forEach(value => {
                         const td = document.createElement("td");
                         td.textContent = value;
                         tr.appendChild(td);
                     });
-            
+
                     const imageCell = document.createElement("td");
                     if (item.image) {
                         const img = document.createElement("img");
@@ -1055,11 +1112,11 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                         imageCell.appendChild(img);
                     }
                     tr.appendChild(imageCell);
-            
+
                     poTableBody.appendChild(tr);
                 });
             }
-            
+
             // ===============================
             // EVENT SELECT PO
             // ===============================
@@ -1067,70 +1124,70 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                 searchInput.value = "";
                 tampilkanData();
             });
-            
+
             // ===============================
             // SEARCH MANUAL PO
             // ===============================
             function cariManual() {
                 const input = searchInput.value.trim().toLowerCase();
-            
+
                 if (!input) {
                     kodeSelector1.value = "";
                     poTableBody.innerHTML = "";
                     return;
                 }
-            
+
                 const poList = Object.keys(dataByKode);
-            
+
                 // Cari PO yang cocok secara tepat terlebih dahulu
                 let foundPO = poList.find(
                     po => po.toLowerCase() === input
                 );
-            
+
                 // Jika tidak ada, cari PO yang mengandung teks input
                 if (!foundPO) {
                     foundPO = poList.find(
                         po => po.toLowerCase().includes(input)
                     );
                 }
-            
+
                 if (!foundPO) {
                     kodeSelector1.value = "";
                     poTableBody.innerHTML = "";
                     console.log("PO tidak ditemukan:", input);
                     return;
                 }
-            
+
                 kodeSelector1.value = foundPO;
                 tampilkanData(foundPO);
             }
-            
+
             // ===============================
             // NEXT PO
             // ===============================
             function nextPO() {
                 const index = kodeSelector1.selectedIndex;
-            
+
                 if (index < kodeSelector1.options.length - 1) {
                     kodeSelector1.selectedIndex = index + 1;
                     searchInput.value = "";
                     tampilkanData();
                 }
             }
-            
+
             // ===============================
             // PREVIOUS PO
             // ===============================
             function previousPO() {
                 const index = kodeSelector1.selectedIndex;
-            
+
                 if (index > 1) {
                     kodeSelector1.selectedIndex = index - 1;
                     searchInput.value = "";
                     tampilkanData();
                 }
             }
-            
+
             // ===============================
             // RESET PO MENU
             // ===============================
@@ -1139,12 +1196,12 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                 searchInput.value = "";
                 poTableBody.innerHTML = "";
             }
-            
+
             // ===============================
             // INIT
             // ===============================
             generatePOSelect();
-            
+
             backToMenuBtnPurchaseOrder.addEventListener(
                 "click",
                 () => {
@@ -1152,6 +1209,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                     showSection("dashboard");
                 }
             );
+
             // ===============================
             // IMAGE ZOOM MODAL
             // ===============================
@@ -1195,7 +1253,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                 imageModal.style.display = "none";
                 modalImage.src = "";
             });
-            
+
             // ===============================
             // GLOBAL
             // ===============================
@@ -1292,265 +1350,284 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             };
 
             // =========================
-            //CHART DASHBOARD
-            //===========================
-            // Formatter USD global
-            const usdFormatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0 // tanpa .00, ubah jadi 2 jika mau
+            // DASHBOARD DATA - KOLEKSI TERPISAH
+            // Sumber: Firestore collection "dashboardData"
+            // Struktur per dokumen: year, month, sales, qtySales, totalPO,
+            // inspectionValueUSD, approvedInspection
+            // =========================
+            const dashboardMonthNames = [
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            ];
+            const dashboardUsdFormatter = new Intl.NumberFormat('en-US', {
+                style: 'currency', currency: 'USD', minimumFractionDigits: 0
             });
+            const dashboardNumberFormatter = new Intl.NumberFormat('en-US');
+            let salesBarChart = null;
+            let salesPieChart = null;
+            let salesLineChart = null;
+            let poBarChart = null;
+            let dashboardLoadInProgress = false;
 
-            let salesBarChart, salesPieChart, salesLineChart, poBarChart;
+            function dashboardNumber(value) {
+                if (value === null || value === undefined || value === '') return 0;
+                const n = Number(value);
+                return Number.isFinite(n) ? n : 0;
+            }
 
-            function renderDashboardCharts() {
+            function dashboardRowsFromSnapshot(snapshot) {
+                return snapshot.docs.map(docSnap => {
+                    const d = docSnap.data() || {};
+                    return {
+                        year: Math.trunc(dashboardNumber(d.year)),
+                        month: Math.trunc(dashboardNumber(d.month)),
+                        sales: dashboardNumber(d.sales),
+                        qtySales: dashboardNumber(d.qtySales),
+                        totalPO: dashboardNumber(d.totalPO),
+                        inspectionValueUSD: dashboardNumber(d.inspectionValueUSD),
+                        approvedInspection: dashboardNumber(d.approvedInspection)
+                    };
+                    // month = 0 diperbolehkan untuk total historis tahunan (mis. 2024/2025).
+                    // Bulan 1–12 tetap digunakan untuk data bulanan tahun berjalan.
+                }).filter(d => d.year >= 2000 && d.month >= 0 && d.month <= 12);
+            }
 
-                // =========================
-                // 🔥 DESTROY CHART LAMA (WAJIB)
-                // =========================
-                if (salesBarChart) {
-                    salesBarChart.destroy();
-                    salesBarChart = null;
+            async function loadDashboardData() {
+                if (dashboardLoadInProgress) return;
+                dashboardLoadInProgress = true;
+                const statusEl = document.getElementById('dashboardDataStatus');
+                if (statusEl) statusEl.textContent = 'Memuat data Dashboard dari Firebase...';
+
+                try {
+                    const snapshot = await getDocs(collection(db, 'dashboardData'));
+                    const rows = dashboardRowsFromSnapshot(snapshot);
+                    loadKPI(rows);
+                    renderDashboardCharts(rows);
+
+                    if (statusEl) {
+                        if (rows.length === 0) {
+                            statusEl.textContent = 'Belum ada data Dashboard. Silakan unggah data melalui menu khusus Dashboard setelah menu upload disiapkan.';
+                        } else {
+                            const years = [...new Set(rows.map(r => r.year))].sort((a, b) => a - b);
+                            statusEl.textContent = `Data Dashboard berhasil dimuat: ${rows.length} baris, tahun ${years.join(', ')}.`;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Gagal memuat dashboardData dari Firestore:', error);
+                    if (statusEl) statusEl.textContent = 'Data Dashboard gagal dimuat. Periksa koneksi dan Firestore Rules untuk koleksi dashboardData.';
+                    loadKPI([]);
+                    renderDashboardCharts([]);
+                } finally {
+                    dashboardLoadInProgress = false;
                 }
-                if (salesPieChart) {
-                    salesPieChart.destroy();
-                    salesPieChart = null;
-                }
+            }
 
-                if (salesLineChart) {
-                    salesLineChart.destroy();
-                    salesLineChart = null;
-                }
+            // Upload Excel dashboard khusus admin. Data lama pada dashboardData akan diganti.
+            const uploadDashboardExcelBtn = document.getElementById("uploadDashboardExcelBtn");
+            if (uploadDashboardExcelBtn) {
+                uploadDashboardExcelBtn.addEventListener("click", async () => {
+                    const statusEl = document.getElementById("dashboardUploadStatus");
+                    const fileInput = document.getElementById("dashboardExcelFile");
+                    const file = fileInput?.files?.[0];
+                    if (!auth.currentUser || !isDashboardAdmin) {
+                        if (statusEl) statusEl.textContent = "Akses ditolak. Login dengan akun yang memiliki role admin.";
+                        return;
+                    }
+                    if (!file) {
+                        if (statusEl) statusEl.textContent = "Pilih file Excel terlebih dahulu.";
+                        return;
+                    }
+                    if (!window.XLSX) {
+                        if (statusEl) statusEl.textContent = "Library pembaca Excel belum berhasil dimuat. Muat ulang halaman.";
+                        return;
+                    }
+                    uploadDashboardExcelBtn.disabled = true;
+                    if (statusEl) statusEl.textContent = "Memeriksa file Excel...";
+                    try {
+                        const buffer = await file.arrayBuffer();
+                        const workbook = window.XLSX.read(buffer, {type: "array", cellDates: false});
+                        const sheet = workbook.Sheets["DashboardData"];
+                        if (!sheet) throw new Error('Sheet "DashboardData" tidak ditemukan. Gunakan template Excel Dashboard.');
+                        const rawRows = window.XLSX.utils.sheet_to_json(sheet, {defval: null, raw: true});
+                        const required = ["year", "month", "sales", "qtySales", "totalPO", "inspectionValueUSD", "approvedInspection"];
+                        if (!rawRows.length) throw new Error("Sheet DashboardData belum berisi baris data.");
+                        const headers = Object.keys(rawRows[0]);
+                        const missing = required.filter(key => !headers.includes(key));
+                        if (missing.length) throw new Error("Kolom wajib tidak ditemukan: " + missing.join(", "));
+                        const parsed = rawRows.map((row, index) => {
+                            const n = key => {
+                                const value = row[key];
+                                if (value === null || value === undefined || value === "") return 0;
+                                const number = Number(value);
+                                if (!Number.isFinite(number)) throw new Error(`Baris ${index + 2}: kolom ${key} harus berisi angka.`);
+                                return number;
+                            };
+                            const year = n("year");
+                            const month = n("month");
+                            if (!Number.isInteger(year) || year < 2000 || year > 2100) throw new Error(`Baris ${index + 2}: tahun harus berupa angka 2000–2100.`);
+                            if (!Number.isInteger(month) || month < 0 || month > 12) throw new Error(`Baris ${index + 2}: bulan harus angka 0–12. Gunakan 0 untuk total historis tahunan.`);
+                            return {year, month, sales: n("sales"), qtySales: n("qtySales"), totalPO: n("totalPO"), inspectionValueUSD: n("inspectionValueUSD"), approvedInspection: n("approvedInspection")};
+                        });
+                        const keys = parsed.map(r => `${r.year}-${String(r.month).padStart(2, "0")}`);
+                        if (new Set(keys).size !== keys.length) throw new Error("Ada tahun dan bulan yang duplikat. Pastikan hanya satu baris untuk setiap bulan dalam setiap tahun.");
+                        if (!confirm(`Upload ${parsed.length} baris dan mengganti seluruh data dashboardData yang ada? Data PO dan Inspection tidak akan diubah.`)) {
+                            if (statusEl) statusEl.textContent = "Upload dibatalkan.";
+                            return;
+                        }
+                        if (statusEl) statusEl.textContent = "Mengganti data Dashboard di Firebase...";
+                        const existing = await getDocs(collection(db, "dashboardData"));
+                        const operations = [];
+                        existing.docs.forEach(d => operations.push({type: "delete", ref: d.ref}));
+                        parsed.forEach(row => {
+                            const id = `${row.year}-${String(row.month).padStart(2, "0")}`;
+                            operations.push({type: "set", ref: doc(db, "dashboardData", id), data: row});
+                        });
+                        // Batas aman batch Firestore; proses per 400 operasi.
+                        for (let i = 0; i < operations.length; i += 400) {
+                            const batch = writeBatch(db);
+                            operations.slice(i, i + 400).forEach(op => {
+                                if (op.type === "delete") batch.delete(op.ref);
+                                else batch.set(op.ref, op.data);
+                            });
+                            await batch.commit();
+                        }
+                        if (statusEl) statusEl.textContent = `Berhasil mengunggah ${parsed.length} baris data Dashboard.`;
+                        await loadDashboardData();
+                    } catch (error) {
+                        console.error("Upload data Dashboard gagal:", error);
+                        if (statusEl) statusEl.textContent = "Upload gagal: " + (error?.message || "periksa koneksi dan Firestore Rules.");
+                    } finally {
+                        uploadDashboardExcelBtn.disabled = false;
+                    }
+                });
+            }
 
-                if (poBarChart) {
-                    poBarChart.destroy();
-                    poBarChart = null;
-                }
+            function loadKPI(rows) {
+                const currentYear = new Date().getFullYear();
+                const yearRows = rows.filter(r => r.year === currentYear);
+                const sum = key => yearRows.reduce((total, row) => total + dashboardNumber(row[key]), 0);
 
-                // =========================
-                // AMBIL CANVAS
-                // =========================
-                const pieCtx = document.getElementById('salesPieChart').getContext('2d');
-                const lineCtx = document.getElementById('salesLineChart').getContext('2d');
-                const barCtx = document.getElementById('poBarChart').getContext('2d');
-                const salesYearCtx = document.getElementById('salesBarChart').getContext('2d');
+                document.getElementById('kpiSales').textContent = dashboardUsdFormatter.format(sum('sales'));
+                document.getElementById('kpiQtySales').textContent = dashboardNumberFormatter.format(sum('qtySales'));
+                document.getElementById('kpiInspection').textContent = dashboardUsdFormatter.format(sum('inspectionValueUSD'));
+                document.getElementById('kpiApproved').textContent = dashboardNumberFormatter.format(sum('approvedInspection'));
+            }
 
-                // =========================
-                // SALES PER YEAR MANUAL
-                // =========================
-                const salesPerYear = [
-                    {year: '2024', total: 16646254.49},
-                    {year: '2025', total: 15257955.59},
-                    {year: '2026', total: 11308929.88}
-                ];
+            function destroyDashboardCharts() {
+                [salesBarChart, salesPieChart, salesLineChart, poBarChart, window.salesBarChartInstance]
+                    .forEach(chart => {if (chart && typeof chart.destroy === 'function') chart.destroy();});
+                salesBarChart = salesPieChart = salesLineChart = poBarChart = null;
+                window.salesBarChartInstance = null;
+            }
 
-                const usdFormatter = new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0
+            function renderDashboardCharts(rows) {
+                const salesCanvas = document.getElementById('salesBarChart');
+                const pieCanvas = document.getElementById('salesPieChart');
+                const lineCanvas = document.getElementById('salesLineChart');
+                const poCanvas = document.getElementById('poBarChart');
+                if (!salesCanvas || !pieCanvas || !lineCanvas || !poCanvas) return;
+
+                destroyDashboardCharts();
+                const currentYear = new Date().getFullYear();
+
+                // Semua tahun, termasuk data historis, dibaca dari Firestore.
+                // Baris dengan month = 0 dipakai untuk total historis tahunan.
+                const annualTotals = new Map();
+                rows.forEach(row => {
+                    const year = Number(row.year);
+                    annualTotals.set(year, (annualTotals.get(year) || 0) + dashboardNumber(row.sales));
+                });
+                const salesPerYear = Array.from(annualTotals, ([year, total]) => ({year, total}))
+                    .sort((a, b) => a.year - b.year);
+
+                const currentYearRows = rows.filter(r => r.year === currentYear);
+                const monthRows = Array.from({length: 12}, (_, i) => {
+                    const month = i + 1;
+                    const matches = currentYearRows.filter(r => r.month === month);
+                    return {
+                        month,
+                        sales: matches.reduce((sum, r) => sum + r.sales, 0),
+                        qtySales: matches.reduce((sum, r) => sum + r.qtySales, 0),
+                        totalPO: matches.reduce((sum, r) => sum + r.totalPO, 0)
+                    };
                 });
 
-                // Hapus chart lama jika ada
-                if (window.salesBarChartInstance) window.salesBarChartInstance.destroy();
+                const commonCurrencyTicks = {callback: value => dashboardUsdFormatter.format(value)};
 
-                window.salesBarChartInstance = new Chart(salesYearCtx, {
+                salesBarChart = new Chart(salesCanvas.getContext('2d'), {
                     type: 'bar',
                     data: {
                         labels: salesPerYear.map(d => d.year),
                         datasets: [{
-                            label: 'Total Sales',
-                            data: salesPerYear.map(d => d.total),
-                            backgroundColor: [
-                                'rgba(37, 99, 235, 0.7)',
-                                'rgba(16, 185, 129, 0.7)',
-                                'rgba(250, 204, 21, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(16, 185, 129, 1)',
-                                'rgba(250, 204, 21, 1)'
-                            ],
-                            borderWidth: 1
+                            label: 'Total Sales', data: salesPerYear.map(d => d.total),
+                            backgroundColor: 'rgba(37, 99, 235, 0.7)',
+                            borderColor: 'rgba(37, 99, 235, 1)', borderWidth: 1
                         }]
                     },
                     options: {
-                        responsive: true, // tetap responsive
+                        responsive: true,
                         plugins: {
                             legend: {display: false},
-                            title: {display: true, text: 'Sales Per Year', padding: {top: 10, bottom: 10}},
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return usdFormatter.format(context.raw); // tampil USD
-                                    }
-                                }
-                            }
+                            tooltip: {callbacks: {label: context => dashboardUsdFormatter.format(context.raw)}}
                         },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function (value) {return usdFormatter.format(value);} // tampil USD
-                                }
-                            },
-                            x: {
-                                ticks: {autoSkip: false},
-                                grid: {offset: true} // batang di tengah label
-                            }
-                        }
+                        scales: {y: {beginAtZero: true, ticks: commonCurrencyTicks}}
                     }
                 });
+                window.salesBarChartInstance = salesBarChart;
 
-                // =========================
-                // 1️⃣ SALES PIE CHART
-                // =========================
-                salesPieChart = new Chart(pieCtx, {
+                salesPieChart = new Chart(pieCanvas.getContext('2d'), {
                     type: 'pie',
                     data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                        labels: dashboardMonthNames,
                         datasets: [{
-                            label: 'Sales',
-                            data: [1068467, 1201750, 1327109, 1332204, 1422231, 1323572, 1434303, 1299798, 899492, 0, 0, 0],
-                            backgroundColor: [
-                                '#2563eb', '#10b981', '#facc15',
-                                '#f97316', '#8b5cf6', '#ec4899',
-                                '#f97316', '#8b5cf6', '#ec4899',
-                                '#2563eb', '#10b981', '#facc15'
-                            ]
+                            label: 'Sales', data: monthRows.map(r => r.sales),
+                            backgroundColor: ['#2563eb', '#10b981', '#facc15', '#f97316', '#8b5cf6', '#ec4899',
+                                '#14b8a6', '#6366f1', '#a3e635', '#fb7185', '#0ea5e9', '#c084fc']
                         }]
                     },
                     options: {
                         responsive: true,
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return context.label + ': ' + usdFormatter.format(context.raw);
-                                    }
-                                }
-                            }
-                        }
+                        plugins: {tooltip: {callbacks: {label: context => `${context.label}: ${dashboardUsdFormatter.format(context.raw)}`}}}
                     }
                 });
 
-                // =========================
-                // 2️⃣ SALES LINE CHART
-                // =========================
-                salesLineChart = new Chart(lineCtx, {
+                const now = new Date();
+                const currentMonth = now.getMonth() + 1;
+                const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+                const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+                const getSales = (year, month) => rows
+                    .filter(r => r.year === year && r.month === month)
+                    .reduce((sum, r) => sum + r.sales, 0);
+                salesLineChart = new Chart(lineCanvas.getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels: ['Last Month', 'Current Month'],
+                        labels: [`${dashboardMonthNames[previousMonth - 1]} ${previousYear}`, `${dashboardMonthNames[currentMonth - 1]} ${currentYear}`],
                         datasets: [{
-                            label: 'Sales',
-                            data: [1299798, 899492,],
-                            borderColor: '#2563eb',
-                            backgroundColor: 'rgba(37,99,235,0.2)',
-                            fill: true,
-                            tension: 0.3
+                            label: 'Sales', data: [getSales(previousYear, previousMonth), getSales(currentYear, currentMonth)],
+                            borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.2)', fill: true, tension: 0.3
                         }]
                     },
                     options: {
                         responsive: true,
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return 'Sales: ' + usdFormatter.format(context.raw);
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                ticks: {
-                                    callback: function (value) {
-                                        return usdFormatter.format(value);
-                                    }
-                                }
-                            }
-                        }
+                        plugins: {tooltip: {callbacks: {label: context => `Sales: ${dashboardUsdFormatter.format(context.raw)}`}}},
+                        scales: {y: {ticks: commonCurrencyTicks}}
                     }
                 });
 
-                // =========================
-                // 3️⃣ PO BAR CHART
-                // =========================
-                poBarChart = new Chart(barCtx, {
+                poBarChart = new Chart(poCanvas.getContext('2d'), {
                     type: 'bar',
                     data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        datasets: [{
-                            label: 'PO Order Qty',
-                            data: [2104, 2401, 2869, 5962, 6068, 11338, 15914, 6350, 6349, 0, 0, 0],
-                            backgroundColor: '#10b981'
-                        }]
+                        labels: dashboardMonthNames,
+                        datasets: [{label: 'PO Count', data: monthRows.map(r => r.totalPO), backgroundColor: '#10b981'}]
                     },
                     options: {
                         responsive: true,
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return 'PO: ' + context.raw.toLocaleString();
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                ticks: {
-                                    callback: function (value) {
-                                        return value.toLocaleString();
-                                    }
-                                }
-                            }
-                        }
+                        plugins: {tooltip: {callbacks: {label: context => `PO: ${dashboardNumberFormatter.format(context.raw)}`}}},
+                        scales: {y: {beginAtZero: true, ticks: {callback: value => dashboardNumberFormatter.format(value)}}}
                     }
                 });
             }
-            // ===============================
-            // KPI DASHBOARD 
-            // ===============================
-            async function loadKPI() {
-                const snapshot = await getDocs(collection(db, "inspectionData"));
 
-                let total = 4448818.99;
-                let approved = 76796;
-
-                snapshot.forEach(doc => {
-                    total++;
-                    const data = doc.data();
-                    if (data.status === "Approved") approved++;
-                });
-
-                // KPI Inspection & Approved
-                document.getElementById("kpiApproved").textContent = approved.toLocaleString();
-                document.getElementById("kpiInspection").textContent = total.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 0
-                });
-
-                // HITUNG TOTAL Sales Qty dari data chart
-                const poData = [6564, 6976, 8047, 8383, 9294, 7837, 7792, 7168, 5134, 0, 0, 0]; // sama seperti chart
-                const totalPO = poData.reduce((sum, val) => sum + val, 0);
-                document.getElementById("kpiQtySales").textContent = totalPO.toLocaleString();
-
-                // ===============================
-                // KPI Sales Value Tahun Ini dalam USD
-                // ===============================
-                // Ambil tahun berjalan secara otomatis
-                const currentYear = [1068467.09, 1201750.33, 1327109.62, 1332204.08, 1422231.21, 1323572.49, 1434303.46, 1299798.67, 899492.93, 0, 0, 0]; // sama seperti chart
-                const salesThisYear = currentYear.reduce((sum, val) => sum + val, 0);
-                // Format ke USD
-                const usdFormatter = new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0
-                });
-
-                document.getElementById("kpiSales").textContent = usdFormatter.format(salesThisYear);
-            }
             // ===============================
             // LOGIN VERLAY 
             // ===============================
@@ -1628,8 +1705,10 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
             // ===============================
             onAuthStateChanged(auth, user => {
                 if (user) {
+                    // Periksa role terpisah untuk menentukan akses upload Dashboard.
+                    refreshDashboardAdminAccess(user);
                     // Update User ID
-                    const username = user.email.split("@")[0];
+                    const username = (user.email || user.uid).split("@")[0];
                     document.getElementById("user-id-display").innerText = "User ID : " + username;
 
                     document.getElementById("loginPage").style.display = "none";
@@ -1643,6 +1722,9 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
                     }
 
                 } else {
+                    isDashboardAdmin = false;
+                    const uploadButton = document.getElementById("dashboardUploadTabButton");
+                    if (uploadButton) uploadButton.style.display = "none";
                     document.getElementById("loginPage").style.display = "flex";
                     document.getElementById("dashboardPage").style.display = "none";
 
